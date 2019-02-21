@@ -65,6 +65,7 @@ Builder.load_string('''
     ScrollView:
         id: sv
         do_scroll_x: False
+        do_scroll_y: False #Changed
         BoxLayout:
             size_hint_y: None
             orientation: 'vertical'

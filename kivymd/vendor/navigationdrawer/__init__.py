@@ -337,7 +337,7 @@ class NavigationDrawer(StencilView):
     '''Controls the opacity of the side panel in its hidden state. Must be
     between 0 (fade to transparent) and 1 (no transparency)'''
 
-    side_panel_positioning = StringProperty('left')
+    side_panel_positioning = StringProperty('right')
     '''Controlls the screen edge in which the side panel is pulled from.
     Must be either 'left', 'right', 'top' or 'bottom' '''
 

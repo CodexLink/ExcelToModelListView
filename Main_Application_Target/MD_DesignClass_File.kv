@@ -34,13 +34,11 @@
 #:import MDBottomNavigationItem kivymd.tabs.MDBottomNavigationItem
 #:import FadeTransition kivy.uix.screenmanager.FadeTransition
 #:import AnchorLayout kivy.uix.anchorlayout
-
 NavigationLayout:
     id: nav_layout
     MDNavigationDrawer:
         id: nav_drawer
         NavigationDrawerToolbar:
-        #Insert gallery Pick Here
             title: "Main Menu"
         NavigationDrawerSubheader:
             text: "Potential Breaking"
@@ -49,12 +47,22 @@ NavigationLayout:
             text: "Dashboard"
             on_release: app.root.ids.scr_mngr.current = 'Startup_FirstTime'
         NavigationDrawerIconButton:
-            icon: 'checkbox-blank-circle'
-            text: "Home"
+            icon: 'database'
+            text: "Data Station"
             on_release: app.root.ids.scr_mngr.current = 'Startup_FirstTime'
         NavigationDrawerIconButton:
             icon: 'checkbox-blank-circle'
             text: "Home"
+            on_release: app.root.ids.scr_mngr.current = 'Startup_FirstTime'
+        NavigationDrawerSubheader:
+            text: "Accounts"
+        NavigationDrawerIconButton:
+            icon: 'face-profile'
+            text: "Edit Profile"
+            on_release: app.root.ids.scr_mngr.current = 'Startup_FirstTime'
+        NavigationDrawerIconButton:
+            icon: 'nature-people'
+            text: "Change User"
             on_release: app.root.ids.scr_mngr.current = 'Startup_FirstTime'
         NavigationDrawerIconButton:
             icon: 'exit-to-app'
@@ -63,13 +71,13 @@ NavigationLayout:
     BoxLayout:
         orientation: 'vertical'
         Toolbar:
-            id: toolbar
-            title: 'Inventory System | DLS-AEMB'
+            id: ToolbarMain
+            title: app.title
             md_bg_color: get_color_from_hex(colors[app.theme_cls.primary_palette]['700'])
             background_palette: app.theme_cls.primary_palette
             background_hue: '700'
             left_action_items: [['menu', lambda x: app.root.toggle_nav_drawer()]]
-            right_action_items: [['dots-vertical', lambda x: app.root.toggle_nav_drawer()]]
+            #right_action_items: [['dots-vertical', lambda x: app.root.toggle_nav_drawer()]]
         ScreenManager:
             id: scr_mngr
             transition: FadeTransition(clearcolor=[255, 255, 255, 0])
@@ -80,42 +88,19 @@ NavigationLayout:
                     size: dp(520), dp(320)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                     BoxLayout:
-                        orientation:'vertical'
-                        padding: dp(10)
-                        spacing: 10
-                        MDLabel:
-                            text: 'User Account'
-                            theme_text_color: 'Primary'
-                            font_style: "Title"
-                            size_hint_y: None
-                            height: self.texture_size[1] + dp(4)
-                        MDLabel:
-                            font_style: "Body1"
-                            text: 'Enter credentials to continue...'
-                            theme_text_color: 'Hint'
-                            size_hint_y: None
-                            height: self.texture_size[1] + dp(4)
+                        orientation: 'vertical'
+                        padding: dp(15)
                         MDTextField:
-                            hint_text: "Username"
-                            helper_text: "Maximum Range Username."
-                            max_text_length: 16
+                            id: text_field_error
+                            hint_text: "Helper text on error (Hit Enter with two characters here)"
+                            helper_text: "Two is my least favorite number"
                             helper_text_mode: "on_error"
-                            write_tab: False
                         MDTextField:
-                            hint_text: "Password"
-                            helper_text: "Maximum Range Password."
-                            max_text_length: 16
+                            hint_text: "required = True"
+                            required: True
                             helper_text_mode: "on_error"
+                        MDTextField:
+                            hint_text: "Max text length = 10"
+                            max_text_length: 10
                             write_tab: False
-                        BoxLayout:
-                            orientation: 'vertical'
-                            padding_top: dp(2)
-                            AnchorLayout:
-                                anchor_x: 'right'
-                                anchor_y: 'bottom'
-                                MDRaisedButton:
-                                    text: "Login"
-                                    size_hint: None, None
-                                    size: 3 * dp(48), dp(48)
-                                    opposite_colors: True
-                                #on_release: app.show_example_dialog()
+                            #on_release: app.show_example_dialog()

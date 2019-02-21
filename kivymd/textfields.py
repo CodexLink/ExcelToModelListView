@@ -11,6 +11,7 @@ from kivymd.label import MDLabel
 from kivymd.theming import ThemableBehavior
 
 Builder.load_string('''
+#:import AnchorLayout kivy.uix.anchorlayout
 <MDTextField>:
     canvas.before:
         Clear
@@ -140,7 +141,7 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
                                        text=self.helper_text)
 
         self._right_msg_lbl = TextfieldLabel(font_style='Caption',
-                                             halign='right',
+                                             halign='left',
                                              valign='middle',
                                              text="")
 

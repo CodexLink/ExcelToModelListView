@@ -287,7 +287,7 @@ class NavigationLayout(VendorNavigationDrawer, ThemableBehavior):
     min_dist_to_close = NumericProperty(0.8)
     anim_time = NumericProperty(0.2)
     separator_image = StringProperty('{}'.format(images_path + '/transparent.png'))
-    side_panel_positioning = 'left'
+    side_panel_positioning = 'right' #Changeable
     side_panel_width = NumericProperty(dp(320))
     max_shadow_opacity = NumericProperty(0.5)
     anim_type = StringProperty('slide_above_simple')

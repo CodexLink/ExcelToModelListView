@@ -4,7 +4,8 @@ from kivy.metrics import dp
 from kivy.properties import ObjectProperty
 from kivy.uix.image import Image
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
-from kivy.uix.anchorlayout import AnchorLayout
+from kivy.uix.anchorlayout import AnchorLayout # Added
+from kivy.uix.widget import Widget # Added
 from kivymd.bottomsheet import MDListBottomSheet, MDGridBottomSheet
 from kivymd.button import MDIconButton
 from kivymd.date_picker import MDDatePicker
@@ -12,12 +13,119 @@ from kivymd.dialog import MDDialog
 from kivymd.label import MDLabel
 from kivymd.list import ILeftBody, ILeftBodyTouch, IRightBodyTouch, BaseListItem
 from kivymd.material_resources import DEVICE_TYPE
-from kivymd.navigationdrawer import MDNavigationDrawer, NavigationDrawerHeaderBase
+from kivymd.navigationdrawer import MDNavigationDrawer, NavigationDrawerHeaderBase, NavigationDrawerIconButton
 from kivymd.selectioncontrols import MDCheckbox
 from kivymd.snackbar import Snackbar
 from kivymd.theming import ThemeManager
 from kivymd.time_picker import MDTimePicker
-#class HackedDemoNavDrawer(MDNavigationDrawer):
+
+main_class_design = '''
+#:import Toolbar kivymd.toolbar.Toolbar
+#:import ThemeManager kivymd.theming.ThemeManager
+#:import MDNavigationDrawer kivymd.navigationdrawer.MDNavigationDrawer
+#:import NavigationLayout kivymd.navigationdrawer.NavigationLayout
+#:import NavigationDrawerDivider kivymd.navigationdrawer.NavigationDrawerDivider
+#:import NavigationDrawerToolbar kivymd.navigationdrawer.NavigationDrawerToolbar
+#:import NavigationDrawerSubheader kivymd.navigationdrawer.NavigationDrawerSubheader
+#:import MDCheckbox kivymd.selectioncontrols.MDCheckbox
+#:import MDSwitch kivymd.selectioncontrols.MDSwitch
+#:import MDList kivymd.list.MDList
+#:import OneLineListItem kivymd.list.OneLineListItem
+#:import TwoLineListItem kivymd.list.TwoLineListItem
+#:import ThreeLineListItem kivymd.list.ThreeLineListItem
+#:import OneLineAvatarListItem kivymd.list.OneLineAvatarListItem
+#:import OneLineIconListItem kivymd.list.OneLineIconListItem
+#:import OneLineAvatarIconListItem kivymd.list.OneLineAvatarIconListItem
+#:import MDTextField kivymd.textfields.MDTextField
+#:import MDSpinner kivymd.spinner.MDSpinner
+#:import MDCard kivymd.card.MDCard
+#:import MDSeparator kivymd.card.MDSeparator
+#:import MDDropdownMenu kivymd.menu.MDDropdownMenu
+#:import get_color_from_hex kivy.utils.get_color_from_hex
+#:import colors kivymd.color_definitions.colors
+#:import SmartTile kivymd.grid.SmartTile
+#:import MDSlider kivymd.slider.MDSlider
+#:import MDTabbedPanel kivymd.tabs.MDTabbedPanel
+#:import MDTab kivymd.tabs.MDTab
+#:import MDProgressBar kivymd.progressbar.MDProgressBar
+#:import MDAccordion kivymd.accordion.MDAccordion
+#:import MDAccordionItem kivymd.accordion.MDAccordionItem
+#:import MDAccordionSubItem kivymd.accordion.MDAccordionSubItem
+#:import MDThemePicker kivymd.theme_picker.MDThemePicker
+#:import MDBottomNavigation kivymd.tabs.MDBottomNavigation
+#:import MDBottomNavigationItem kivymd.tabs.MDBottomNavigationItem
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import AnchorLayout kivy.uix.anchorlayout
+NavigationLayout:
+    id: nav_layout
+    MDNavigationDrawer:
+        id: nav_drawer
+        NavigationDrawerToolbar:
+            title: "Main Menu"
+        NavigationDrawerSubheader:
+            text: "Prolly Breaking"
+        NavigationDrawerIconButton:
+            icon: 'view-dashboard'
+            text: "Dashboard"
+            on_release: app.root.ids.scr_mngr.current = 'Startup_FirstTime'
+        NavigationDrawerIconButton:
+            icon: 'exit-to-app'
+            text: "Exit Application"
+            on_release: app.get_running_app().stop()
+        NavigationDrawerIconButton:
+            icon: 'view-dashboard'
+            text: "Dashboasdard"
+            on_release: app.root.ids.scr_mngr.current = 'Startup_FirstTime'
+        NavigationDrawerIconButton:
+            icon: 'exit-to-app'
+            text: "Exit Applasdication"
+            on_release: app.get_running_app().stop()
+    BoxLayout:
+        orientation: 'vertical'
+        Toolbar:
+            id: ToolbarMain
+            title: app.title
+            md_bg_color: get_color_from_hex(colors[app.theme_cls.primary_palette]['700'])
+            background_palette: app.theme_cls.primary_palette
+            background_hue: '700'
+            left_action_items: [['menu', lambda x: app.root.toggle_nav_drawer()]]
+            right_action_items: [['lock', lambda x: None], ['camera', lambda x: None], ['play', lambda x: None]]
+        ScreenManager:
+            id: scr_mngr
+            transition: FadeTransition(clearcolor=[255, 255, 255, 0])
+            Screen:
+                name: 'Startup_FirstTime'
+                MDCard:
+                    size_hint: None, None
+                    size: dp(520), dp(320)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    BoxLayout:
+                        orientation: 'vertical'
+                        padding: dp(10)
+                        spacing: 10
+                        AnchorLayout:
+                            anchor_x: 'center'
+                            anchor_y: 'center'
+                            MDLabel:
+                                pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                                text: 'This is Experimental, where ToolBar should be changed dynamically...'
+                        MDRaisedButton:
+                            text: "Remove Right Buttons Toolbar"
+                            size_hint: None, None
+                            size: 3 * dp(48), dp(48)
+                            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                            opposite_colors: True
+                            on_release: app.root.ids.nav_drawer.add_widget(NavigationDrawerIconButton(icon='checkbox-blank-circle', text="Text Created"))
+                            #on_release: app.toolbar_remove_right_botton_content(), app.show_snackbar('Button1')
+                        MDRaisedButton:
+                            text: "Change Content ToolBar"
+                            size_hint: None, None
+                            size: 3 * dp(48), dp(48)
+                            pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                            opposite_colors: True
+                            on_release: app.toolbar_change_content(), app.show_snackbar('Button2')
+'''
+# class HackedDemoNavDrawer(MDNavigationDrawer):
 #    # DO NOT USE
 #    def add_widget(self, widget, index=0):
 #        if issubclass(widget.__class__, BaseListItem):
@@ -33,10 +141,10 @@ from kivymd.time_picker import MDTimePicker
 #            super(MDNavigationDrawer, self).add_widget(widget, index)
 
 
-class KitchenSink(App):
+class KitchenSink(App, Widget):
     theme_cls = ThemeManager()
     previous_date = ObjectProperty()
-    title = "Inventory System | DLS-AEMB"
+    title = 'NavigationUpdateThroughButton | Experimental #1'
 
     menu_items = [
         {'viewclass': 'MDMenuItem',
@@ -56,16 +164,29 @@ class KitchenSink(App):
     ]
 
     def build(self):
-        main_widget = Builder.load_file("MD_DesignClass_File.kv")
+        self.main_widget = Builder.load_string(main_class_design)
         self.theme_cls.primary_palette = 'Amber'
         #self.theme_cls.theme_style = 'Light'
        # main_widget.ids.text_field_error.bind(
        #     on_text_validate=self.set_error_message,
        #     on_focus=self.set_error_message)
         # self.bottom_navigation_remove_mobile(main_widget)
-        return main_widget
-    def remove_widget_nav_drawer(self):
+        return self.main_widget
+    def callback(self, instance, value):
+        toast("Pressed item menu %d" % value)
+
+    #def toolbar_remove_right_botton_content(self):
+    #    for i in range(15):
+    #        self.main_widget.ids.nav_drawer.add_widget(MDNavigationDrawer(icon='checkbox-blank-circle', text="Item menu"))
+
+    def toolbar_change_content(self):
         pass
+
+    def show_snackbar(self, snack_type):
+        if snack_type == 'Button1':
+            Snackbar(text="Button1 Executed Successfully!", button_text="Dismiss", button_callback=lambda *args: 2).show()
+        elif snack_type == 'Button2':
+            Snackbar(text="Button2 Executed Successfully!", button_text="Dismiss", button_callback=lambda *args: 2).show()
 #    def bottom_navigation_remove_mobile(self, widget):
 #        # Removes some items from bottom-navigation demo when on mobile
 #        if DEVICE_TYPE == 'mobile':
@@ -195,15 +316,15 @@ class KitchenSink(App):
 #        pass
 #
 #
-#class AvatarSampleWidget(ILeftBody, Image):
+# class AvatarSampleWidget(ILeftBody, Image):
 #    pass
 #
 #
-#class IconLeftSampleWidget(ILeftBodyTouch, MDIconButton):
+# class IconLeftSampleWidget(ILeftBodyTouch, MDIconButton):
 #    pass
 #
 #
-#class IconRightSampleWidget(IRightBodyTouch, MDCheckbox):
+# class IconRightSampleWidget(IRightBodyTouch, MDCheckbox):
 #    pass
 
 
