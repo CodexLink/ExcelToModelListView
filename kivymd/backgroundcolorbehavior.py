@@ -1,11 +1,11 @@
 # -*- coding: utf-8 -*-
+
 from kivy.lang import Builder
 from kivy.properties import BoundedNumericProperty, ReferenceListProperty
 from kivy.properties import OptionProperty, ListProperty
 from kivy.uix.widget import Widget
 from kivy.utils import get_color_from_hex
 from kivymd.color_definitions import text_colors
-from kivymd.theming import ThemableBehavior
 
 Builder.load_string('''
 <BackgroundColorBehavior>
@@ -74,8 +74,10 @@ class SpecificBackgroundColorBehavior(BackgroundColorBehavior):
     def __init__(self, **kwargs):
         super(SpecificBackgroundColorBehavior, self).__init__(**kwargs)
         if hasattr(self, 'theme_cls'):
-            self.theme_cls.bind(primary_palette=self._update_specific_text_color)
-            self.theme_cls.bind(accent_palette=self._update_specific_text_color)
+            self.theme_cls.bind(
+                primary_palette=self._update_specific_text_color)
+            self.theme_cls.bind(
+                accent_palette=self._update_specific_text_color)
             self.theme_cls.bind(theme_style=self._update_specific_text_color)
         self.bind(background_hue=self._update_specific_text_color)
         self.bind(background_palette=self._update_specific_text_color)

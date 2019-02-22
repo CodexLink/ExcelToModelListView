@@ -1,4 +1,5 @@
 # -*- coding: utf-8 -*-
+
 from kivy.app import App
 from kivy.core.text import LabelBase
 from kivy.core.window import Window
@@ -9,8 +10,9 @@ from kivy.properties import OptionProperty, AliasProperty, ObjectProperty, \
 from kivy.uix.widget import Widget
 from kivy.utils import get_color_from_hex
 from kivy.atlas import Atlas
-from kivymd.color_definitions import colors, text_colors
-from kivymd.material_resources import FONTS, DEVICE_TYPE
+
+from kivymd.color_definitions import colors
+from kivymd.material_resources import FONTS, DEVICE_TYPE, DEVICE_IOS
 from kivymd import images_path
 
 for font in FONTS:
@@ -340,6 +342,7 @@ class ThemeManager(Widget):
 class ThemableBehavior(object):
     theme_cls = ObjectProperty(None)
     opposite_colors = BooleanProperty(False)
+    device_ios = DEVICE_IOS
 
     def __init__(self, **kwargs):
         if self.theme_cls is not None:

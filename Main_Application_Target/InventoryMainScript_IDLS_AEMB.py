@@ -4,7 +4,7 @@ from kivy.metrics import dp
 from kivy.properties import ObjectProperty
 from kivy.uix.image import Image
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
-from kivy.uix.anchorlayout import AnchorLayout
+#from kivy.config import config
 from kivymd.bottomsheet import MDListBottomSheet, MDGridBottomSheet
 from kivymd.button import MDIconButton
 from kivymd.date_picker import MDDatePicker
@@ -12,11 +12,14 @@ from kivymd.dialog import MDDialog
 from kivymd.label import MDLabel
 from kivymd.list import ILeftBody, ILeftBodyTouch, IRightBodyTouch, BaseListItem
 from kivymd.material_resources import DEVICE_TYPE
-from kivymd.navigationdrawer import MDNavigationDrawer, NavigationDrawerHeaderBase
+from kivymd.navigationdrawer import MDNavigationDrawer, NavigationDrawerHeaderBase, NavigationDrawerIconButton
 from kivymd.selectioncontrols import MDCheckbox
 from kivymd.snackbar import Snackbar
 from kivymd.theming import ThemeManager
 from kivymd.time_picker import MDTimePicker
+from kivymd.toolbar import Toolbar
+from kivy.utils import get_color_from_hex
+from kivymd.color_definitions import colors
 #class HackedDemoNavDrawer(MDNavigationDrawer):
 #    # DO NOT USE
 #    def add_widget(self, widget, index=0):
@@ -34,9 +37,13 @@ from kivymd.time_picker import MDTimePicker
 
 
 class KitchenSink(App):
+    #self.params_title = None
+    #self.params_hue = None
+    #self.params_left_action_items = None
+    #self.params_right_action_items = None
     theme_cls = ThemeManager()
     previous_date = ObjectProperty()
-    title = "Inventory System | DLS-AEMB"
+    title = "Inventory To Simplified Model View - EXT_SMV_GUI" #Excel to Simplified Model VIew in GUI
 
     menu_items = [
         {'viewclass': 'MDMenuItem',
@@ -54,17 +61,35 @@ class KitchenSink(App):
         {'viewclass': 'MDMenuItem',
          'text': 'Example item'},
     ]
-
+ 
     def build(self):
-        main_widget = Builder.load_file("MD_DesignClass_File.kv")
+        self.MainClassBuildFile = Builder.load_file("MD_DesignClass_File.kv")
         self.theme_cls.primary_palette = 'Amber'
+        self.theme_cls.primary_hue = '800'
         #self.theme_cls.theme_style = 'Light'
-       # main_widget.ids.text_field_error.bind(
-       #     on_text_validate=self.set_error_message,
-       #     on_focus=self.set_error_message)
-        # self.bottom_navigation_remove_mobile(main_widget)
-        return main_widget
-    def remove_widget_nav_drawer(self):
+        return self.MainClassBuildFile
+    def MDToolbar_DynamicContent_Change(self, params_title, params_pallete, params_left_action_items, params_right_action_items):
+        #for i in range(15):
+         #   #self.MainClassBuildFile.ids.nav_drawer.add_widget(NavigationDrawerIconButton(icon='checkbox-blank-circle', text="Item menu %d" % i,on_release=lambda x, y=i: self.callback(x, y)))
+         #   self.MainClassBuildFile.ids.nav_drawer.remove_widget(i)
+        self.root.ids.ToolbarMain.title = params_title
+        self.root.ids.ToolbarMain.md_bg_color = get_color_from_hex(colors[params_pallete][self.theme_cls.primary_hue])
+        self.root.ids.ToolbarMain.background_palette = params_pallete
+        self.root.ids.ToolbarMain.left_action_items = params_left_action_items
+        self.root.ids.ToolbarMain.right_action_items = params_right_action_items
+    #def MDNavigationDrawer_RemoveFunction
+    def MDNavigationDrawer_DynamicContent_Change(self, Params_Mode):
+        if Params_Mode == 'User.Logon_Passed':
+            #self.root.ids.
+            pass
+        elif Params_Mode == 'User.LogonPrompt':
+            pass
+        elif Params_Mode == 'User.PromptedAdmin_Passed':
+            pass
+        else:
+            logger.error('[RUNTIME ERROR] -> Unknown String Checked with No Valid Statement To Run!')
+            raise ValueError('[RUNTIME ERROR] -> Unknown String Checked with No Valid Statement To Run!')
+    def MDStartup_AdminAccessConfirm(self, BooleanPrompt):
         pass
 #    def bottom_navigation_remove_mobile(self, widget):
 #        # Removes some items from bottom-navigation demo when on mobile
