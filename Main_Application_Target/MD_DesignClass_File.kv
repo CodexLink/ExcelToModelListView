@@ -42,39 +42,42 @@ NavigationLayout:
     MDNavigationDrawer:
         id: nav_drawer
         NavigationDrawerSubheader:
-            text: "User Menu"
+            text: "Author Menu"
         NavigationDrawerIconButton:
-            id: ToolMenu_1
             icon: 'view-dashboard'
             text: "Dashboard"
-            on_release: app.root.ids.scr_mngr.current = 'MainWindow_Dashboard'
+            on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_Dashboard'
         NavigationDrawerIconButton:
-            id: ToolMenu_2
             icon: 'database-plus'
             text: "Data File | Import and Export"
-            on_release: app.root.ids.scr_mngr.current = 'MainWindow_DataPlacement'
+            on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_DataPlacement'
         NavigationDrawerIconButton:
-            id: ToolMenu_2
             icon: 'view-list'
             text: "Data Management"
-            on_release: app.root.ids.scr_mngr.current = 'MainWindow_SimplifiedView'
+            on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
         NavigationDrawerSubheader:
             text: "Account"
         NavigationDrawerIconButton:
-            id: ToolMenu_4
-            icon: 'face-profile'
-            text: "Edit Profile"
-            on_release: app.root.ids.scr_mngr.current = 'Startup_FirstTime'
+            icon: 'face'
+            text: "Add Author"
+            on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_AccountAddInfo'
         NavigationDrawerIconButton:
-            id: ToolMenu_5
+            icon: 'delete-sweep'
+            text: "Remove Author"
+            on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_AccountDeleteInfo'
+        NavigationDrawerIconButton:
+            icon: 'key-change'
+            text: "Edit Author Info"
+            on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_AccountEditInfo'
+        NavigationDrawerIconButton:
             icon: 'nature-people'
-            text: "Change User"
-            on_release: app.root.ids.scr_mngr.current = 'Startup_FirstTime'
+            text: "Change Author"
+            on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_AccountUserSelection'
         NavigationDrawerIconButton:
-            id: ToolMenu_
+            id: ToolMenu_6
             icon: 'exit-to-app'
             text: "Exit Application"
-            on_release: app.get_running_app().stop()
+            #on_release: root.MDButton_Trigger_ExitConfirm()#app.get_running_app().stop()
     BoxLayout:
         orientation: 'vertical'
         Toolbar:
@@ -84,103 +87,138 @@ NavigationLayout:
             background_palette: app.theme_cls.primary_palette
             background_hue: app.theme_cls.primary_hue
             left_action_items: [['menu', lambda x: app.root.toggle_nav_drawer()]]
-            #right_action_items: [['dots-vertical', lambda x: app.root.toggle_nav_drawer()]]
+            #right_action_items: None
         ScreenManager:
-            id: scr_mngr
+            id: ScreenFrame_MainWindow
             transition: FadeTransition(clearcolor=[255, 255, 255, 0])
             Screen:
                 name: 'Startup_FirstTime_GetInfo'
                 MDCard:
                     size_hint: None, None
-                    size: dp(560), dp(450)
+                    size: dp(560), dp(470)
                     pos_hint: {'center_x': 0.5, 'center_y': 0.5}
                     BoxLayout:
                         orientation: 'vertical'
-                        padding: dp(22)
-                        BoxLayout:
-                            orientation: 'vertical'
-                            #padding_vertical: dp(10)
-                            AnchorLayout:
-                                anchor_x: 'left'
-                                anchor_y: 'top'
-                                StackLayout:
-                                    spacing:20
-                                    MDLabel:
-                                        text: 'Hello and Welcome!'
-                                        theme_text_color: 'Primary'
-                                        font_style: "Headline"
-                                        size_hint_y: None
-                                        height: dp(15)
-                                    MDLabel:
-                                        text: 'Please set the following... This wont take a while...'
-                                        theme_text_color: 'Secondary'
-                                        font_style: "Body1"
-                                        size_hint_y: None
-                                        height: dp(0)
-                        BoxLayout:
-                            orientation: 'vertical'
-                            spacing: 10
-                            MDTextField:
-                                hint_text: "Input Your First Name"
-                                required: True
-                                helper_text: "First Name Needed for Author Assignment"
-                                helper_text_mode: "on_error"
-                                write_tab: False
-                            MDTextField:
-                                hint_text: "Input Your Last Name"
-                                required: True
-                                helper_text: "Last Name Needed for Author Assignment"
-                                helper_text_mode: "on_error"
-                                write_tab: False
-                            MDTextField:
-                                hint_text: "Input Your Job Position"
-                                required: True
-                                helper_text: "Job Position Needed for Author Assignment"
-                                helper_text_mode: "on_error"
-                                write_tab: False
-                            MDLabel:
-                                text: 'Want to use the program with debugging features? Click Admin PrevCheck for more info.'
-                                theme_text_color: 'Secondary'
-                                font_style: "Caption"
-                                size_hint_y: None
-                                height: dp(8)
-                        BoxLayout:
-                            orientation: 'horizontal'
-                            #spacing: 10
-                            AnchorLayout:
-                                anchor_x: 'left'
-                                anchor_y: 'bottom'
+                        padding: dp(20)
+                        AnchorLayout:
+                            anchor_x: 'left'
+                            anchor_y: 'top'
+                            StackLayout:
+                                spacing:20
+                                MDLabel:
+                                    text: 'Hello and Welcome!'
+                                    theme_text_color: 'Primary'
+                                    font_style: "Headline"
+                                    size_hint_y: None
+                                    height: dp(15)
+                                MDLabel:
+                                    text: 'Please set the following... This wont take a while...'
+                                    theme_text_color: 'Secondary'
+                                    font_style: "Body1"
+                                    size_hint_y: None
+                                    height: dp(3)
+                                MDTextField:
+                                    hint_text: "Input Your First Name"
+                                    required: True
+                                    helper_text: "First Name Needed for Author Assignment"
+                                    helper_text_mode: "on_focus"
+                                    write_tab: False
+                                MDTextField:
+                                    hint_text: "Input Your Last Name"
+                                    required: True
+                                    helper_text: "Last Name Needed for Author Assignment"
+                                    helper_text_mode: "on_focus"
+                                    write_tab: False
+                                MDTextField:
+                                    hint_text: "Input Your Job Position"
+                                    required: True
+                                    helper_text: "Job Position Needed for Author Assignment"
+                                    helper_text_mode: "on_focus"
+                                    write_tab: False
+                                MDTextField:
+                                    hint_text: "Input Your Password"
+                                    required: True
+                                    helper_text: "Password is needed to avoid changing authors without permission."
+                                    helper_text_mode: "on_focus"
+                                    password: True
+                                    write_tab: False
+                                MDLabel:
+                                    text: 'Want to use the program with modifying features? Click Admin Previledge for more info.'
+                                    theme_text_color: 'Secondary'
+                                    font_style: "Caption"
+                                    size_hint_y: None
+                                    height: dp(8)
                                 MDFlatButton:
                                     theme_text_color: 'Custom'
-                                    text_color: app.theme_cls.primary_palette
-                                    text: "Admin PrevCheck"
+                                    text: "Admin Previledge"
                                     size_hint: None, None
                                     size: 3 * dp(48), dp(48)
-                            AnchorLayout:
-                                anchor_x: 'right'
-                                anchor_y: 'bottom'
                                 MDRaisedButton:
-                                    text: "Submit"
+                                    text: "Submit Data"
                                     size_hint: None, None
                                     size: 3 * dp(48), dp(48)
             Screen:
                 name: 'MainWindow_Dashboard'
             Screen:
                 name: 'MainWindow_DataPlacement'
+                MDTabbedPanel:
+                #For tab 1, it should have a checker and status of the file and last modified. Any info of the file.
+                    id: MDTab_DataImportExport
+                    tab_display_mode:'text'
+                    MDTab:
+                        name: 'MDTabOne_DataSetup'
+                        text: "Data"
+                        MDLabel:
+                            font_style: 'Body1'
+                            theme_text_color: 'Primary'
+                            text: "Here is my music list :)"
+                            halign: 'center'
+                #Conversion are for DB, JSON (If possible), Excel is Addable
+                    MDTab:
+                        name: 'MDTabTwo_DataImportExport'
+                        text: 'Import, Export and Data Bind'
+                        MDLabel:
+                            font_style: 'Body1'
+                            theme_text_color: 'Primary'
+                            text: "Show movies here :)"
+                            halign: 'center'
+            Screen:
+                name: 'MainWindow_SimplifiedView'
                 MDBottomNavigation:
                     id: MainFrameWindow_Divider
                     MDBottomNavigationItem:
                         name: 'MainFrameWindow_1'
-                        text: "Warning"
-                        icon: "alert-octagon"
+                        text: "Data Simplified Management"
+                        icon: "view-list"
                         MDLabel:
                             font_style: 'Body1'
                             theme_text_color: 'Primary'
                             text: "Data List"
                             halign: 'center'
+                        MDTabbedPanel:
+                            id: tab_panel
+                            tab_display_mode:'text'
+                            MDTab:
+                                name: 'music'
+                                text: "Music"
+                                icon: "playlist-play"
+                                MDLabel:
+                                    font_style: 'Body1'
+                                    theme_text_color: 'Primary'
+                                    text: "Here is my music list :)"
+                                    halign: 'center'
+                            MDTab:
+                                name: 'movies'
+                                text: 'Movies'
+                                icon: "movie"
+                                MDLabel:
+                                    font_style: 'Body1'
+                                    theme_text_color: 'Primary'
+                                    text: "Show movies here :)"
+                                    halign: 'center'
                     MDBottomNavigationItem:
                         name: 'MainFrameWindow_2'
-                        text: "Status Report"
+                        text: "Data Status Report"
                         icon: 'book-open'
                         BoxLayout:
                             orientation: 'vertical'
@@ -192,7 +230,12 @@ NavigationLayout:
                             #3 Due Dates
                             #4 Recently Added 
                             GridLayout:
-                                col: 3
+                                cols: 2
+                                rows: 3
+                                size_hint_y: None
+                                height: self.minimum_height
+                                spacing: dp(10)
+                                size_hint_y: None
                                 MDCard:
                                     size_hint: None, None
                                     size: dp(320), dp(200)
@@ -204,8 +247,6 @@ NavigationLayout:
                                             theme_text_color: 'Secondary'
                                             font_style: "Title"
                                             size_hint_y: None
-                                            BoxLayout:
-                                                padding_top: dp(5)
                                         MDTextField:
                                             hint_text: "No helper text"
                                             write_tab: False
@@ -219,57 +260,290 @@ NavigationLayout:
                                             helper_text: "Text is always here"
                                             helper_text_mode: "persistent"
                                             write_tab: False
-                                MDCard:
-                                    size_hint: None, None
-                                    size: dp(320), dp(200)
-                                    BoxLayout:
-                                        orientation:'vertical'
-                                        padding: dp(10)
-                                        MDLabel:
-                                            text: 'Title'
-                                            theme_text_color: 'Secondary'
-                                            font_style: "Title"
-                                            size_hint_y: None
-                                            BoxLayout:
-                                                padding_top: dp(5)
-                                        MDTextField:
-                                            hint_text: "No helper text"
-                                            write_tab: False
-                                        MDTextField:
-                                            hint_text: "Helper text on focus"
-                                            helper_text: "This will disappear when you click off"
-                                            helper_text_mode: "on_focus"
-                                            write_tab: False
-                                        MDTextField:
-                                            hint_text: "Persistent helper text"
-                                            helper_text: "Text is always here"
-                                            helper_text_mode: "persistent"
-                                            write_tab: False        
-                                MDCard:
-                                    size_hint: None, None
-                                    size: dp(320), dp(200)
-                                    BoxLayout:
-                                        orientation:'vertical'
-                                        padding: dp(10)
-                                        MDLabel:
-                                            text: 'Title'
-                                            theme_text_color: 'Secondary'
-                                            font_style: "Title"
-                                            size_hint_y: None
-                                            BoxLayout:
-                                                padding_top: dp(5)
-                                        MDTextField:
-                                            hint_text: "No helper text"
-                                            write_tab: False
-                                        MDTextField:
-                                            hint_text: "Helper text on focus"
-                                            helper_text: "This will disappear when you click off"
-                                            helper_text_mode: "on_focus"
-                                            write_tab: False
-                                        MDTextField:
-                                            hint_text: "Persistent helper text"
-                                            helper_text: "Text is always here"
-                                            helper_text_mode: "persistent"
-                                            write_tab: False        
             Screen:
-                name: 'MainWindow_SimplifiedView'
+                name: 'MainWindow_AccountUserSelection'
+                MDCard:
+                    size_hint: None, None
+                    size: dp(560), dp(470)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    BoxLayout:
+                        orientation: 'vertical'
+                        padding: 0, dp(20)
+                        StackLayout:
+                            spacing:20
+                            AnchorLayout:
+                                anchor_x: 'left'
+                                anchor_y: 'top'
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    padding: dp(20), 0
+                                    spacing: 20
+                                    MDLabel:
+                                        text: 'Select an Registered Author'
+                                        theme_text_color: 'Primary'
+                                        font_style: "Headline"
+                                        size_hint_y: None
+                                        height: dp(15)
+                                    MDLabel:
+                                        text: 'Please choose your identity with your true identity!'
+                                        theme_text_color: 'Secondary'
+                                        font_style: "Body1"
+                                        size_hint_y: None
+                                        height: dp(3)
+                                    ScrollView:
+                                        do_scroll_x: False
+                                        MDList:
+                                            id: MDList_UserInsertion_Selection
+                                            TwoLineAvatarListItem:
+                                                type: "two-line"
+                                                text: "Two-line item..."
+                                                secondary_text: "with avatar"
+                                                AvatarSampleWidget:
+                                                    source: './assets/avatar.png'
+                                            TwoLineAvatarListItem:
+                                                type: "two-line"
+                                                text: "Two-line item..."
+                                                secondary_text: "with avatar"
+                                                AvatarSampleWidget:
+                                                    source: './assets/avatar.png'
+                                            TwoLineAvatarListItem:
+                                                type: "two-line"
+                                                text: "Two-line item..."
+                                                secondary_text: "with avatar"
+                                                AvatarSampleWidget:
+                                                    source: './assets/avatar.png'
+                                            TwoLineAvatarListItem:
+                                                type: "two-line"
+                                                text: "Two-line item..."
+                                                secondary_text: "with avatar"
+                                                AvatarSampleWidget:
+                                                    source: './assets/avatar.png'
+                                            TwoLineAvatarListItem:
+                                                type: "two-line"
+                                                text: "Two-line item..."
+                                                secondary_text: "with avatar"
+                                                AvatarSampleWidget:
+                                                    source: './assets/avatar.png'
+                                            TwoLineAvatarListItem:
+                                                type: "two-line"
+                                                text: "Two-line item..."
+                                                secondary_text: "with avatar"
+                                                AvatarSampleWidget:
+                                                    source: './assets/avatar.png'
+                                            TwoLineAvatarListItem:
+                                                type: "two-line"
+                                                text: "Two-line item..."
+                                                secondary_text: "with avatar"
+                                                AvatarSampleWidget:
+                                                    source: './assets/avatar.png'
+            Screen:
+                name: 'MainWindow_AccountAddInfo'
+                MDCard:
+                    size_hint: None, None
+                    size: dp(560), dp(470)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    BoxLayout:
+                        orientation: 'vertical'
+                        padding: dp(20)
+                        AnchorLayout:
+                            anchor_x: 'left'
+                            anchor_y: 'top'
+                            StackLayout:
+                                spacing:20
+                                MDLabel:
+                                    text: 'Add an Author'
+                                    theme_text_color: 'Primary'
+                                    font_style: "Headline"
+                                    size_hint_y: None
+                                    height: dp(15)
+                                MDLabel:
+                                    text: 'More staffs? Add more authors!'
+                                    theme_text_color: 'Secondary'
+                                    font_style: "Body1"
+                                    size_hint_y: None
+                                    height: dp(3)
+                                MDTextField:
+                                    hint_text: "Input Your First Name"
+                                    required: True
+                                    helper_text: "First Name Needed for Author Assignment"
+                                    helper_text_mode: "on_focus"
+                                    write_tab: False
+                                MDTextField:
+                                    hint_text: "Input Your Last Name"
+                                    required: True
+                                    helper_text: "Last Name Needed for Author Assignment"
+                                    helper_text_mode: "on_focus"
+                                    write_tab: False
+                                MDTextField:
+                                    hint_text: "Input Your Job Position"
+                                    required: True
+                                    helper_text: "Job Position Needed for Author Assignment"
+                                    helper_text_mode: "on_focus"
+                                    write_tab: False
+                                MDTextField:
+                                    hint_text: "Input Your Password"
+                                    required: True
+                                    helper_text: "Password is needed to avoid changing authors without permission."
+                                    helper_text_mode: "on_focus"
+                                    password: True
+                                    write_tab: False
+                                MDLabel:
+                                    text: 'Want to use the program with modifying features? Click Admin Previledge for more info.'
+                                    theme_text_color: 'Secondary'
+                                    font_style: "Caption"
+                                    size_hint_y: None
+                                    height: dp(8)
+                                MDFlatButton:
+                                    theme_text_color: 'Custom'
+                                    text: "Admin Previledge"
+                                    size_hint: None, None
+                                    size: 3 * dp(48), dp(48)
+                                MDRaisedButton:
+                                    text: "Submit Data"
+                                    size_hint: None, None
+                                    size: 3 * dp(48), dp(48)
+            Screen:
+                name: 'MainWindow_AccountDeleteInfo'
+                MDCard:
+                    size_hint: None, None
+                    size: dp(560), dp(470)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    BoxLayout:
+                        orientation: 'vertical'
+                        padding: 0, dp(20)
+                        AnchorLayout:
+                            anchor_x: 'left'
+                            anchor_y: 'top'
+                            StackLayout:
+                                spacing:20
+                                BoxLayout:
+                                    orientation: 'vertical'
+                                    padding: dp(20), 0
+                                    spacing: 20
+                                    MDLabel:
+                                        text: 'Remove an Registered Author'
+                                        theme_text_color: 'Primary'
+                                        font_style: "Headline"
+                                        size_hint_y: None
+                                        height: dp(15)
+                                    MDLabel:
+                                        text: 'This is the place to remove an authors right of modification and view.'
+                                        theme_text_color: 'Secondary'
+                                        font_style: "Body1"
+                                        size_hint_y: None
+                                        height: dp(3)
+                                    ScrollView:
+                                        do_scroll_x: False
+                                        MDList:
+                                            id: MDList_UserDeletion_Selection
+                                            NavigationDrawerIconButton:
+                                                icon: 'tab-unselected'
+                                                text: "Unselect Checked Author"
+                                            TwoLineAvatarIconListItem:
+                                                text: "Persons Name"
+                                                secondary_text: "<Position>"
+                                                AvatarSampleWidget:
+                                                    source: './assets/avatar.png'
+                                                IconRightSampleWidget:
+                                            TwoLineAvatarIconListItem:
+                                                text: "Persons Name"
+                                                secondary_text: "<Position>"
+                                                AvatarSampleWidget:
+                                                    source: './assets/avatar.png'
+                                                IconRightSampleWidget:
+                                            TwoLineAvatarIconListItem:
+                                                text: "Persons Name"
+                                                secondary_text: "<Position>"
+                                                AvatarSampleWidget:
+                                                    source: './assets/avatar.png'
+                                                IconRightSampleWidget:
+                                            TwoLineAvatarIconListItem:
+                                                text: "Persons Name"
+                                                secondary_text: "<Position>"
+                                                AvatarSampleWidget:
+                                                    source: './assets/avatar.png'
+                                                IconRightSampleWidget:
+                                            TwoLineAvatarIconListItem:
+                                                text: "Persons Name"
+                                                secondary_text: "<Position>"
+                                                AvatarSampleWidget:
+                                                    source: './assets/avatar.png'
+                                                IconRightSampleWidget:
+                                            TwoLineAvatarIconListItem:
+                                                text: "Persons Name"
+                                                secondary_text: "<Position>"
+                                                AvatarSampleWidget:
+                                                    source: './assets/avatar.png'
+                                                IconRightSampleWidget:
+                                    MDFlatButton:
+                                        theme_text_color: 'Custom'
+                                        text: "Remove Selected"
+                                        size_hint: None, None
+                                        size: 3 * dp(48), dp(48)
+                                        pos_hint: {'center_y': 0.9}
+            Screen:
+                name: 'MainWindow_AccountEditInfo'
+                MDCard:
+                    size_hint: None, None
+                    size: dp(560), dp(470)
+                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
+                    BoxLayout:
+                        orientation: 'vertical'
+                        padding: dp(20)
+                        AnchorLayout:
+                            anchor_x: 'left'
+                            anchor_y: 'top'
+                            StackLayout:
+                                spacing:20
+                                MDLabel:
+                                    text: 'Edit your Information'
+                                    theme_text_color: 'Primary'
+                                    font_style: "Headline"
+                                    size_hint_y: None
+                                    height: dp(15)
+                                MDLabel:
+                                    text: 'Type Mistake? Wrong Info? Correct That One Here!'
+                                    theme_text_color: 'Secondary'
+                                    font_style: "Body1"
+                                    size_hint_y: None
+                                    height: dp(3)
+                                MDTextField:
+                                    hint_text: "Edit Your First Name"
+                                    required: True
+                                    helper_text: "First Name Needed for Author Assignment"
+                                    helper_text_mode: "on_focus"
+                                    write_tab: False
+                                MDTextField:
+                                    hint_text: "Edit Your Last Name"
+                                    required: True
+                                    helper_text: "Last Name Needed for Author Assignment"
+                                    helper_text_mode: "on_focus"
+                                    write_tab: False
+                                MDTextField:
+                                    hint_text: "Edit Your Job Position"
+                                    required: True
+                                    helper_text: "Job Position Needed for Author Assignment"
+                                    helper_text_mode: "on_focus"
+                                    write_tab: False
+                                MDTextField:
+                                    hint_text: "Edit Your Password"
+                                    required: True
+                                    helper_text: "Password is needed to avoid changing authors without permission."
+                                    helper_text_mode: "on_focus"
+                                    password: True
+                                    write_tab: False
+                                MDLabel:
+                                    text: 'Want to use the program with modifying features? Click Admin Previledge for more info.'
+                                    theme_text_color: 'Secondary'
+                                    font_style: "Caption"
+                                    size_hint_y: None
+                                    height: dp(8)
+                                MDFlatButton:
+                                    theme_text_color: 'Custom'
+                                    text: "Admin Previledge"
+                                    size_hint: None, None
+                                    size: 3 * dp(48), dp(48)
+                                MDRaisedButton:
+                                    text: "Submit Data"
+                                    size_hint: None, None
+                                    size: 3 * dp(48), dp(48)

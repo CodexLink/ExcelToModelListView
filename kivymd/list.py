@@ -571,3 +571,5 @@ class TwoLineAvatarIconListItem(TwoLineAvatarListItem):
 class ThreeLineAvatarIconListItem(ThreeLineAvatarListItem):
     # dp(40) = dp(16) + dp(24):
     _txt_right_pad = NumericProperty(dp(40) + m_res.HORIZ_MARGINS)
+
+#Added

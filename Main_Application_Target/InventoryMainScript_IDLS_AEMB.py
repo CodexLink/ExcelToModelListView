@@ -1,10 +1,23 @@
+'''
+Project Name: InventoryEXT_SMV_GUI - Inventory To Simplified Model View, Code Material Design
+Proper Name: Excel Inventory To Simplified View
+Version: unknown.beta
+Authors: Janrey Tuazon Licas - App Design (Semi)
+        Sam Matienzo (Database Worker)
+GUI Library Used: Kivy
+    Base Theme: KivyMD (Material Design Preset Designs)
+
+Date Initialization: 02/21/2019
+
+'''
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.metrics import dp
 from kivy.properties import ObjectProperty
 from kivy.uix.image import Image
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
-#from kivy.config import config
+from kivy.config import Config
+from kivy.logger import Logger as LoggerDebug
 from kivymd.bottomsheet import MDListBottomSheet, MDGridBottomSheet
 from kivymd.button import MDIconButton
 from kivymd.date_picker import MDDatePicker
@@ -36,48 +49,105 @@ from kivymd.color_definitions import colors
 #            super(MDNavigationDrawer, self).add_widget(widget, index)
 
 
-class KitchenSink(App):
-    #self.params_title = None
-    #self.params_hue = None
-    #self.params_left_action_items = None
-    #self.params_right_action_items = None
+class MD_InventoryEXI_SMV_GUI(App):
     theme_cls = ThemeManager()
     previous_date = ObjectProperty()
-    title = "Inventory To Simplified Model View - EXT_SMV_GUI" #Excel to Simplified Model VIew in GUI
+    title = "Welcome to Excel Inventory To Simplified Model View | EXI_SMV" #Excel to Simplified Model VIew in GUI
 
-    menu_items = [
-        {'viewclass': 'MDMenuItem',
-         'text': 'Example item'},
-        {'viewclass': 'MDMenuItem',
-         'text': 'Example item'},
-        {'viewclass': 'MDMenuItem',
-         'text': 'Example item'},
-        {'viewclass': 'MDMenuItem',
-         'text': 'Example item'},
-        {'viewclass': 'MDMenuItem',
-         'text': 'Example item'},
-        {'viewclass': 'MDMenuItem',
-         'text': 'Example item'},
-        {'viewclass': 'MDMenuItem',
-         'text': 'Example item'},
-    ]
- 
+    def KivyConfig_Init(self): # Get Values from DB and Change App Behavior Accordingly
+        pass
+
+    def KivyConfig_Setup_FirstTime(self): #This Config can be changed from DB
+        Config.set('graphics','fullscreen','auto')
+        Config.set('graphics','show_cursor','1')
+        Config.set('graphics','width','1024')
+        Config.set('graphics','height','768')
+        Config.set('graphics','minimum_width','1024')
+        Config.set('graphics','minimum_height','768')
+
+    def SQLite_Generate_FirstTime(self):
+        pass
+
+    def SQLite_Init(self): #Init Files and Creates when it doesnt exist but show snackbar that is doesnt exist
+        pass
+
+    def SQLite_ChangeModify(self): # Not Sure
+        pass
+
+    def CriticalComponent_Check(self):
+        return 1
+        if self.KivyConfig_Init() == 'Passed':
+            LoggerDebug.info()
+        elif self.KivyConfig_Init() == 'FileDoesNotExist': #Not Consistent, Maybe Clarify this one soon
+            LoggerDebug.info('FILE EXISTENT: App knows this is not the first. File does not exist. Relocate the application...') # Add save file
+            raise Exception('FILE EXISTENT: App knows this is not the first. File does not exist. Relocate the application...')
+            self.get_running_app().stop() 
+        else: #Add Path does not exist
+            if self.KivyConfig_Setup_FirstTime() == 'Passed':
+                LoggerDebug.info('Kivy Config: First Time Settings is loaded and saved.') # Add save file
+                if self.SQLite_Init() == 'Passed':
+                    LoggerDebug.info('Kivy Config: First Time Settings is loaded and saved.') # Add save file
+                else:
+                    if self.SQLite_Generate_FirstTime() == 'Passed':
+                        LoggerDebug.info('Kivy Config: First Time Files is Initialized and Ready To Go!') # Add save file
+                        return 1
+                    else:
+                        return 0
+            else:
+                return 0
+
     def build(self):
         self.MainClassBuildFile = Builder.load_file("MD_DesignClass_File.kv")
         self.theme_cls.primary_palette = 'Amber'
         self.theme_cls.primary_hue = '800'
-        #self.theme_cls.theme_style = 'Light'
+        self.theme_cls.theme_style = 'Light'
         return self.MainClassBuildFile
+        
+    def MD_DataManage_ShowCellToList(self):
+        pass
+
+    def MD_DataManage_Modify(self):
+        pass
+
+    def MD_FirstTime_DataSubmission(self):
+        pass
+
+    def MDCard_GenerateReport(self):
+        pass
+
+    #For Add and Delete
+    def MDAuthor_DeleteData(self):
+        pass
+
+    def MDAuthor_AddData(self):
+        pass
+
+    def MDAuthor_EditData(self):
+        pass
+
+    def MDStartup_FirstTime_AdminAccess(self, BooleanPrompt):
+        pass
+    
+    #For Checking Previledge on Accessing Admin Features
+    def MDAuthor_CheckAdminPrev_OnAction(self):
+        pass
+
+    # For Logon Screen
+    def MDAuthor_DialogBooleanPrompt(self):
+        pass
+
+    #For Logon and Admin for Modifying User and Assign
+    def MDAuthor_PasswordAccessPrompt(self):
+        pass
     def MDToolbar_DynamicContent_Change(self, params_title, params_pallete, params_left_action_items, params_right_action_items):
-        #for i in range(15):
-         #   #self.MainClassBuildFile.ids.nav_drawer.add_widget(NavigationDrawerIconButton(icon='checkbox-blank-circle', text="Item menu %d" % i,on_release=lambda x, y=i: self.callback(x, y)))
-         #   self.MainClassBuildFile.ids.nav_drawer.remove_widget(i)
         self.root.ids.ToolbarMain.title = params_title
         self.root.ids.ToolbarMain.md_bg_color = get_color_from_hex(colors[params_pallete][self.theme_cls.primary_hue])
         self.root.ids.ToolbarMain.background_palette = params_pallete
         self.root.ids.ToolbarMain.left_action_items = params_left_action_items
         self.root.ids.ToolbarMain.right_action_items = params_right_action_items
-    #def MDNavigationDrawer_RemoveFunction
+
+    #For First TIme
+
     def MDNavigationDrawer_DynamicContent_Change(self, Params_Mode):
         if Params_Mode == 'User.Logon_Passed':
             #self.root.ids.
@@ -87,150 +157,44 @@ class KitchenSink(App):
         elif Params_Mode == 'User.PromptedAdmin_Passed':
             pass
         else:
-            logger.error('[RUNTIME ERROR] -> Unknown String Checked with No Valid Statement To Run!')
-            raise ValueError('[RUNTIME ERROR] -> Unknown String Checked with No Valid Statement To Run!')
-    def MDStartup_AdminAccessConfirm(self, BooleanPrompt):
+            LoggerDebug.error('RUNTIME ERROR: Unknown String Passed with No Valid Statement To Run!')
+            raise ValueError('RUNTIME ERROR:  Unknown String Passed with No Valid Statement To Run!')
+    
+    def MDButton_DarkMode(self, params_switch_boolean):
+        if params_switch_boolean == 'Process_Dark' and self.theme_cls.theme_style == 'Dark':
+            #params_switch_boolean = 
+            #self.theme_cls.theme_style = 
+            #self.root.ids.ToolbarMain
+            pass
+        elif params_switch_boolean == 'Process_Light' and self.theme_cls.theme_style == 'Light':
+           # params_switch_boolean = 
+           # self.theme_cls.theme_style = 
+            pass
+        else:
+            LoggerDebug.error('MDButton_DarkMode received invalid parameters, reset SQL Database or modify the property of App_ReadibilityMode to Light or Dark in String Form')
+            raise ValueError('MDButton_DarkMode received invalid parameters, reset SQL Database or modify the property of App_ReadibilityMode to Light or Dark in String Form')
+    def MDButton_Trigger_GoBack(self, param_ScreenFrame_LastKW): #Last Known Window
         pass
-#    def bottom_navigation_remove_mobile(self, widget):
-#        # Removes some items from bottom-navigation demo when on mobile
-#        if DEVICE_TYPE == 'mobile':
-#            widget.ids.bottom_navigation_demo.remove_widget(
-#                widget.ids.bottom_navigation_desktop_2)
-#        if DEVICE_TYPE == 'mobile' or DEVICE_TYPE == 'tablet':
-#            widget.ids.bottom_navigation_demo.remove_widget(
-#                widget.ids.bottom_navigation_desktop_1)
-#
-#    def show_example_snackbar(self, snack_type):
-#
-#        if snack_type == 'simple':
-#            Snackbar(text="This is a snackbar!").show()
-#        elif snack_type == 'button':
-#            Snackbar(text="This is a snackbar", button_text="with a button!",
-#                     button_callback=lambda *args: 2).show()
-#        elif snack_type == 'verylong':
-#            Snackbar(
-#                text="This is a very very very very very very very long snackbar!").show()
-#
-#    def show_example_dialog(self):
-#        content = MDLabel(font_style='Body1',
-#                          theme_text_color='Secondary',
-#                          text="This is a dialog with a title and some text. "
-#                               "That's pretty awesome right!",
-#                          size_hint_y=None,
-#                          valign='top')
-#        content.bind(texture_size=content.setter('size'))
-#        self.dialog = MDDialog(title="This is a test dialog",
-#                               content=content,
-#                               size_hint=(.8, None),
-#                               height=dp(200),
-#                               auto_dismiss=False)
-#
-#        self.dialog.add_action_button("Dismiss",
-#                                      action=lambda *x: self.dialog.dismiss())
-#        self.dialog.open()
-#
-#    def show_example_long_dialog(self):
-#        content = MDLabel(font_style='Body1',
-#                          theme_text_color='Secondary',
-#                          text="Lorem ipsum dolor sit amet, consectetur "
-#                               "adipiscing elit, sed do eiusmod tempor "
-#                               "incididunt ut labore et dolore magna aliqua. "
-#                               "Ut enim ad minim veniam, quis nostrud "
-#                               "exercitation ullamco laboris nisi ut aliquip "
-#                               "ex ea commodo consequat. Duis aute irure "
-#                               "dolor in reprehenderit in voluptate velit "
-#                               "esse cillum dolore eu fugiat nulla pariatur. "
-#                               "Excepteur sint occaecat cupidatat non "
-#                               "proident, sunt in culpa qui officia deserunt "
-#                               "mollit anim id est laborum.",
-#                          size_hint_y=None,
-#                          valign='top')
-#        content.bind(texture_size=content.setter('size'))
-#        self.dialog = MDDialog(title="This is a long test dialog",
-#                               content=content,
-#                               size_hint=(.8, None),
-#                               height=dp(200),
-#                               auto_dismiss=False)
-#
-#        self.dialog.add_action_button("Dismiss",
-#                                      action=lambda *x: self.dialog.dismiss())
-#        self.dialog.open()
-#
-#    def get_time_picker_data(self, instance, time):
-#        self.root.ids.time_picker_label.text = str(time)
-#        self.previous_time = time
-#
-#    def show_example_time_picker(self):
-#        self.time_dialog = MDTimePicker()
-#        self.time_dialog.bind(time=self.get_time_picker_data)
-#        if self.root.ids.time_picker_use_previous_time.active:
-#            try:
-#                self.time_dialog.set_time(self.previous_time)
-#            except AttributeError:
-#                pass
-#        self.time_dialog.open()
-#
-#    def set_previous_date(self, date_obj):
-#        self.previous_date = date_obj
-#        self.root.ids.date_picker_label.text = str(date_obj)
-#
-#    def show_example_date_picker(self):
-#        if self.root.ids.date_picker_use_previous_date.active:
-#            pd = self.previous_date
-#            try:
-#                MDDatePicker(self.set_previous_date,
-#                             pd.year, pd.month, pd.day).open()
-#            except AttributeError:
-#                MDDatePicker(self.set_previous_date).open()
-#        else:
-#            MDDatePicker(self.set_previous_date).open()
-#
-#    def show_example_bottom_sheet(self):
-#        bs = MDListBottomSheet()
-#        bs.add_item("Here's an item with text only", lambda x: x)
-#        bs.add_item("Here's an item with an icon", lambda x: x,
-#                    icon='clipboard-account')
-#        bs.add_item("Here's another!", lambda x: x, icon='nfc')
-#        bs.open()
-#
-#    def show_example_grid_bottom_sheet(self):
-#        bs = MDGridBottomSheet()
-#        bs.add_item("Facebook", lambda x: x,
-#                    icon_src='./assets/facebook-box.png')
-#        bs.add_item("YouTube", lambda x: x,
-#                    icon_src='./assets/youtube-play.png')
-#        bs.add_item("Twitter", lambda x: x,
-#                    icon_src='./assets/twitter.png')
-#        bs.add_item("Da Cloud", lambda x: x,
-#                    icon_src='./assets/cloud-upload.png')
-#        bs.add_item("Camera", lambda x: x,
-#                    icon_src='./assets/camera.png')
-#        bs.open()
-#
-#    def set_error_message(self, *args):
-#        if len(self.root.ids.text_field_error.text) == 2:
-#            self.root.ids.text_field_error.error = True
-#        else:
-#            self.root.ids.text_field_error.error = False
-#
-#    def on_pause(self):
-#        return True
-#
-#    def on_stop(self):
-#        pass
-#
-#
-#class AvatarSampleWidget(ILeftBody, Image):
-#    pass
-#
-#
-#class IconLeftSampleWidget(ILeftBodyTouch, MDIconButton):
-#    pass
-#
-#
-#class IconRightSampleWidget(IRightBodyTouch, MDCheckbox):
-#    pass
 
+    def MDButton_Trigger_ExitConfirm(self):
+         BooleanPrompt = MDDialog(title='Exit Confirmation', text='Are you sure you want to quit the application?', text_button_ok='Yes', text_button_cancel='No').open() 
+
+class AvatarSampleWidget(ILeftBody, Image):
+    pass
+
+
+class IconLeftSampleWidget(ILeftBodyTouch, MDIconButton):
+    pass
+
+class IconRightSampleWidget(IRightBodyTouch, MDCheckbox):
+    pass
 
 if __name__ == '__main__':
-    KitchenSink().run()
+    if MD_InventoryEXI_SMV_GUI().CriticalComponent_Check():
+        LoggerDebug.info('Resource: File Checks Completed... ')
+        MD_InventoryEXI_SMV_GUI().KivyConfig_Setup_FirstTime()
+        MD_InventoryEXI_SMV_GUI().run()
+    else:
+        LoggerDebug.error('CHECK FAILURE: Application was succesfully failed to comply on one of the files to create or check those files. Set the application run with admin previledges...')
+        raise Exception('CHECK FAILURE: Application was succesfully failed to comply on one of the files to create or check those files. Set the application run with admin previledges...')
+        get_running_app().stop()
