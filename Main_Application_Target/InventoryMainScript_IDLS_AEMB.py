@@ -58,13 +58,13 @@ class MD_InventoryEXI_SMV_GUI(App):
         pass
 
     def KivyConfig_Setup_FirstTime(self): #This Config can be changed from DB
-        Config.set('graphics','fullscreen','auto')
-        Config.set('graphics','show_cursor','1')
+        #Config.set('graphics', 'fullscreen', 'fake')
         Config.set('graphics','width','1024')
         Config.set('graphics','height','768')
+        Config.set('graphics','show_cursor','1')
         Config.set('graphics','minimum_width','1024')
         Config.set('graphics','minimum_height','768')
-
+        Config.write()
     def SQLite_Generate_FirstTime(self):
         pass
 
@@ -98,8 +98,8 @@ class MD_InventoryEXI_SMV_GUI(App):
 
     def build(self):
         self.MainClassBuildFile = Builder.load_file("MD_DesignClass_File.kv")
-        self.theme_cls.primary_palette = 'Amber'
-        self.theme_cls.primary_hue = '800'
+        self.theme_cls.primary_palette = 'DeepOrange'
+        self.theme_cls.primary_hue = '400'
         self.theme_cls.theme_style = 'Light'
         return self.MainClassBuildFile
         
@@ -139,6 +139,7 @@ class MD_InventoryEXI_SMV_GUI(App):
     #For Logon and Admin for Modifying User and Assign
     def MDAuthor_PasswordAccessPrompt(self):
         pass
+        
     def MDToolbar_DynamicContent_Change(self, params_title, params_pallete, params_left_action_items, params_right_action_items):
         self.root.ids.ToolbarMain.title = params_title
         self.root.ids.ToolbarMain.md_bg_color = get_color_from_hex(colors[params_pallete][self.theme_cls.primary_hue])

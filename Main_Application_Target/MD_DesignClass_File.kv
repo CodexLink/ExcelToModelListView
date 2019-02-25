@@ -36,11 +36,12 @@
 #:import AnchorLayout kivy.uix.anchorlayout
 #:import StackLayout kivy.uix.stacklayout
 #:import GridLayout kivy.uix.gridlayout
-
+#:import Window kivy.core.window.Window
 NavigationLayout:
     id: nav_layout
     MDNavigationDrawer:
         id: nav_drawer
+        drawer_logo: 'assets/drawer_logo.png'
         NavigationDrawerSubheader:
             text: "Author Menu"
         NavigationDrawerIconButton:
@@ -93,16 +94,15 @@ NavigationLayout:
             transition: FadeTransition(clearcolor=[255, 255, 255, 0])
             Screen:
                 name: 'Startup_FirstTime_GetInfo'
-                MDCard:
-                    size_hint: None, None
-                    size: dp(560), dp(470)
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                    BoxLayout:
-                        orientation: 'vertical'
-                        padding: dp(20)
-                        AnchorLayout:
-                            anchor_x: 'left'
-                            anchor_y: 'top'
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    MDCard:
+                        size_hint: None, None
+                        size: dp(560), dp(470)
+                        BoxLayout:
+                            orientation: 'vertical'
+                            padding: dp(20)
                             StackLayout:
                                 spacing:20
                                 MDLabel:
@@ -173,7 +173,7 @@ NavigationLayout:
                             theme_text_color: 'Primary'
                             text: "Here is my music list :)"
                             halign: 'center'
-                #Conversion are for DB, JSON (If possible), Excel is Addable
+                                #Conversion are for DB, JSON (If possible), Excel is Addable
                     MDTab:
                         name: 'MDTabTwo_DataImportExport'
                         text: 'Import, Export and Data Bind'
@@ -187,8 +187,12 @@ NavigationLayout:
                 MDBottomNavigation:
                     id: MainFrameWindow_Divider
                     MDBottomNavigationItem:
+                        name: 'MainFrameWindow_0'
+                        text: "Data Binding and Setups"
+                        icon: "database-plus"
+                    MDBottomNavigationItem:
                         name: 'MainFrameWindow_1'
-                        text: "Data Simplified Management"
+                        text: "Data Management"
                         icon: "view-list"
                         MDLabel:
                             font_style: 'Body1'
@@ -198,23 +202,253 @@ NavigationLayout:
                         MDTabbedPanel:
                             id: tab_panel
                             tab_display_mode:'text'
+                            tab_width_mode:'stacked'
                             MDTab:
-                                name: 'music'
-                                text: "Music"
-                                icon: "playlist-play"
+                                name: 'Tab_IterateWorkheet#1'
+                                text: "Tab_IterateWorkheet#1"
+                                GridLayout:
+                                    cols:2
+                                    BoxLayout:
+                                        orientation: 'vertical'
+                                        ScrollView:
+                                            do_scroll_x: False
+                                            MDList:
+                                                padding: dp(0)
+                                                id: MDList_UserInsertion_Selection
+                                                TwoLineAvatarListItem:
+                                                    type: "two-line"
+                                                    text: "Two-line item..."
+                                                    secondary_text: "with avatar"
+                                                    AvatarSampleWidget:
+                                                        source: './assets/avatar.png'
+                                                TwoLineAvatarListItem:
+                                                    type: "two-line"
+                                                    text: "Two-line item..."
+                                                    secondary_text: "with avatar"
+                                                    AvatarSampleWidget:
+                                                        source: './assets/avatar.png'
+                                                TwoLineAvatarListItem:
+                                                    type: "two-line"
+                                                    text: "Two-line item..."
+                                                    secondary_text: "with avatar"
+                                                    AvatarSampleWidget:
+                                                        source: './assets/avatar.png'
+                                                TwoLineAvatarListItem:
+                                                    type: "two-line"
+                                                    text: "Two-line item..."
+                                                    secondary_text: "with avatar"
+                                                    AvatarSampleWidget:
+                                                        source: './assets/avatar.png'
+                                                TwoLineAvatarListItem:
+                                                    type: "two-line"
+                                                    text: "Two-line item..."
+                                                    secondary_text: "with avatar"
+                                                    AvatarSampleWidget:
+                                                        source: './assets/avatar.png'
+                                                TwoLineAvatarListItem:
+                                                    type: "two-line"
+                                                    text: "Two-line item..."
+                                                    secondary_text: "with avatar"
+                                                    AvatarSampleWidget:
+                                                        source: './assets/avatar.png'
+                                                TwoLineAvatarListItem:
+                                                    type: "two-line"
+                                                    text: "Two-line item..."
+                                                    secondary_text: "with avatar"
+                                                    AvatarSampleWidget:
+                                                        source: './assets/avatar.png'
+                                                TwoLineAvatarListItem:
+                                                    type: "two-line"
+                                                    text: "Two-line item..."
+                                                    secondary_text: "with avatar"
+                                                    AvatarSampleWidget:
+                                                        source: './assets/avatar.png'
+                                                TwoLineAvatarListItem:
+                                                    type: "two-line"
+                                                    text: "Two-line item..."
+                                                    secondary_text: "with avatar"
+                                                    AvatarSampleWidget:
+                                                        source: './assets/avatar.png'
+                                                TwoLineAvatarListItem:
+                                                    type: "two-line"
+                                                    text: "Two-line item..."
+                                                    secondary_text: "with avatar"
+                                                    AvatarSampleWidget:
+                                                        source: './assets/avatar.png'
+                                                TwoLineAvatarListItem:
+                                                    type: "two-line"
+                                                    text: "Two-line item..."
+                                                    secondary_text: "with avatar"
+                                                    AvatarSampleWidget:
+                                                        source: './assets/avatar.png'
+                                                TwoLineAvatarListItem:
+                                                    type: "two-line"
+                                                    text: "Two-line item..."
+                                                    secondary_text: "with avatar"
+                                                    AvatarSampleWidget:
+                                                        source: './assets/avatar.png'
+                                    ScrollView:
+                                        size_hint: (1,None)
+                                        size: (Window.width, Window.height)
+                                        StackLayout:
+                                            padding: dp(10)
+                                            padding: 10
+                                            spacing: 5
+                                            size_hint: 1, None
+                                            minimum_height:self.minimum_height                                            
+                                            GridLayout:
+                                                cols:1 if Window.width < 1400 else 2
+                                                size_hint_y: None
+                                                spacing: dp(10)
+                                                height: self.minimum_height
+                                                MDCard:
+                                                # I just realized that removing size_hint will make the card resizable
+                                                    size: dp(320), dp(180)
+                                                    size_hint_y: None
+                                                    padding: dp(15)
+                                                    BoxLayout:
+                                                        orientation: 'vertical'
+                                                        AnchorLayout:
+                                                            anchor_x: 'left'
+                                                            anchor_y: 'top'
+                                                            StackLayout:
+                                                                spacing:20
+                                                                BoxLayout:
+                                                                    orientation: 'vertical'
+                                                                    padding: dp(20), 0
+                                                                    spacing: 20
+                                                                    MDLabel:
+                                                                        font_style: 'Title'
+                                                                        theme_text_color: 'Primary'
+                                                                        halign: 'left'
+                                                                        text: "Commands"
+                                                                        width: dp(10)
+                                                                    MDRaisedButton:
+                                                                        text: "Submit Data"
+                                                                        size: 3 * dp(40), dp(40)
+                                                                    MDRaisedButton:
+                                                                        text: "Submit Data"
+                                                                        size_hint: None, None
+                                                                        size: 3 * dp(40), dp(40)
+                                                MDCard:
+                                                    size_hint_y: None
+                                                    size: dp(320), dp(180)
+                                                    padding: dp(15)
+                                                    BoxLayout:
+                                                        size: self.size
+                                                        orientation: 'vertical'
+                                                        AnchorLayout:
+                                                            anchor_x: 'left'
+                                                            anchor_y: 'top'
+                                                            StackLayout:
+                                                                spacing:20
+                                                                BoxLayout:
+                                                                    orientation: 'vertical'
+                                                                    padding: dp(20), 0
+                                                                    spacing: 20
+                                                                    MDLabel:
+                                                                        font_style: 'Title'
+                                                                        theme_text_color: 'Primary'
+                                                                        halign: 'left'
+                                                                        text: "Commands"
+                                                                        width: dp(10)
+                                                                    MDRaisedButton:
+                                                                        text: "Submit Data"
+                                                                        size_hint: None, None
+                                                                        size: 3 * dp(40), dp(40)
+                                                                    MDRaisedButton:
+                                                                        text: "Submit Data"
+                                                                        size_hint: None, None
+                                                                        size: 3 * dp(40), dp(40)
+                                                MDCard:
+                                                    size_hint_y: None
+                                                    size: dp(320), dp(180)
+                                                    padding: dp(15)
+                                                    BoxLayout:
+                                                        size: self.size
+                                                        orientation: 'vertical'
+                                                        AnchorLayout:
+                                                            anchor_x: 'left'
+                                                            anchor_y: 'top'
+                                                            StackLayout:
+                                                                spacing:20
+                                                                BoxLayout:
+                                                                    orientation: 'vertical'
+                                                                    padding: dp(20), 0
+                                                                    spacing: 20
+                                                                    MDLabel:
+                                                                        font_style: 'Title'
+                                                                        theme_text_color: 'Primary'
+                                                                        halign: 'left'
+                                                                        text: "Commands"
+                                                                        width: dp(10)
+                                                                    MDRaisedButton:
+                                                                        text: "Submit Data"
+                                                                        size_hint: None, None
+                                                                        size: 3 * dp(40), dp(40)
+                                                                    MDRaisedButton:
+                                                                        text: "Submit Data"
+                                                                        size_hint: None, None
+                                                                        size: 3 * dp(40), dp(40)
+                                                MDCard:
+                                                    size_hint_y: None
+                                                    size: dp(320), dp(180)
+                                                    padding: dp(15)
+                                                    BoxLayout:
+                                                        size: self.size
+                                                        orientation: 'vertical'
+                                                        AnchorLayout:
+                                                            anchor_x: 'left'
+                                                            anchor_y: 'top'
+                                                            StackLayout:
+                                                                spacing:20
+                                                                BoxLayout:
+                                                                    orientation: 'vertical'
+                                                                    padding: dp(20), 0
+                                                                    spacing: 20
+                                                                    MDLabel:
+                                                                        font_style: 'Title'
+                                                                        theme_text_color: 'Primary'
+                                                                        halign: 'left'
+                                                                        text: "Commands"
+                                                                        width: dp(10)
+                                                                    MDRaisedButton:
+                                                                        text: "Submit Data"
+                                                                        size_hint: None, None
+                                                                        size: 3 * dp(40), dp(40)
+                                                                    MDRaisedButton:
+                                                                        text: "Submit Data"
+                                                                        size_hint: None, None
+                                                                        size: 3 * dp(40), dp(40)
+                                            MDLabel:
+                                                font_style: 'Title'
+                                                theme_text_color: 'Primary'
+                                                halign: 'left'
+                                                text: "Quick Actions"
+                                                width: dp(10)
+                                            MDRaisedButton:
+                                                text: "Increment"
+                                                size_hint: None, None
+                                                size: 3 * dp(48), dp(48)
+                                            MDRaisedButton:
+                                                text: "Decrement"
+                                                size_hint: None, None
+                                                size: 3 * dp(48), dp(48)
+                                            MDRaisedButton:
+                                                text: "Remove Data"
+                                                size_hint: None, None
+                                                size: 3 * dp(48), dp(48)
+                                            MDRaisedButton:
+                                                text: "Remove Value"
+                                                size_hint: None, None
+                                                size: 3 * dp(48), dp(48)
+                            MDTab:
+                                name: 'Tab_IterateWorkheet#2'
+                                text: 'Tab_IterateWorkheet#2'
                                 MDLabel:
                                     font_style: 'Body1'
                                     theme_text_color: 'Primary'
-                                    text: "Here is my music list :)"
-                                    halign: 'center'
-                            MDTab:
-                                name: 'movies'
-                                text: 'Movies'
-                                icon: "movie"
-                                MDLabel:
-                                    font_style: 'Body1'
-                                    theme_text_color: 'Primary'
-                                    text: "Show movies here :)"
+                                    text: "Iterate Data per Worksheet! Remember!"
                                     halign: 'center'
                     MDBottomNavigationItem:
                         name: 'MainFrameWindow_2'
@@ -338,16 +572,15 @@ NavigationLayout:
                                                     source: './assets/avatar.png'
             Screen:
                 name: 'MainWindow_AccountAddInfo'
-                MDCard:
-                    size_hint: None, None
-                    size: dp(560), dp(470)
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                    BoxLayout:
-                        orientation: 'vertical'
-                        padding: dp(20)
-                        AnchorLayout:
-                            anchor_x: 'left'
-                            anchor_y: 'top'
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    MDCard:
+                        size_hint: None, None
+                        size: dp(560), dp(470)
+                        BoxLayout:
+                            orientation: 'vertical'
+                            padding: dp(20)
                             StackLayout:
                                 spacing:20
                                 MDLabel:
@@ -404,16 +637,15 @@ NavigationLayout:
                                     size: 3 * dp(48), dp(48)
             Screen:
                 name: 'MainWindow_AccountDeleteInfo'
-                MDCard:
-                    size_hint: None, None
-                    size: dp(560), dp(470)
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                    BoxLayout:
-                        orientation: 'vertical'
-                        padding: 0, dp(20)
-                        AnchorLayout:
-                            anchor_x: 'left'
-                            anchor_y: 'top'
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    MDCard:
+                        size_hint: None, None
+                        size: dp(560), dp(470)
+                        BoxLayout:
+                            orientation: 'vertical'
+                            padding: 0, dp(20)
                             StackLayout:
                                 spacing:20
                                 BoxLayout:
@@ -483,16 +715,15 @@ NavigationLayout:
                                         pos_hint: {'center_y': 0.9}
             Screen:
                 name: 'MainWindow_AccountEditInfo'
-                MDCard:
-                    size_hint: None, None
-                    size: dp(560), dp(470)
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                    BoxLayout:
-                        orientation: 'vertical'
-                        padding: dp(20)
-                        AnchorLayout:
-                            anchor_x: 'left'
-                            anchor_y: 'top'
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    MDCard:
+                        size_hint: None, None
+                        size: dp(560), dp(470)
+                        BoxLayout:
+                            orientation: 'vertical'
+                            padding: dp(20)
                             StackLayout:
                                 spacing:20
                                 MDLabel:

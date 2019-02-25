@@ -1,0 +1,73 @@
+<FlatButton@ButtonBehavior+Label>:
+	font_size: 14
+
+<OperatorWindow>:
+	id: main_win
+	orientation: "vertical"
+	canvas.before:
+		Color:
+			rgba: { 1, 1, 1, 1}
+		Rectangle:
+			size: self.size
+			pos: self.pos
+			
+#======================  GUI design header  =========================	
+	BoxLayout:
+		id: header
+		size_hint_y: None
+		height: 40
+		canvas.before:
+			Color:
+				rgba: {.682, .776, .812, 1 }
+			Rectangle:
+				size: self.size
+				pos: self.pos
+		Label:
+			text: "ROUTE-88 BIKE CAFE I.S.M.S"
+			size_hint_x: .9
+			bold: True
+			color: {1,1,1,1}
+			
+		FlatButton: 
+			id: loggedin_user
+			text: "Owner"
+			color: {1,1,1,1}
+			
+#=====================  Creating three buttons ========================
+
+	BoxLayout:
+		id: current
+		size_hint_y: 50
+		canvas.before:
+			Color:
+				rgba: {1, 1, 1, 1}
+			Rectangle:
+				size: self.size
+				pos: self.pos
+		
+		Button:
+			text: "Current Item"
+			background_normal: ''
+			background_color: {1, 0.82, .863, 1 }
+		Button:
+			id: cur_product
+			text: "Default Product"
+			background_normal: ''
+			background_color: {.992, .992, .588, 1 }
+			
+		Button:
+			id: cur_price
+			text: "P 0.00"
+			background_normal: ''
+			background_color: {.467, 0.867, .467, 1 }
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		

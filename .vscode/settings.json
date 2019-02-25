@@ -1,0 +1,5 @@
+{
+    "python.linting.pylintEnabled": true,
+    "breadcrumbs.symbolPath": "off",
+    "breadcrumbs.filePath": "off"
+}
