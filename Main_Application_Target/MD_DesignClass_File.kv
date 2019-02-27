@@ -43,15 +43,11 @@ NavigationLayout:
         id: nav_drawer
         drawer_logo: 'assets/drawer_logo.png'
         NavigationDrawerSubheader:
-            text: "Author Menu"
+            text: "Authors Menu"
         NavigationDrawerIconButton:
             icon: 'view-dashboard'
             text: "Dashboard"
             on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_Dashboard'
-        NavigationDrawerIconButton:
-            icon: 'database-plus'
-            text: "Data File | Import and Export"
-            on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_DataPlacement'
         NavigationDrawerIconButton:
             icon: 'view-list'
             text: "Data Management"
@@ -160,38 +156,15 @@ NavigationLayout:
             Screen:
                 name: 'MainWindow_Dashboard'
             Screen:
-                name: 'MainWindow_DataPlacement'
-                MDTabbedPanel:
-                #For tab 1, it should have a checker and status of the file and last modified. Any info of the file.
-                    id: MDTab_DataImportExport
-                    tab_display_mode:'text'
-                    MDTab:
-                        name: 'MDTabOne_DataSetup'
-                        text: "Data"
-                        MDLabel:
-                            font_style: 'Body1'
-                            theme_text_color: 'Primary'
-                            text: "Here is my music list :)"
-                            halign: 'center'
-                                #Conversion are for DB, JSON (If possible), Excel is Addable
-                    MDTab:
-                        name: 'MDTabTwo_DataImportExport'
-                        text: 'Import, Export and Data Bind'
-                        MDLabel:
-                            font_style: 'Body1'
-                            theme_text_color: 'Primary'
-                            text: "Show movies here :)"
-                            halign: 'center'
-            Screen:
                 name: 'MainWindow_SimplifiedView'
                 MDBottomNavigation:
                     id: MainFrameWindow_Divider
                     MDBottomNavigationItem:
-                        name: 'MainFrameWindow_0'
+                        name: 'MainFrameWindow_1'
                         text: "Data Binding and Setups"
                         icon: "database-plus"
                     MDBottomNavigationItem:
-                        name: 'MainFrameWindow_1'
+                        name: 'MainFrameWindow_2'
                         text: "Data Management"
                         icon: "view-list"
                         MDLabel:
@@ -288,160 +261,41 @@ NavigationLayout:
                                                     AvatarSampleWidget:
                                                         source: './assets/avatar.png'
                                     ScrollView:
-                                        size_hint: (1,None)
-                                        size: (Window.width, Window.height)
-                                        StackLayout:
+                                        do_scroll_x: False                            
+                                        GridLayout:
+                                            cols:2 if Window.width > 1400 else 1
+                                            size_hint_y: None
+                                            spacing: dp(10)
                                             padding: dp(10)
-                                            padding: 10
-                                            spacing: 5
-                                            size_hint: 1, None
-                                            minimum_height:self.minimum_height                                            
-                                            GridLayout:
-                                                cols:1 if Window.width < 1400 else 2
+                                            height: self.minimum_height
+                                            MDCard:
+                                            # I just realized that removing size_hint will make the card resizable
+                                                size: dp(320), dp(180)
                                                 size_hint_y: None
-                                                spacing: dp(10)
-                                                height: self.minimum_height
-                                                MDCard:
-                                                # I just realized that removing size_hint will make the card resizable
-                                                    size: dp(320), dp(180)
-                                                    size_hint_y: None
+                                                padding: dp(15)
+                                                BoxLayout:
+                                                    orientation: 'vertical'
                                                     padding: dp(15)
-                                                    BoxLayout:
-                                                        orientation: 'vertical'
-                                                        AnchorLayout:
-                                                            anchor_x: 'left'
-                                                            anchor_y: 'top'
-                                                            StackLayout:
-                                                                spacing:20
-                                                                BoxLayout:
-                                                                    orientation: 'vertical'
-                                                                    padding: dp(20), 0
-                                                                    spacing: 20
-                                                                    MDLabel:
-                                                                        font_style: 'Title'
-                                                                        theme_text_color: 'Primary'
-                                                                        halign: 'left'
-                                                                        text: "Commands"
-                                                                        width: dp(10)
-                                                                    MDRaisedButton:
-                                                                        text: "Submit Data"
-                                                                        size: 3 * dp(40), dp(40)
-                                                                    MDRaisedButton:
-                                                                        text: "Submit Data"
-                                                                        size_hint: None, None
-                                                                        size: 3 * dp(40), dp(40)
-                                                MDCard:
-                                                    size_hint_y: None
-                                                    size: dp(320), dp(180)
-                                                    padding: dp(15)
-                                                    BoxLayout:
-                                                        size: self.size
-                                                        orientation: 'vertical'
-                                                        AnchorLayout:
-                                                            anchor_x: 'left'
-                                                            anchor_y: 'top'
-                                                            StackLayout:
-                                                                spacing:20
-                                                                BoxLayout:
-                                                                    orientation: 'vertical'
-                                                                    padding: dp(20), 0
-                                                                    spacing: 20
-                                                                    MDLabel:
-                                                                        font_style: 'Title'
-                                                                        theme_text_color: 'Primary'
-                                                                        halign: 'left'
-                                                                        text: "Commands"
-                                                                        width: dp(10)
-                                                                    MDRaisedButton:
-                                                                        text: "Submit Data"
-                                                                        size_hint: None, None
-                                                                        size: 3 * dp(40), dp(40)
-                                                                    MDRaisedButton:
-                                                                        text: "Submit Data"
-                                                                        size_hint: None, None
-                                                                        size: 3 * dp(40), dp(40)
-                                                MDCard:
-                                                    size_hint_y: None
-                                                    size: dp(320), dp(180)
-                                                    padding: dp(15)
-                                                    BoxLayout:
-                                                        size: self.size
-                                                        orientation: 'vertical'
-                                                        AnchorLayout:
-                                                            anchor_x: 'left'
-                                                            anchor_y: 'top'
-                                                            StackLayout:
-                                                                spacing:20
-                                                                BoxLayout:
-                                                                    orientation: 'vertical'
-                                                                    padding: dp(20), 0
-                                                                    spacing: 20
-                                                                    MDLabel:
-                                                                        font_style: 'Title'
-                                                                        theme_text_color: 'Primary'
-                                                                        halign: 'left'
-                                                                        text: "Commands"
-                                                                        width: dp(10)
-                                                                    MDRaisedButton:
-                                                                        text: "Submit Data"
-                                                                        size_hint: None, None
-                                                                        size: 3 * dp(40), dp(40)
-                                                                    MDRaisedButton:
-                                                                        text: "Submit Data"
-                                                                        size_hint: None, None
-                                                                        size: 3 * dp(40), dp(40)
-                                                MDCard:
-                                                    size_hint_y: None
-                                                    size: dp(320), dp(180)
-                                                    padding: dp(15)
-                                                    BoxLayout:
-                                                        size: self.size
-                                                        orientation: 'vertical'
-                                                        AnchorLayout:
-                                                            anchor_x: 'left'
-                                                            anchor_y: 'top'
-                                                            StackLayout:
-                                                                spacing:20
-                                                                BoxLayout:
-                                                                    orientation: 'vertical'
-                                                                    padding: dp(20), 0
-                                                                    spacing: 20
-                                                                    MDLabel:
-                                                                        font_style: 'Title'
-                                                                        theme_text_color: 'Primary'
-                                                                        halign: 'left'
-                                                                        text: "Commands"
-                                                                        width: dp(10)
-                                                                    MDRaisedButton:
-                                                                        text: "Submit Data"
-                                                                        size_hint: None, None
-                                                                        size: 3 * dp(40), dp(40)
-                                                                    MDRaisedButton:
-                                                                        text: "Submit Data"
-                                                                        size_hint: None, None
-                                                                        size: 3 * dp(40), dp(40)
-                                            MDLabel:
-                                                font_style: 'Title'
-                                                theme_text_color: 'Primary'
-                                                halign: 'left'
-                                                text: "Quick Actions"
-                                                width: dp(10)
-                                            MDRaisedButton:
-                                                text: "Increment"
-                                                size_hint: None, None
-                                                size: 3 * dp(48), dp(48)
-                                            MDRaisedButton:
-                                                text: "Decrement"
-                                                size_hint: None, None
-                                                size: 3 * dp(48), dp(48)
-                                            MDRaisedButton:
-                                                text: "Remove Data"
-                                                size_hint: None, None
-                                                size: 3 * dp(48), dp(48)
-                                            MDRaisedButton:
-                                                text: "Remove Value"
-                                                size_hint: None, None
-                                                size: 3 * dp(48), dp(48)
+                                                    StackLayout:
+                                                        spacing:20
+                                                        MDLabel:
+                                                            font_style: 'Title'
+                                                            theme_text_color: 'Primary'
+                                                            halign: 'left'
+                                                            text: "Quick Actions"
+                                                            width: dp(10)
+                                                        MDRaisedButton:
+                                                            text: "Increment"
+                                                            size: 3 * dp(48), dp(48)
+                                                        MDRaisedButton:
+                                                            text: "Decrement"
+                                                            size: 3 * dp(48), dp(48)
+                                                        MDRaisedButton:
+                                                            text: "Remove Data"
+                                                            size: 3 * dp(48), dp(48)
+                                                        MDRaisedButton:
+                                                            text: "Remove Value"
+                                                            size: 3 * dp(48), dp(48)
                             MDTab:
                                 name: 'Tab_IterateWorkheet#2'
                                 text: 'Tab_IterateWorkheet#2'
@@ -451,7 +305,7 @@ NavigationLayout:
                                     text: "Iterate Data per Worksheet! Remember!"
                                     halign: 'center'
                     MDBottomNavigationItem:
-                        name: 'MainFrameWindow_2'
+                        name: 'MainFrameWindow_3'
                         text: "Data Status Report"
                         icon: 'book-open'
                         BoxLayout:
@@ -494,6 +348,246 @@ NavigationLayout:
                                             helper_text: "Text is always here"
                                             helper_text_mode: "persistent"
                                             write_tab: False
+                    MDBottomNavigationItem:
+                        name: 'MainFrameWindow_4'
+                        text: "Data Import and Export"
+                        icon: 'book-open'
+                        ScrollView:
+                            do_scroll_x: False                              
+                            GridLayout:
+                                cols:2 if Window.width < 1400 else 1
+                                size_hint_y: None
+                                spacing: dp(10)
+                                padding: dp(20)
+                                height: self.minimum_height
+                                MDCard:
+                                # I just realized that removing size_hint will make the card resizable
+                                    size: dp(320), dp(180)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    BoxLayout:
+                                        orientation: 'vertical'
+                                        AnchorLayout:
+                                            anchor_x: 'left'
+                                            anchor_y: 'top'
+                                            StackLayout:
+                                                spacing:20
+                                                BoxLayout:
+                                                    orientation: 'horizontal'
+                                                    padding: dp(20)
+                                                    spacing: 20
+                                                    MDLabel:
+                                                        font_style: 'Title'
+                                                        theme_text_color: 'Primary'
+                                                        halign: 'left'
+                                                        text: "Quick Actions"
+                                                        width: dp(10)
+                                                    MDRaisedButton:
+                                                        text: "Increment"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Decrement"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Remove Data"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Remove Value"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                MDCard:
+                                # I just realized that removing size_hint will make the card resizable
+                                    size: dp(320), dp(180)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    BoxLayout:
+                                        orientation: 'vertical'
+                                        AnchorLayout:
+                                            anchor_x: 'left'
+                                            anchor_y: 'top'
+                                            StackLayout:
+                                                spacing:20
+                                                BoxLayout:
+                                                    orientation: 'horizontal'
+                                                    padding: dp(20)
+                                                    spacing: 20
+                                                    MDLabel:
+                                                        font_style: 'Title'
+                                                        theme_text_color: 'Primary'
+                                                        halign: 'left'
+                                                        text: "Quick Actions"
+                                                        width: dp(10)
+                                                    MDRaisedButton:
+                                                        text: "Increment"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Decrement"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Remove Data"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Remove Value"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                MDCard:
+                                # I just realized that removing size_hint will make the card resizable
+                                    size: dp(320), dp(180)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    BoxLayout:
+                                        orientation: 'vertical'
+                                        AnchorLayout:
+                                            anchor_x: 'left'
+                                            anchor_y: 'top'
+                                            StackLayout:
+                                                spacing:20
+                                                BoxLayout:
+                                                    orientation: 'horizontal'
+                                                    padding: dp(20)
+                                                    spacing: 20
+                                                    MDLabel:
+                                                        font_style: 'Title'
+                                                        theme_text_color: 'Primary'
+                                                        halign: 'left'
+                                                        text: "Quick Actions"
+                                                        width: dp(10)
+                                                    MDRaisedButton:
+                                                        text: "Increment"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Decrement"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Remove Data"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Remove Value"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                MDCard:
+                                # I just realized that removing size_hint will make the card resizable
+                                    size: dp(320), dp(180)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    BoxLayout:
+                                        orientation: 'vertical'
+                                        AnchorLayout:
+                                            anchor_x: 'left'
+                                            anchor_y: 'top'
+                                            StackLayout:
+                                                spacing:20
+                                                BoxLayout:
+                                                    orientation: 'horizontal'
+                                                    padding: dp(20)
+                                                    spacing: 20
+                                                    MDLabel:
+                                                        font_style: 'Title'
+                                                        theme_text_color: 'Primary'
+                                                        halign: 'left'
+                                                        text: "Quick Actions"
+                                                        width: dp(10)
+                                                    MDRaisedButton:
+                                                        text: "Increment"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Decrement"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Remove Data"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Remove Value"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                MDCard:
+                                # I just realized that removing size_hint will make the card resizable
+                                    size: dp(320), dp(180)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    BoxLayout:
+                                        orientation: 'vertical'
+                                        AnchorLayout:
+                                            anchor_x: 'left'
+                                            anchor_y: 'top'
+                                            StackLayout:
+                                                spacing:20
+                                                BoxLayout:
+                                                    orientation: 'horizontal'
+                                                    padding: dp(20)
+                                                    spacing: 20
+                                                    MDLabel:
+                                                        font_style: 'Title'
+                                                        theme_text_color: 'Primary'
+                                                        halign: 'left'
+                                                        text: "Quick Actions"
+                                                        width: dp(10)
+                                                    MDRaisedButton:
+                                                        text: "Increment"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Decrement"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Remove Data"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Remove Value"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                MDCard:
+                                # I just realized that removing size_hint will make the card resizable
+                                    size: dp(320), dp(180)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    BoxLayout:
+                                        orientation: 'vertical'
+                                        AnchorLayout:
+                                            anchor_x: 'left'
+                                            anchor_y: 'top'
+                                            StackLayout:
+                                                spacing:20
+                                                BoxLayout:
+                                                    orientation: 'horizontal'
+                                                    padding: dp(20)
+                                                    spacing: 20
+                                                    MDLabel:
+                                                        font_style: 'Title'
+                                                        theme_text_color: 'Primary'
+                                                        halign: 'left'
+                                                        text: "Quick Actions"
+                                                        width: dp(10)
+                                                    MDRaisedButton:
+                                                        text: "Increment"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Decrement"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Remove Data"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Remove Value"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
             Screen:
                 name: 'MainWindow_AccountUserSelection'
                 MDCard:
