@@ -53,7 +53,7 @@ class MD_InventoryEXI_SMV_GUI(App):
     theme_cls = ThemeManager()
     previous_date = ObjectProperty()
     title = "Welcome to Excel Inventory To Simplified Model View | EXI_SMV" #Excel to Simplified Model VIew in GUI
-
+    Icon_Status = 'brightness-1'
     def KivyConfig_Init(self): # Get Values from DB and Change App Behavior Accordingly
         pass
 
@@ -161,28 +161,36 @@ class MD_InventoryEXI_SMV_GUI(App):
             LoggerDebug.error('RUNTIME ERROR: Unknown String Passed with No Valid Statement To Run!')
             raise ValueError('RUNTIME ERROR:  Unknown String Passed with No Valid Statement To Run!')
     
-    def MDButton_DarkMode(self, params_switch_boolean):
-        if params_switch_boolean == 'Process_Dark' and self.theme_cls.theme_style == 'Dark':
-            #params_switch_boolean = 
-            #self.theme_cls.theme_style = 
-            #self.root.ids.ToolbarMain
-            pass
-        elif params_switch_boolean == 'Process_Light' and self.theme_cls.theme_style == 'Light':
-           # params_switch_boolean = 
-           # self.theme_cls.theme_style = 
-            pass
+    def MDButton_DarkMode(self):
+        if self.root.ids.ToolbarMain.darkBooleanParameter == True and self.theme_cls.theme_style == 'Dark':
+            self.root.ids.ToolbarMain.darkBooleanParameter = False
+            self.root.ids.ToolbarMain.right_action_items =  [['brightness-1', lambda x: MD_InventoryEXI_SMV_GUI.MDButton_DarkMode(self)]]
+            self.theme_cls.theme_style = 'Light'
+            # Make it time based
+            self.MDUserNotif_SnackbarHandler('Dark Mode Activated!')
+        elif self.root.ids.ToolbarMain.darkBooleanParameter == False and self.theme_cls.theme_style == 'Light':
+            self.root.ids.ToolbarMain.darkBooleanParameter = True
+            self.root.ids.ToolbarMain.right_action_items =  [['brightness-7', lambda x: MD_InventoryEXI_SMV_GUI.MDButton_DarkMode(self)]]
+            self.theme_cls.theme_style = 'Dark'
+            self.MDUserNotif_SnackbarHandler('Light Mode Activated!')
         else:
             LoggerDebug.error('MDButton_DarkMode received invalid parameters, reset SQL Database or modify the property of App_ReadibilityMode to Light or Dark in String Form')
             raise ValueError('MDButton_DarkMode received invalid parameters, reset SQL Database or modify the property of App_ReadibilityMode to Light or Dark in String Form')
+    
     def MDButton_Trigger_GoBack(self, param_ScreenFrame_LastKW): #Last Known Window
         pass
 
     def MDButton_Trigger_ExitConfirm(self):
          BooleanPrompt = MDDialog(title='Exit Confirmation', text='Are you sure you want to quit the application?', text_button_ok='Yes', text_button_cancel='No').open() 
+    
+    def MDUserNotif_SnackbarHandler(self, params_message):
+        Snackbar(text=params_message).show()
+    # Unsure Method Call
+    def MDSnackbar_CallbackHandler(self):
+        pass
 
 class AvatarSampleWidget(ILeftBody, Image):
     pass
-
 
 class IconLeftSampleWidget(ILeftBodyTouch, MDIconButton):
     pass

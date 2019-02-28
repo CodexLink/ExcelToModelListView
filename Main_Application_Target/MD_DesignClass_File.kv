@@ -1,6 +1,6 @@
 #:import Toolbar kivymd.toolbar.Toolbar
 #:import ThemeManager kivymd.theming.ThemeManager
-#:import MDNavigationDrawer kivymd.navigationdrawer.MDNavigationDrawer
+#:import MDNavigationDrawer_HeaderStringOnly kivymd.navigationdrawer.MDNavigationDrawer_HeaderStringOnly
 #:import NavigationLayout kivymd.navigationdrawer.NavigationLayout
 #:import NavigationDrawerDivider kivymd.navigationdrawer.NavigationDrawerDivider
 #:import NavigationDrawerToolbar kivymd.navigationdrawer.NavigationDrawerToolbar
@@ -39,9 +39,11 @@
 #:import Window kivy.core.window.Window
 NavigationLayout:
     id: nav_layout
-    MDNavigationDrawer:
+    MDNavigationDrawer_HeaderStringOnly:
         id: nav_drawer
-        drawer_logo: 'assets/drawer_logo.png'
+        header_name: 'Authors Name'
+        subheader_name: 'Authors Job Position'
+        NavigationDrawerDivider:
         NavigationDrawerSubheader:
             text: "Authors Menu"
         NavigationDrawerIconButton:
@@ -52,6 +54,7 @@ NavigationLayout:
             icon: 'view-list'
             text: "Data Management"
             on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
+        NavigationDrawerDivider:
         NavigationDrawerSubheader:
             text: "Account"
         NavigationDrawerIconButton:
@@ -84,12 +87,23 @@ NavigationLayout:
             background_palette: app.theme_cls.primary_palette
             background_hue: app.theme_cls.primary_hue
             left_action_items: [['menu', lambda x: app.root.toggle_nav_drawer()]]
-            #right_action_items: None
+            #Add an If and else on this icon
+            right_action_items: [['brightness-1', lambda x: app.MDButton_DarkMode()]]
+            darkBooleanParameter: False
         ScreenManager:
             id: ScreenFrame_MainWindow
             transition: FadeTransition(clearcolor=[255, 255, 255, 0])
             Screen:
                 name: 'Startup_FirstTime_GetInfo'
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    Image:
+                        source: 'assets/LayerTriangleVector3.jpg'
+                        size_hint: None, None
+                        size: 1920, 1080
+                        # size: self.texture_size[0] / 2, self.texture_size[1] / 2
+                        # opacity: 0.1
                 AnchorLayout:
                     anchor_x: 'center'
                     anchor_y: 'center'
@@ -153,8 +167,16 @@ NavigationLayout:
                                     text: "Submit Data"
                                     size_hint: None, None
                                     size: 3 * dp(48), dp(48)
+                                    on_release: app.MDToolbar_DynamicContent_Change('ThisIsATest', 'Red', '' ,'')
             Screen:
                 name: 'MainWindow_Dashboard'
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    Image:
+                        source: 'assets/LayerTriangleVector3.jpg'
+                        size_hint: None, None
+                        size: 1920, 1080
             Screen:
                 name: 'MainWindow_SimplifiedView'
                 MDBottomNavigation:
@@ -186,7 +208,6 @@ NavigationLayout:
                                         ScrollView:
                                             do_scroll_x: False
                                             MDList:
-                                                padding: dp(0)
                                                 id: MDList_UserInsertion_Selection
                                                 TwoLineAvatarListItem:
                                                     type: "two-line"
@@ -274,28 +295,26 @@ NavigationLayout:
                                                 size_hint_y: None
                                                 padding: dp(15)
                                                 BoxLayout:
-                                                    orientation: 'vertical'
+                                                    orientation: 'horizontal'
                                                     padding: dp(15)
-                                                    StackLayout:
-                                                        spacing:20
-                                                        MDLabel:
-                                                            font_style: 'Title'
-                                                            theme_text_color: 'Primary'
-                                                            halign: 'left'
-                                                            text: "Quick Actions"
-                                                            width: dp(10)
-                                                        MDRaisedButton:
-                                                            text: "Increment"
-                                                            size: 3 * dp(48), dp(48)
-                                                        MDRaisedButton:
-                                                            text: "Decrement"
-                                                            size: 3 * dp(48), dp(48)
-                                                        MDRaisedButton:
-                                                            text: "Remove Data"
-                                                            size: 3 * dp(48), dp(48)
-                                                        MDRaisedButton:
-                                                            text: "Remove Value"
-                                                            size: 3 * dp(48), dp(48)
+                                                    MDLabel:
+                                                        font_style: 'Title'
+                                                        theme_text_color: 'Primary'
+                                                        halign: 'left'
+                                                        text: "Quick Actions"
+                                                        width: dp(10)
+                                                    MDRaisedButton:
+                                                        text: "Increment"
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Decrement"
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Remove Data"
+                                                        size: 3 * dp(48), dp(48)
+                                                    MDRaisedButton:
+                                                        text: "Remove Value"
+                                                        size: 3 * dp(48), dp(48)
                             MDTab:
                                 name: 'Tab_IterateWorkheet#2'
                                 text: 'Tab_IterateWorkheet#2'
@@ -590,18 +609,24 @@ NavigationLayout:
                                                         size: 3 * dp(48), dp(48)
             Screen:
                 name: 'MainWindow_AccountUserSelection'
-                MDCard:
-                    size_hint: None, None
-                    size: dp(560), dp(470)
-                    pos_hint: {'center_x': 0.5, 'center_y': 0.5}
-                    BoxLayout:
-                        orientation: 'vertical'
-                        padding: 0, dp(20)
-                        StackLayout:
-                            spacing:20
-                            AnchorLayout:
-                                anchor_x: 'left'
-                                anchor_y: 'top'
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    Image:
+                        source: 'assets/LayerTriangleVector3.jpg'
+                        size_hint: None, None
+                        size: 1920, 1080
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    MDCard:
+                        size_hint: None, None
+                        size: dp(560), dp(470)
+                        BoxLayout:
+                            orientation: 'vertical'
+                            padding: 0, dp(20)
+                            StackLayout:
+                                spacing:20
                                 BoxLayout:
                                     orientation: 'vertical'
                                     padding: dp(20), 0
@@ -669,6 +694,13 @@ NavigationLayout:
                 AnchorLayout:
                     anchor_x: 'center'
                     anchor_y: 'center'
+                    Image:
+                        source: 'assets/LayerTriangleVector3.jpg'
+                        size_hint: None, None
+                        size: 1920, 1080
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
                     MDCard:
                         size_hint: None, None
                         size: dp(560), dp(470)
@@ -731,6 +763,13 @@ NavigationLayout:
                                     size: 3 * dp(48), dp(48)
             Screen:
                 name: 'MainWindow_AccountDeleteInfo'
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    Image:
+                        source: 'assets/LayerTriangleVector3.jpg'
+                        size_hint: None, None
+                        size: 1920, 1080
                 AnchorLayout:
                     anchor_x: 'center'
                     anchor_y: 'center'
@@ -809,6 +848,13 @@ NavigationLayout:
                                         pos_hint: {'center_y': 0.9}
             Screen:
                 name: 'MainWindow_AccountEditInfo'
+                AnchorLayout:
+                    anchor_x: 'center'
+                    anchor_y: 'center'
+                    Image:
+                        source: 'assets/LayerTriangleVector3.jpg'
+                        size_hint: None, None
+                        size: 1920, 1080
                 AnchorLayout:
                     anchor_x: 'center'
                     anchor_y: 'center'
