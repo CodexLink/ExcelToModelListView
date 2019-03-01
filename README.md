@@ -1,6 +1,5 @@
-# Excel-Inventory-To-Simplified-Model-View-EXI_SMV
+# Excel Inventory To Simplified Model View | EXI_SMV
 A First Year 2nd Semester OOP Project in CPE 009 | An Inventory Project Based on Python Object Oriented Programming using Kivy Framework with Material Design Theme from KivyMD Various Repository. Designed To Convert Excel Row and Column Views into Simplified List with Controls for Quick Actions. Data Looped from SQL to Excel or vice versa...
-
 
 ## Introduction / Information
 Inventory To Simplified Model View was one of my second projectin programming that only circulates in Python. It was coded in Object Oriented which is different than the first project which uses the method of Procedural Programming. Our goal is to make an application that is responsive, carefully design which includes friendly interface. With that, we were able to achieve one thing. Is to create an application that simplifies excel data into a list view which sorts data for proper editing. Which is made to reduce confusion and fatigue as well...
