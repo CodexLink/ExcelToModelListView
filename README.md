@@ -3,93 +3,77 @@ A First Year 2nd Semester OOP Project in CPE 009 | An Inventory Project Based on
 
 
 ## Introduction / Information
-Enrollment System for C CLI (No Brand) was one of our first project in programming that only circulates in C Language. Our goal is to make a responsive application that technically able to replicate a Web application / system called "ARIS". ARIS is one our school web system that currently operates within the school. With that, alternatives can be done just in case, and so this application was born.
+Inventory To Simplified Model View was one of my second projectin programming that only circulates in Python. It was coded in Object Oriented which is different than the first project which uses the method of Procedural Programming. Our goal is to make an application that is responsive, carefully design which includes friendly interface. With that, we were able to achieve one thing. Is to create an application that simplifies excel data into a list view which sorts data for proper editing. Which is made to reduce confusion and fatigue as well...
 
 ## Getting Started
 
-These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. 
+These instructions that will help you get  a copy of our project up and running on your local machine for development and testing purposes. 
 
 ### Prerequisites
 
 Here are the things that you need to install the software. Each software has labelled it's difficulty on how to use it.
 
 ```
-PROGRAM NAME - COMMENTS - SET UP DIFFICULTY
+PROGRAM NAME
 
 IDE (Dependent and Independent)
-
-Visual Studio Code (Dependent IDE) - For Coding w/o Compiling - Easy, w/ Compiling + Dependencies - Hard
-Dev-C++ - Obsolete Alternative IDE for Compiling - Easy
-Visual Studio (Community Edition) - Accurate Checks with Quality, Large Size IDE - (For Setting up Options) - Intermediate
+ - Visual Studio Code (Dependent IDE)
 
 TOOLS & Visual Studio Code Dependencies
 
-Cppcheck - Checker for C and C++ Code - Easy
-C / C++ Components
-Beautify
-Terminal
-Code Runner - Alternative Compiler - (First Time Setup) - Between Medium and Hard
+<AddSomething>
 
 Collaboration
 VS Live Share - You need aspiring or willing groupmates to use this one.
 Github Desktop, Git GUI and Git Bash - Alternative Collaboration Than Usual File Passing - Intermediate
-
+Discord - For Screen Share and Talk about Development
 ```
 
 ## Deployment
+```
+```
 
-Just run the your-compiled version of this program and that was it. No additional steps required. User cannot change things on database...
+## Builderspec Docs Instructions for One File System (Except Data)
+```
+```
 
 ## Built With
-
 * [Visual Studio Code](https://code.visualstudio.com/) - The primary text editor with Github Integration and other such stuffs. Secondary Compiler and Debugger.
-* [Dev C++](http://www.bloodshed.net/devcpp.html) - The secondary text editor for compiling with GCC, integrated to CMD.
-* [CppCheck](http://cppcheck.sourceforge.net/) - Cppcheck is a static code analysis tool for the C and C++ programming languages.
-* [Visual Studio Code Extension - Code Runner](https://github.com/formulahendry/vscode-code-runner) - A Visual Studio Code Extension used to easily build the program.
-* [Windows API / Win32API / Visual C / C++](https://docs.microsoft.com/en-us/windows/desktop/apiindex/windows-api-list) - A C / C++ Library API used to initialize / manipulate functions and windows and other such stuffs from Windows OS.
-* [Win32 Port of OpenSSH](https://github.com/PowerShell/Win32-OpenSSH) - Win32 port of OpenSSH.
+* [Python](http://www.bloodshed.net/devcpp.html) - The secondary text editor for compiling with GCC, integrated to CMD.
+* [Kivy](http://www.bloodshed.net/devcpp.html) - The secondary text editor for compiling with GCC, integrated to CMD.
+* [KivyMD (Variant Modified)](http://www.bloodshed.net/devcpp.html) - The secondary text editor for compiling with GCC, integrated to CMD.
 
 ## Contributing
 
-There is no contribution outside for a moment. I'm planning to work on this part.
+There is a contribution, please wait for it...
 
 ## Versioning
-
-We use don't use any APIs regarding software version. But instead we usually do based on time and date in 24H format. For example:
+We use don't use any APIs regarding software versioning. But instead we usually do based on time and date in 24H format. For example:
 ```
-When Build is done: at 4:51 PM at 08/21/2018
+When Build is Done: at 4:51 PM at 08/21/2018
 Result Versioning is: 1651-082118.BETA
 ```
-Beta is state of a program that is very unstable point.
-We are planning to automatically do basic versioning with C Language soon. Not so complex but far more basic.
-
+I (Janrey Licas), would like to use some other revisioning naming other than my method of versioning...
 ## Authors
 
 Here are the list of authors who is taking part of the project.
 
 * **Janrey Tuazon Licas** - *Initial Work / Project Lead / FrontEnd Design and Backend Programming* - [CodexLink](https://github.com/CodexLink)
-* **Sam Matienzo** - *Database Prototype Maker and Test* - [Dubuphoria](https://github.com/Dubuphoria)
+* **Sam Matienzo** - *Database Prototype Maker and Tester and Resource Researcher* - [Dubuphoria](https://github.com/Dubuphoria)
 
 ## License
 
 This project is licensed under the GNU v3 License - see the [LICENSE.md](https://github.com/CodexLink/Project_5MES_C/blob/master/README.md) file for details
 
-## Acknowledgments
-
-* StackOverflow
-* CISCO NetAcad
-* Someone who doesn't love us but we do love them...
-
-## Links used to gain knowledge for creating this project
-Please refer to this for the list of stackoverflow links that we have checked out.
 
 # Unconventional FAQ
 ## Why would you like to distribute this?
-I want to distribute this in a way of helping people with a twist. Also this wasn't really meant to be shared in public. It was used to collaborate with people. Other than that, this repository will be private for some time.
-
-## Notes for Programmers who copies code and use this without citation or credits?
-You are not deserved to be programmer just to use my whole system without my credits. A PM would be better to thank me. This was open sourced to use by people who willing to learn and who will want to explore on my program.
-
-## Disclaimer
-We want to be good as possible, but as far as we know, this project will likely to be shared by everyone else without any credit. With that, soon enough we (I) will try to hard coded this.
-
+  - I don't meant to distribute this for any use of any projects, that should be asked with permission on me. But since this was open source, people won't do that with respect. However, I make this project open for public to make Kivy gain popularity and especially make KivyMD alive to make things if possible, make the development goes back into a state of the way it should be...
+  
+## Any chances of being a maintainer of the project 'KivyMD'???
+  - There might be chances that I want to apply, ever since I love Material Design so much, that I use it on overall design- dependent contents such as PowerPoint and GUI Programming. But in any possible conflict on the changes of the component, I will make one for myself or contribute to one of the following:
+ ```
+ Potential repos #1: AndreMiras/KivyMD
+ Potential repos #2: HeaTTheatR/KivyMD
+ ```
+This project won't go alive because of these forked-from-official repos. - 'Janrey "CodexLink" Licas
