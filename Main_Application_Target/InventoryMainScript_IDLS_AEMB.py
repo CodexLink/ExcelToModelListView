@@ -33,6 +33,8 @@ from kivymd.time_picker import MDTimePicker
 from kivymd.toolbar import Toolbar
 from kivy.utils import get_color_from_hex
 from kivymd.color_definitions import colors
+from kivy.clock import Clock
+#Clock.max_iteration = 20
 #class HackedDemoNavDrawer(MDNavigationDrawer):
 #    # DO NOT USE
 #    def add_widget(self, widget, index=0):

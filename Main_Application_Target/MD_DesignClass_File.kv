@@ -163,6 +163,7 @@ NavigationLayout:
                                     text: "Admin Previledge"
                                     size_hint: None, None
                                     size: 3 * dp(48), dp(48)
+                                    on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
                                 MDRaisedButton:
                                     text: "Submit Data"
                                     size_hint: None, None
@@ -177,6 +178,67 @@ NavigationLayout:
                         source: 'assets/LayerTriangleVector3.jpg'
                         size_hint: None, None
                         size: 1920, 1080
+                    ScrollView:
+                        do_scroll_x: False                            
+                        GridLayout:
+                            cols:2 if Window.width < 1200 else 2
+                            size_hint_y: None
+                            spacing: dp(10)
+                            padding: dp(10)
+                            height: self.minimum_height
+                            MDCard:
+                            # I just realized that removing size_hint will make the card resizable
+                                size: dp(320), dp(180)
+                                size_hint_y: None
+                                padding: dp(15)
+                                StackLayout:
+                                    spacing: dp(10)
+                                    BoxLayout:
+                                        orientation: 'horizontal'
+                                        padding: dp(10)
+                                        spacing: dp(10)
+                                        MDLabel:
+                                            font_style: 'Title'
+                                            theme_text_color: 'Primary'
+                                            halign: 'left'
+                                            text: "Quick Actions"
+                                            width: dp(10)
+                                        MDRaisedButton:
+                                            text: "Increment"
+                                            size_hint_y: None
+                                            size: 3 * dp(48), dp(48)
+                                        MDRaisedButton:
+                                            text: "Decrement"
+                                            size_hint_y: None
+                                            size: 3 * dp(48), dp(48)
+                                        MDRaisedButton:
+                                            text: "Remove Data"
+                                            size_hint_y: None
+                                            size: 3 * dp(48), dp(48)
+                            MDCard:
+                                size_hint: None, None
+                                size: dp(320), dp(200)
+                                BoxLayout:
+                                    orientation:'vertical'
+                                    padding: dp(10)
+                                    MDLabel:
+                                        text: 'Title'
+                                        theme_text_color: 'Secondary'
+                                        font_style: "Title"
+                                        size_hint_y: None
+                                    MDTextField:
+                                        hint_text: "No helper text"
+                                        write_tab: False
+                                    MDTextField:
+                                        hint_text: "Helper text on focus"
+                                        helper_text: "This will disappear when you click off"
+                                        helper_text_mode: "on_focus"
+                                        write_tab: False
+                                    MDTextField:
+                                        hint_text: "Persistent helper text"
+                                        helper_text: "Text is always here"
+                                        helper_text_mode: "persistent"
+                                        write_tab: False
             Screen:
                 name: 'MainWindow_SimplifiedView'
                 MDBottomNavigation:
@@ -284,7 +346,7 @@ NavigationLayout:
                                     ScrollView:
                                         do_scroll_x: False                            
                                         GridLayout:
-                                            cols:2 if Window.width > 1400 else 1
+                                            cols:1
                                             size_hint_y: None
                                             spacing: dp(10)
                                             padding: dp(10)
@@ -295,26 +357,206 @@ NavigationLayout:
                                                 size_hint_y: None
                                                 padding: dp(15)
                                                 BoxLayout:
-                                                    orientation: 'horizontal'
-                                                    padding: dp(15)
+                                                    orientation:'vertical'
                                                     MDLabel:
-                                                        font_style: 'Title'
+                                                        font_style: 'Headline'
                                                         theme_text_color: 'Primary'
-                                                        halign: 'left'
                                                         text: "Quick Actions"
-                                                        width: dp(10)
-                                                    MDRaisedButton:
-                                                        text: "Increment"
-                                                        size: 3 * dp(48), dp(48)
-                                                    MDRaisedButton:
-                                                        text: "Decrement"
-                                                        size: 3 * dp(48), dp(48)
-                                                    MDRaisedButton:
-                                                        text: "Remove Data"
-                                                        size: 3 * dp(48), dp(48)
-                                                    MDRaisedButton:
-                                                        text: "Remove Value"
-                                                        size: 3 * dp(48), dp(48)
+                                                        width: dp(20)
+                                                        text_size: self.size
+                                                        halign: 'left'
+                                                        valign: 'top'
+                                                    BoxLayout:
+                                                        orientation: 'horizontal'
+                                                        spacing: dp(10)
+                                                        padding: 0
+                                                        StackLayout:
+                                                            spacing: dp(5)
+                                                            MDRaisedButton:
+                                                                text: "Increment Data"
+                                                                size_hint: None, None
+                                                                size: 3 * dp(48), dp(48)
+                                                            MDRaisedButton:
+                                                                text: "Decrement Data"
+                                                                size_hint: None, None
+                                                                size: 3 * dp(48), dp(48)
+                                                            MDRaisedButton:
+                                                                text: "Submit Data"
+                                                                size_hint: None, None
+                                                                size: 3 * dp(48), dp(48)
+                                                            MDRaisedButton:
+                                                                text: "Increment Data"
+                                                                size_hint: None, None
+                                                                size: 3 * dp(48), dp(48)
+                                                            MDRaisedButton:
+                                                                text: "Decrement Data"
+                                                                size_hint: None, None
+                                                                size: 3 * dp(48), dp(48)
+                                                            MDRaisedButton:
+                                                                text: "Submit Data"
+                                                                size_hint: None, None
+                                                                size: 3 * dp(48), dp(48)
+                                            MDCard:
+                                            # I just realized that removing size_hint will make the card resizable
+                                                size: dp(320), dp(130)
+                                                size_hint_y: None
+                                                padding: dp(15)
+                                                elevation: 1
+                                                BoxLayout:
+                                                    orientation:'vertical'
+                                                    MDLabel:
+                                                        font_style: 'Headline'
+                                                        theme_text_color: 'Primary'
+                                                        text: "File Options"
+                                                        width: dp(20)
+                                                        text_size: self.size
+                                                        halign: 'left'
+                                                        valign: 'top'
+                                                    BoxLayout:
+                                                        orientation: 'horizontal'
+                                                        spacing: dp(10)
+                                                        padding: 0
+                                                        MDRaisedButton:
+                                                            text: "Save"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                                        MDRaisedButton:
+                                                            text: "Reload Data"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                                        MDRaisedButton:
+                                                            text: "Submit Data"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                            MDCard:
+                                                size_hint_y: None
+                                                size: dp(320), dp(880)
+                                                padding: dp(15)
+                                                BoxLayout:
+                                                    orientation:'vertical'
+                                                    spacing: dp(10)
+                                                    MDLabel:
+                                                        font_style: 'Headline'
+                                                        theme_text_color: 'Primary'
+                                                        text: "Data Editor"
+                                                        width: dp(20)
+                                                        text_size: self.size
+                                                        halign: 'left'
+                                                        valign: 'top'
+                                                    MDTextField:
+                                                        hint_text: "Item Number Input"
+                                                        required: True
+                                                        helper_mode: 'on_focus'
+                                                        helper_text: 'Item Number of the Particular. Required...'
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        hint_text: "Particulars Input"
+                                                        helper_text: 'Particular Name. Required...'
+                                                        required: True
+                                                        helper_mode: 'on_focus'
+                                                        helper_text: ''
+                                                        write_tab: False
+                                                        MDFlatButton:
+                                                            theme_text_color: 'Custom'
+                                                            text: "Admin Previledge"
+                                                            size_hint: None, None
+                                                    MDTextField:
+                                                        hint_text: "On Hand Value Input"
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        hint_text: "Proposed Value Input"
+                                                        helper_text: "Text is always here"
+                                                        helper_text_mode: 'on_focus'
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        hint_text: "Unit Type Input"
+                                                        helper_text: "Type of the Unit of the Particular"
+                                                        helper_text_mode: 'on_focus'
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        hint_text: "Unit Value Input"
+                                                        helper_text: "Text is always here"
+                                                        helper_text_mode: "persistent"
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        hint_text: "Total Value"
+                                                        helper_text: "This value is automatically computed..."
+                                                        helper_text_mode: "persistent"
+                                                        write_tab: False
+                                                        disabled: True
+                                                    MDTextField:
+                                                        hint_text: "Quarter #1 Value"
+                                                        helper_text: "Quarter What Usage????????"
+                                                        helper_text_mode: 'on_focus'
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        hint_text: "Quarter #2 Value"
+                                                        helper_text: "Quarter What Usage????????"
+                                                        helper_text_mode: 'on_focus'
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        hint_text: "Quarter #3 Value"
+                                                        helper_text: "Quarter What Usage????????"
+                                                        helper_text_mode: 'on_focus'
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        hint_text: "Quarter #4 Value"
+                                                        helper_text: "Quarter What Usage????????"
+                                                        helper_text_mode: 'on_focus'
+                                                        write_tab: False
+                                                    BoxLayout:
+                                                        orientation: 'horizontal'
+                                                        spacing: dp(10)
+                                                        MDRaisedButton:
+                                                            text: "Apply"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                                        MDFlatButton:
+                                                            text: "Clear Input"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                                        MDFlatButton:
+                                                            text: "Increment"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                            #MDCard:
+                                            #    size: dp(320), dp(280)
+                                            #    size_hint_y: None
+                                            #    padding: dp(15)
+                                            #    BoxLayout:
+                                            #        orientation: 'vertical'
+                                            #        padding: 0, dp(20)
+                                            #        MDLabel:
+                                            #            orientation: 'vertical'
+                                            #            text: 'Data Editor'
+                                            #            theme_text_color: 'Primary'
+                                            #            font_style: "Headline"
+                                            #            size_hint_y: None
+                                            #        MDTextField:
+                                            #            hint_text: "No helper text"
+                                            #            size_hint_y: None
+                                            #            write_tab: False
+                                            #        MDTextField:
+                                            #            hint_text: "Helper text on focus"
+                                            #            size_hint_y: None
+                                            #            helper_text: "This will disappear when you click off"
+                                            #            helper_text_mode: "on_focus"
+                                            #            write_tab: False
+                                            #        MDTextField:
+                                            #            hint_text: "Persistent helper text"
+                                            #            size_hint_y: None
+                                            #            helper_text: "Text is always here"
+                                            #            helper_text_mode: "persistent"
+                                            #            write_tab: False
+                                            #        MDRaisedButton:
+                                            #            text: "Apply"
+                                            #            size_hint: None, None
+                                            #            size: 3 * dp(48), dp(48)
+                                            #        MDFlatButton:
+                                            #            theme_text_color: 'Custom'
+                                            #            text: "Clear Input"
+                                            #            size_hint: None, None
+                                            #            size: 3 * dp(48), dp(48)
                             MDTab:
                                 name: 'Tab_IterateWorkheet#2'
                                 text: 'Tab_IterateWorkheet#2'
@@ -399,7 +641,7 @@ NavigationLayout:
                                                         font_style: 'Title'
                                                         theme_text_color: 'Primary'
                                                         halign: 'left'
-                                                        text: "Quick Actions"
+                                                        text: "Value Incrementing Actions"
                                                         width: dp(10)
                                                     MDRaisedButton:
                                                         text: "Increment"

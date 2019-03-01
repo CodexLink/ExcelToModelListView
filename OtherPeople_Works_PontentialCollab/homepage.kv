@@ -1,0 +1,32 @@
+<ImageButton@ButtonBehavior>:
+
+<homepageWindow>:
+	id: home_win
+	orientation: "horizontal"
+	spacing: 20
+	canvas.before:
+		Color:
+			rgba: ( 0.01, 0.17, 0.37, 1)
+		Rectangle:
+			size: self.size
+			pos: self.pos
+	BoxLayout:
+		orientation: "horizontal"
+		Button:
+			id: payment
+			Image:
+				source: 'r_88.png'
+				size: .5, .5
+        		center_x: self.parent.center_x
+        		center_y: self.parent.center_y
+				spacing: 20
+		
+		Button:
+			id: inventory
+			size: .5, .5
+        	center_x: self.parent.center_x
+        	center_y: self.parent.center_y
+			background_normal: 'r_88.png'
+			spacing: 20
+			
+		
