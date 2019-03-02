@@ -77,7 +77,7 @@ NavigationLayout:
             id: ToolMenu_6
             icon: 'exit-to-app'
             text: "Exit Application"
-            #on_release: root.MDButton_Trigger_ExitConfirm()#app.get_running_app().stop()
+            #on_release: root.MDButton_Trigger_ExifadtConfirm()#app.get_running_app().stop()
     BoxLayout:
         orientation: 'vertical'
         Toolbar:
@@ -128,24 +128,29 @@ NavigationLayout:
                                     size_hint_y: None
                                     height: dp(3)
                                 MDTextField:
+                                    id: FirstTimer_DataFirstName
                                     hint_text: "Input Your First Name"
                                     required: True
                                     helper_text: "First Name Needed for Author Assignment"
                                     helper_text_mode: "on_focus"
                                     write_tab: False
+                                    #text:  'What is this ghoosting in my keyboard!?!?!?'
                                 MDTextField:
+                                    id: FirstTimer_DataLastName
                                     hint_text: "Input Your Last Name"
                                     required: True
                                     helper_text: "Last Name Needed for Author Assignment"
                                     helper_text_mode: "on_focus"
                                     write_tab: False
                                 MDTextField:
+                                    id: FirstTimer_DataJobPosition
                                     hint_text: "Input Your Job Position"
                                     required: True
                                     helper_text: "Job Position Needed for Author Assignment"
                                     helper_text_mode: "on_focus"
                                     write_tab: False
                                 MDTextField:
+                                    id: FirstTimer_DataPassword
                                     hint_text: "Input Your Password"
                                     required: True
                                     helper_text: "Password is needed to avoid changing authors without permission."
@@ -163,7 +168,8 @@ NavigationLayout:
                                     text: "Admin Previledge"
                                     size_hint: None, None
                                     size: 3 * dp(48), dp(48)
-                                    on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
+                                    #on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
+                                    on_release: app.ExcelLoadInit_Prototype()
                                 MDRaisedButton:
                                     text: "Submit Data"
                                     size_hint: None, None
@@ -245,104 +251,62 @@ NavigationLayout:
                     id: MainFrameWindow_Divider
                     MDBottomNavigationItem:
                         name: 'MainFrameWindow_1'
-                        text: "Data Binding and Setups"
-                        icon: "database-plus"
-                    MDBottomNavigationItem:
-                        name: 'MainFrameWindow_2'
                         text: "Data Management"
                         icon: "view-list"
+                        #on_release: app.ExcelLoadInit_Prototype() 
                         MDLabel:
                             font_style: 'Body1'
                             theme_text_color: 'Primary'
                             text: "Data List"
                             halign: 'center'
                         MDTabbedPanel:
-                            id: tab_panel
+                            id: MD_MainWorkSheet_TabPanel
                             tab_display_mode:'text'
                             tab_width_mode:'stacked'
                             MDTab:
+                                id: MD_WorkSheet_One
                                 name: 'Tab_IterateWorkheet#1'
                                 text: "Tab_IterateWorkheet#1"
+                                content_disabled: False
                                 GridLayout:
                                     cols:2
                                     BoxLayout:
                                         orientation: 'vertical'
                                         ScrollView:
-                                            do_scroll_x: False
+                                            foon_reedo_scroll_x: False
                                             MDList:
                                                 id: MDList_UserInsertion_Selection
-                                                TwoLineAvatarListItem:
+                                                TwoLineListItem:
+                                                    id: ListElement_Placeholder
                                                     type: "two-line"
-                                                    text: "Two-line item..."
-                                                    secondary_text: "with avatar"
-                                                    AvatarSampleWidget:
-                                                        source: './assets/avatar.png'
-                                                TwoLineAvatarListItem:
+                                                    text: "{Main Particular Name}"
+                                                    secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                                    active: True
+                                                TwoLineListItem:
+                                                    id: ListElement_Placeholder
                                                     type: "two-line"
-                                                    text: "Two-line item..."
-                                                    secondary_text: "with avatar"
-                                                    AvatarSampleWidget:
-                                                        source: './assets/avatar.png'
-                                                TwoLineAvatarListItem:
+                                                    text: "{Main Particular Name}"
+                                                    secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                                TwoLineListItem:
+                                                    id: ListElement_Placeholder
                                                     type: "two-line"
-                                                    text: "Two-line item..."
-                                                    secondary_text: "with avatar"
-                                                    AvatarSampleWidget:
-                                                        source: './assets/avatar.png'
-                                                TwoLineAvatarListItem:
+                                                    text: "{Main Particular Name}"
+                                                    secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                                TwoLineListItem:
+                                                    id: ListElement_Placeholder
                                                     type: "two-line"
-                                                    text: "Two-line item..."
-                                                    secondary_text: "with avatar"
-                                                    AvatarSampleWidget:
-                                                        source: './assets/avatar.png'
-                                                TwoLineAvatarListItem:
+                                                    text: "{Main Particular Name}"
+                                                    secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                                TwoLineListItem:
+                                                    id: ListElement_Placeholder
                                                     type: "two-line"
-                                                    text: "Two-line item..."
-                                                    secondary_text: "with avatar"
-                                                    AvatarSampleWidget:
-                                                        source: './assets/avatar.png'
-                                                TwoLineAvatarListItem:
+                                                    text: "{Main Particular Name}"
+                                                    secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                                TwoLineListItem:
+                                                    id: ListElement_Placeholder
                                                     type: "two-line"
-                                                    text: "Two-line item..."
-                                                    secondary_text: "with avatar"
-                                                    AvatarSampleWidget:
-                                                        source: './assets/avatar.png'
-                                                TwoLineAvatarListItem:
-                                                    type: "two-line"
-                                                    text: "Two-line item..."
-                                                    secondary_text: "with avatar"
-                                                    AvatarSampleWidget:
-                                                        source: './assets/avatar.png'
-                                                TwoLineAvatarListItem:
-                                                    type: "two-line"
-                                                    text: "Two-line item..."
-                                                    secondary_text: "with avatar"
-                                                    AvatarSampleWidget:
-                                                        source: './assets/avatar.png'
-                                                TwoLineAvatarListItem:
-                                                    type: "two-line"
-                                                    text: "Two-line item..."
-                                                    secondary_text: "with avatar"
-                                                    AvatarSampleWidget:
-                                                        source: './assets/avatar.png'
-                                                TwoLineAvatarListItem:
-                                                    type: "two-line"
-                                                    text: "Two-line item..."
-                                                    secondary_text: "with avatar"
-                                                    AvatarSampleWidget:
-                                                        source: './assets/avatar.png'
-                                                TwoLineAvatarListItem:
-                                                    type: "two-line"
-                                                    text: "Two-line item..."
-                                                    secondary_text: "with avatar"
-                                                    AvatarSampleWidget:
-                                                        source: './assets/avatar.png'
-                                                TwoLineAvatarListItem:
-                                                    type: "two-line"
-                                                    text: "Two-line item..."
-                                                    secondary_text: "with avatar"
-                                                    AvatarSampleWidget:
-                                                        source: './assets/avatar.png'
+                                                    text: "{Main Particular Name}"
+                                                    secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
                                     ScrollView:
                                         do_scroll_x: False                            
                                         GridLayout:
@@ -353,49 +317,152 @@ NavigationLayout:
                                             height: self.minimum_height
                                             MDCard:
                                             # I just realized that removing size_hint will make the card resizable
-                                                size: dp(320), dp(180)
+                                                size: dp(320), dp(300)
                                                 size_hint_y: None
                                                 padding: dp(15)
                                                 BoxLayout:
                                                     orientation:'vertical'
+                                                    AnchorLayout:
+                                                        anchor_x: 'left'
+                                                        anchor_y: 'top'
+                                                        size_hint_y: None
+                                                        MDLabel:
+                                                            font_style: 'Headline'
+                                                            theme_text_color: 'Primary'
+                                                            text: "Quick Actions"
+                                                            width: dp(20)
+                                                            text_size: self.size
+                                                            halign: 'left'
+                                                            valign: 'top'
+                                                            size_hint_y: None
+                                                    StackLayout:
+                                                        spacing: dp(10)
+                                                        MDRaisedButton:
+                                                            text: "Decrease OnHand Val"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                                        MDRaisedButton:
+                                                            text: "Increase OnHand Val"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                                        MDRaisedButton:
+                                                            text: "Decrease Proposed Val"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                                        MDRaisedButton:
+                                                            text: "Increase Proposed Val"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                                        MDRaisedButton:
+                                                            text: "Decrease PerUnit Val"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                                        MDRaisedButton:
+                                                            text: "Increase PerUnit Val"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                            MDCard:
+                                                size_hint_y: None
+                                                size: dp(320), dp(880)
+                                                padding: dp(15)
+                                                BoxLayout:
+                                                    orientation:'vertical'
+                                                    spacing: dp(10)
                                                     MDLabel:
                                                         font_style: 'Headline'
                                                         theme_text_color: 'Primary'
-                                                        text: "Quick Actions"
+                                                        text: "Data Editor"
                                                         width: dp(20)
                                                         text_size: self.size
                                                         halign: 'left'
                                                         valign: 'top'
+                                                    MDTextField:
+                                                        id: Resource_ItemNumVal
+                                                        hint_text: "Item Number Input"
+                                                        helper_mode: 'on_focus'
+                                                        helper_text: 'Item Number of the Particular. Required...'
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        id: Resource_ParticularProperty
+                                                        hint_text: "Particulars Input"
+                                                        helper_text: 'Particular Name. Required...'
+                                                        helper_mode: 'on_focus'
+                                                        write_tab: False
+                                                        MDFlatButton:
+                                                            theme_text_color: 'Custom'
+                                                            text: "Admin Previledge"
+                                                            size_hint: None, None
+                                                    MDTextField:
+                                                        id: Resource_OnHandVal
+                                                        hint_text: "On Hand Value Input"
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        id: Resource_ProposedVal
+                                                        hint_text: "Proposed Value Input"
+                                                        helper_text: "Text is always here"
+                                                        helper_text_mode: 'on_focus'
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        id: Resource_UnitTypeProperty
+                                                        hint_text: "Unit Type Input"
+                                                        helper_text: "Type of the Unit of the Particular"
+                                                        helper_text_mode: 'on_focus'
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        id: Resource_UnitVal
+                                                        hint_text: "Unit Value Input"
+                                                        helper_text: "Text is always here"
+                                                        helper_text_mode: "persistent"
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        id: Quartile_TextFieldVal_One
+                                                        hint_text: "Quarter #1 Value"
+                                                        helper_text: "Quarter What Usage????????"
+                                                        helper_text_mode: 'on_focus'
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        id: Quartile_TextFieldVal_Two
+                                                        hint_text: "Quarter #2 Value"
+                                                        helper_text: "Quarter What Usage????????"
+                                                        helper_text_mode: 'on_focus'
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        id: Quartile_TextFieldVal_Three
+                                                        hint_text: "Quarter #3 Value"
+                                                        helper_text: "Quarter What Usage????????"
+                                                        helper_text_mode: 'on_focus'
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        id: Quartile_TextFieldVal_Four
+                                                        hint_text: "Quarter #4 Value"
+                                                        helper_text: "Quarter What Usage????????"
+                                                        helper_text_mode: 'on_focus'
+                                                        write_tab: False
+                                                    MDTextField:
+                                                        id: Total_ComputedVal
+                                                        hint_text: "Total Value"
+                                                        helper_text: "This value is automatically computed based from data..."
+                                                        helper_text_mode: "persistent"
+                                                        write_tab: False
+                                                        disabled: True
                                                     BoxLayout:
                                                         orientation: 'horizontal'
                                                         spacing: dp(10)
-                                                        padding: 0
-                                                        StackLayout:
-                                                            spacing: dp(5)
-                                                            MDRaisedButton:
-                                                                text: "Increment Data"
-                                                                size_hint: None, None
-                                                                size: 3 * dp(48), dp(48)
-                                                            MDRaisedButton:
-                                                                text: "Decrement Data"
-                                                                size_hint: None, None
-                                                                size: 3 * dp(48), dp(48)
-                                                            MDRaisedButton:
-                                                                text: "Submit Data"
-                                                                size_hint: None, None
-                                                                size: 3 * dp(48), dp(48)
-                                                            MDRaisedButton:
-                                                                text: "Increment Data"
-                                                                size_hint: None, None
-                                                                size: 3 * dp(48), dp(48)
-                                                            MDRaisedButton:
-                                                                text: "Decrement Data"
-                                                                size_hint: None, None
-                                                                size: 3 * dp(48), dp(48)
-                                                            MDRaisedButton:
-                                                                text: "Submit Data"
-                                                                size_hint: None, None
-                                                                size: 3 * dp(48), dp(48)
+                                                        MDRaisedButton:
+                                                            text: "Apply Changes"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                                            on_release: app.MDWorksheetWorker_DataEditor_Apply()
+                                                        MDFlatButton:
+                                                            text: "Clear Input"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                                            on_release: app.MDWorksheetWorker_DataEditor_CleanInput()
+                                                        MDFlatButton:
+                                                            text: "Undo Changes"
+                                                            size_hint: None, None
+                                                            size: 3 * dp(48), dp(48)
+                                                            on_release: app.MDWorksheetWorker_DataEditor_Undo()
                                             MDCard:
                                             # I just realized that removing size_hint will make the card resizable
                                                 size: dp(320), dp(130)
@@ -417,146 +484,22 @@ NavigationLayout:
                                                         spacing: dp(10)
                                                         padding: 0
                                                         MDRaisedButton:
+                                                            id: FileOpt_Save
                                                             text: "Save"
                                                             size_hint: None, None
                                                             size: 3 * dp(48), dp(48)
                                                         MDRaisedButton:
+                                                            id: FileOpt_ReloadDataFile
                                                             text: "Reload Data"
                                                             size_hint: None, None
                                                             size: 3 * dp(48), dp(48)
+                                                            on_release: app.ExcelLoadInit_Prototype()
                                                         MDRaisedButton:
-                                                            text: "Submit Data"
+                                                            id: FileOpt_
+                                                            text: "Show Formula"
                                                             size_hint: None, None
                                                             size: 3 * dp(48), dp(48)
-                                            MDCard:
-                                                size_hint_y: None
-                                                size: dp(320), dp(880)
-                                                padding: dp(15)
-                                                BoxLayout:
-                                                    orientation:'vertical'
-                                                    spacing: dp(10)
-                                                    MDLabel:
-                                                        font_style: 'Headline'
-                                                        theme_text_color: 'Primary'
-                                                        text: "Data Editor"
-                                                        width: dp(20)
-                                                        text_size: self.size
-                                                        halign: 'left'
-                                                        valign: 'top'
-                                                    MDTextField:
-                                                        hint_text: "Item Number Input"
-                                                        required: True
-                                                        helper_mode: 'on_focus'
-                                                        helper_text: 'Item Number of the Particular. Required...'
-                                                        write_tab: False
-                                                    MDTextField:
-                                                        hint_text: "Particulars Input"
-                                                        helper_text: 'Particular Name. Required...'
-                                                        required: True
-                                                        helper_mode: 'on_focus'
-                                                        helper_text: ''
-                                                        write_tab: False
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Admin Previledge"
-                                                            size_hint: None, None
-                                                    MDTextField:
-                                                        hint_text: "On Hand Value Input"
-                                                        write_tab: False
-                                                    MDTextField:
-                                                        hint_text: "Proposed Value Input"
-                                                        helper_text: "Text is always here"
-                                                        helper_text_mode: 'on_focus'
-                                                        write_tab: False
-                                                    MDTextField:
-                                                        hint_text: "Unit Type Input"
-                                                        helper_text: "Type of the Unit of the Particular"
-                                                        helper_text_mode: 'on_focus'
-                                                        write_tab: False
-                                                    MDTextField:
-                                                        hint_text: "Unit Value Input"
-                                                        helper_text: "Text is always here"
-                                                        helper_text_mode: "persistent"
-                                                        write_tab: False
-                                                    MDTextField:
-                                                        hint_text: "Total Value"
-                                                        helper_text: "This value is automatically computed..."
-                                                        helper_text_mode: "persistent"
-                                                        write_tab: False
-                                                        disabled: True
-                                                    MDTextField:
-                                                        hint_text: "Quarter #1 Value"
-                                                        helper_text: "Quarter What Usage????????"
-                                                        helper_text_mode: 'on_focus'
-                                                        write_tab: False
-                                                    MDTextField:
-                                                        hint_text: "Quarter #2 Value"
-                                                        helper_text: "Quarter What Usage????????"
-                                                        helper_text_mode: 'on_focus'
-                                                        write_tab: False
-                                                    MDTextField:
-                                                        hint_text: "Quarter #3 Value"
-                                                        helper_text: "Quarter What Usage????????"
-                                                        helper_text_mode: 'on_focus'
-                                                        write_tab: False
-                                                    MDTextField:
-                                                        hint_text: "Quarter #4 Value"
-                                                        helper_text: "Quarter What Usage????????"
-                                                        helper_text_mode: 'on_focus'
-                                                        write_tab: False
-                                                    BoxLayout:
-                                                        orientation: 'horizontal'
-                                                        spacing: dp(10)
-                                                        MDRaisedButton:
-                                                            text: "Apply"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                        MDFlatButton:
-                                                            text: "Clear Input"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                        MDFlatButton:
-                                                            text: "Increment"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                            #MDCard:
-                                            #    size: dp(320), dp(280)
-                                            #    size_hint_y: None
-                                            #    padding: dp(15)
-                                            #    BoxLayout:
-                                            #        orientation: 'vertical'
-                                            #        padding: 0, dp(20)
-                                            #        MDLabel:
-                                            #            orientation: 'vertical'
-                                            #            text: 'Data Editor'
-                                            #            theme_text_color: 'Primary'
-                                            #            font_style: "Headline"
-                                            #            size_hint_y: None
-                                            #        MDTextField:
-                                            #            hint_text: "No helper text"
-                                            #            size_hint_y: None
-                                            #            write_tab: False
-                                            #        MDTextField:
-                                            #            hint_text: "Helper text on focus"
-                                            #            size_hint_y: None
-                                            #            helper_text: "This will disappear when you click off"
-                                            #            helper_text_mode: "on_focus"
-                                            #            write_tab: False
-                                            #        MDTextField:
-                                            #            hint_text: "Persistent helper text"
-                                            #            size_hint_y: None
-                                            #            helper_text: "Text is always here"
-                                            #            helper_text_mode: "persistent"
-                                            #            write_tab: False
-                                            #        MDRaisedButton:
-                                            #            text: "Apply"
-                                            #            size_hint: None, None
-                                            #            size: 3 * dp(48), dp(48)
-                                            #        MDFlatButton:
-                                            #            theme_text_color: 'Custom'
-                                            #            text: "Clear Input"
-                                            #            size_hint: None, None
-                                            #            size: 3 * dp(48), dp(48)
+                                                            #on_release: app.()
                             MDTab:
                                 name: 'Tab_IterateWorkheet#2'
                                 text: 'Tab_IterateWorkheet#2'
@@ -566,7 +509,7 @@ NavigationLayout:
                                     text: "Iterate Data per Worksheet! Remember!"
                                     halign: 'center'
                     MDBottomNavigationItem:
-                        name: 'MainFrameWindow_3'
+                        name: 'MainFrameWindow_2'
                         text: "Data Status Report"
                         icon: 'book-open'
                         BoxLayout:
@@ -610,8 +553,8 @@ NavigationLayout:
                                             helper_text_mode: "persistent"
                                             write_tab: False
                     MDBottomNavigationItem:
-                        name: 'MainFrameWindow_4'
-                        text: "Data Import and Export"
+                        name: 'MainFrameWindow_3'
+                        text: "Data Binds and Export"
                         icon: 'book-open'
                         ScrollView:
                             do_scroll_x: False                              

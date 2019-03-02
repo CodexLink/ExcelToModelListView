@@ -31,9 +31,13 @@ from kivymd.snackbar import Snackbar
 from kivymd.theming import ThemeManager
 from kivymd.time_picker import MDTimePicker
 from kivymd.toolbar import Toolbar
+from kivymd.tabs import MDTab
 from kivy.utils import get_color_from_hex
 from kivymd.color_definitions import colors
 from kivy.clock import Clock
+from openpyxl import load_workbook, Workbook
+import openpyxl
+import sqlite3
 #Clock.max_iteration = 20
 #class HackedDemoNavDrawer(MDNavigationDrawer):
 #    # DO NOT USE
@@ -166,9 +170,9 @@ class MD_InventoryEXI_SMV_GUI(App):
     def MDButton_DarkMode(self):
         if self.root.ids.ToolbarMain.darkBooleanParameter == True and self.theme_cls.theme_style == 'Dark':
             self.root.ids.ToolbarMain.darkBooleanParameter = False
-            self.root.ids.ToolbarMain.right_action_items =  [['brightness-1', lambda x: MD_InventoryEXI_SMV_GUI.MDButton_DarkMode(self)]]
+            self.root.ids.ToolbarMain.right_action_items =  [['brightness-2', lambda x: MD_InventoryEXI_SMV_GUI.MDButton_DarkMode(self)]]
             self.theme_cls.theme_style = 'Light'
-            # Make it time based
+            # Make it time based, if possible
             self.MDUserNotif_SnackbarHandler('Dark Mode Activated!')
         elif self.root.ids.ToolbarMain.darkBooleanParameter == False and self.theme_cls.theme_style == 'Light':
             self.root.ids.ToolbarMain.darkBooleanParameter = True
@@ -190,6 +194,124 @@ class MD_InventoryEXI_SMV_GUI(App):
     # Unsure Method Call
     def MDSnackbar_CallbackHandler(self):
         pass
+
+    def ExcelLoadInit_Prototype(self):
+        #Should be selectable
+        CounterList = 0
+        IDTabs_Accessible = ['MD_WorkSheet_One','MD_WorkSheet_Two','MD_WorkSheet_Three','MD_WorkSheet_Four','MD_WorkSheet_Five']
+        ExcelID_UniqueListIndex = 0
+        ExcelID_MDTabbedPanel = 0
+        ExcelFile = openpyxl.load_workbook('E:\A Development That No One Knows\Github\InventoryEditor-Data_List_Simplier_AEMB\TrialError_ExperimentalPrototype\sample.xlsx')
+        ExcelWorksheet = ExcelFile.worksheets[0]
+        #Load per Column each with SheetNames on MDTabbedPanel - Seperatable or not or remove based on file
+        for SheetData in ExcelFile.sheetnames:
+            ExcelID_MDTabbedPanel += 1
+            #self.root.ids.FirstTimer_DataFirstName.text = SheetData
+            pass
+        for row in ExcelWorksheet['B6:P25']:#.format(ExcelWorksheet.min_row,ExcelWorksheet.max_row)]:
+            CounterCheck = 1
+            # This could be changed, or prolly make the set of ids into list, not dictionary
+            for cell in row:
+                if CounterCheck == 1 and CounterCheck <= 11:
+                    self.root.ids.Resource_ItemNumVal.text = str(cell.value)
+                    CounterCheck += 1
+                    CounterList += 1
+                elif CounterCheck == 2 and CounterCheck <= 11:
+                    self.root.ids.Resource_ParticularProperty.text = str(cell.value)
+                    CounterCheck += 1
+                    CounterList += 1
+                elif CounterCheck == 3 and CounterCheck <= 11:
+                    self.root.ids.Resource_OnHandVal.text = str(cell.value)
+                    CounterCheck += 1
+                    CounterList += 1
+                elif CounterCheck == 4 and CounterCheck <= 11:
+                    self.root.ids.Resource_ProposedVal.text = str(cell.value)
+                    CounterCheck += 1
+                    CounterList += 1
+                elif CounterCheck == 5 and CounterCheck <= 11:
+                    self.root.ids.Resource_UnitTypeProperty.text = str(cell.value)
+                    CounterCheck += 1
+                    CounterList += 1
+                elif CounterCheck == 6 and CounterCheck <= 11:
+                    self.root.ids.Resource_UnitVal.text = str(cell.value)
+                    CounterCheck += 1
+                    CounterList += 1
+                elif CounterCheck == 7 and CounterCheck <= 11:
+                    self.root.ids.Quartile_TextFieldVal_One.text = str(cell.value)
+                    CounterCheck += 1
+                    CounterList += 1
+                elif CounterCheck == 8 and CounterCheck <= 11:
+                    self.root.ids.Quartile_TextFieldVal_Two.text = str(cell.value)
+                    CounterCheck += 1
+                    CounterList += 1
+                elif CounterCheck == 9 and CounterCheck <= 11:
+                    self.root.ids.Quartile_TextFieldVal_Three.text = str(cell.value)
+                    CounterCheck += 1
+                    CounterList += 1
+                elif CounterCheck == 10 and CounterCheck <= 11:
+                    self.root.ids.Quartile_TextFieldVal_Four.text = str(cell.value)
+                    CounterCheck += 1
+                    CounterList += 1
+                elif CounterCheck == 11 and CounterCheck <= 11:
+                    # This value which instantly changed when its applied or when editing is done... (I guess)
+                    # The value of this show not be saved in the way it is modified here. Get the formmula by getting the function reference from undo function
+                    # Create a function to dice the formula and compute it with possible iterations from any n number
+                    self.root.ids.Total_ComputedVal.text = str(cell.value)
+                    CounterCheck += 1
+                    CounterList += 1
+                else:
+                    break;
+                print (cell, cell.value, CounterCheck)
+        print(ExcelWorksheet.min_row)
+        print(ExcelWorksheet.max_row)
+        print(ExcelWorksheet.min_column)
+        print(ExcelWorksheet.max_column)
+        #self.root.ids.MDList_UserInsertion_Selection.add_widget(TwoLineListItem(id=('IterationItem_%d' % CounterList), name=cell.value))
+
+    def MDWorksheetWorker_DataEditor_Apply(self):
+        # Create an Undo Method here?
+        self.MDUserNotif_SnackbarHandler('Selected Data Edit has been applied!')
+
+    def MDWorksheetWorker_DataEditor_CleanInput(self):
+        self.root.ids.Resource_ItemNumVal.text = ''
+        self.root.ids.Resource_ParticularProperty.text = ''
+        self.root.ids.Resource_OnHandVal.text = ''
+        self.root.ids.Resource_ProposedVal.text = ''
+        self.root.ids.Resource_UnitTypeProperty.text = ''
+        self.root.ids.Resource_UnitVal.text = ''
+        self.root.ids.Total_ComputedVal.text = ''
+        self.root.ids.Quartile_TextFieldVal_One.text = ''
+        self.root.ids.Quartile_TextFieldVal_Two.text = ''
+        self.root.ids.Quartile_TextFieldVal_Three.text = ''
+        self.root.ids.Quartile_TextFieldVal_Four.text = ''
+        self.MDUserNotif_SnackbarHandler('Selected Data Edit has been cleared!')
+
+    #Reference this function on the funciton who handles when selected this one it should show up on the data editor
+    def MDWorksheetWorker_DataEditor_Undo_DataHandler(self):
+        pass
+
+    def MDWorksheetWorker_DataEditor_Undo(self):
+        self.MDUserNotif_SnackbarHandler('Selected Data has been reverted back to last save state!')
+
+    def MDWorksheet_QuickActions(self, params_actionPerformed):
+        #Get Active ID of Selected Data and transfer something or Notif this shit...
+        if params_actionPerformed == 'IncVOnHandal':
+            pass
+        elif params_actionPerformed == 'DecOnHandVal':
+            pass
+        elif params_actionPerformed == 'IncProposedVal':
+            pass
+        elif params_actionPerformed == 'DecProposedVal':
+            pass
+        elif params_actionPerformed == 'IncPerUnitVal':
+            pass
+        elif params_actionPerformed == 'DecPerUnitVal':
+            pass
+        else:
+            raise ValueError('Parameter Variable -> params_actionPerformed: Received an invalid string from function caller!')
+            LoggerDebug.error('Parameter Variable -> params_actionPerformed: Received an invalid string from function caller!')
+            app.stop()
+        self.MDUserNotif_SnackbarHandler('Selected Data has been reverted back to last save state!')
 
 class AvatarSampleWidget(ILeftBody, Image):
     pass
