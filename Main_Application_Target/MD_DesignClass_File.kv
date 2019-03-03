@@ -532,41 +532,50 @@ NavigationLayout:
                                                             on_release: app.MDWorksheetWorker_DataEditor_Undo()
                                             MDCard:
                                             # I just realized that removing size_hint will make the card resizable
-                                                size: dp(320), dp(130)
+                                                size: dp(320), dp(190)
                                                 size_hint_y: None
                                                 padding: dp(15)
                                                 elevation: 1
-                                                BoxLayout:
-                                                    orientation:'vertical'
-                                                    MDLabel:
-                                                        font_style: 'Headline'
-                                                        theme_text_color: 'Primary'
-                                                        text: "File Options"
-                                                        width: dp(20)
-                                                        text_size: self.size
-                                                        halign: 'left'
-                                                        valign: 'top'
+                                                AnchorLayout:
+                                                    anchor_x: 'left'
+                                                    anchor_y: 'top'
                                                     BoxLayout:
-                                                        orientation: 'horizontal'
-                                                        spacing: dp(10)
-                                                        padding: 0
-                                                        MDRaisedButton:
-                                                            id: FileOpt_Save
-                                                            text: "Save"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                        MDRaisedButton:
-                                                            id: FileOpt_ReloadDataFile
-                                                            text: "Reload Data"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                            on_release: app.ExcelLoadInit_Prototype()
-                                                        MDRaisedButton:
-                                                            id: FileOpt_
-                                                            text: "Show Formula"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                            #on_release: app.()
+                                                        orientation:'vertical'
+                                                        size_hint_y: None
+                                                        MDLabel:
+                                                            font_style: 'Headline'
+                                                            theme_text_color: 'Primary'
+                                                            text: "File Options"
+                                                            width: dp(20)
+                                                            text_size: self.size
+                                                            halign: 'left'
+                                                            valign: 'top'
+                                                        StackLayout:
+                                                            spacing: dp(10)
+                                                            MDRaisedButton:
+                                                                id: FileOpt_Save
+                                                                text: "Save on Import Path"
+                                                                size_hint: None, None
+                                                                size: 3 * dp(48), dp(48)
+                                                                #on_release: app.ExcelLoadInit_Prototype()
+                                                            MDRaisedButton:
+                                                                id: FileOpt_Save
+                                                                text: "Save on Export Path"
+                                                                size_hint: None, None
+                                                                size: 3 * dp(48), dp(48)
+                                                                #on_release: app.ExcelLoadInit_Prototype()
+                                                            MDRaisedButton:
+                                                                id: FileOpt_ReloadDataFile
+                                                                text: "Reload Data"
+                                                                size_hint: None, None
+                                                                size: 3 * dp(48), dp(48)
+                                                                on_release: app.ExcelLoadInit_Prototype()
+                                                            MDRaisedButton:
+                                                                id: FileOpt_
+                                                                text: "Show Formula"
+                                                                size_hint: None, None
+                                                                size: 3 * dp(48), dp(48)
+                                                                #on_release: app.ExcelLoadInit_Prototype()
                             MDTab:
                                 name: 'Tab_IterateWorkheet#2'
                                 text: 'Tab_IterateWorkheet#2'
@@ -621,7 +630,7 @@ NavigationLayout:
                                             write_tab: False
                     MDBottomNavigationItem:
                         name: 'MainFrameWindow_3'
-                        text: "Data Binds and Export"
+                        text: "Import Data / Export Pull Out"
                         icon: 'book-open'
                         ScrollView:
                             do_scroll_x: False                              
@@ -633,7 +642,7 @@ NavigationLayout:
                                 height: self.minimum_height
                                 MDCard:
                                 # I just realized that removing size_hint will make the card resizable
-                                    size: dp(320), dp(265)
+                                    size: dp(320), dp(215)
                                     size_hint_y: None
                                     padding: dp(15)
                                     elevation: 1
@@ -647,12 +656,12 @@ NavigationLayout:
                                                 MDLabel:
                                                     font_style: 'Headline'
                                                     theme_text_color: 'Primary'
-                                                    text: "Excel File: Data Binding"
+                                                    text: "Data Binding / Data Import"
                                                     text_size: self.size
                                                     halign: 'left'
                                                     valign: 'top'
                                                 MDLabel:
-                                                    text: 'This is the area where things get started... Please set up and fill those infos that is required in order to get go!'
+                                                    text: 'This is the part where things get started... Please set up and fill those text fields that is required in order to get go!'
                                                     theme_text_color: 'Secondary'
                                                     font_style: "Body1"
                                                     text_size: self.size
@@ -669,44 +678,12 @@ NavigationLayout:
                                                     write_tab: False
                                                 MDTextField:
                                                     id: DataBind_FileArguments
-                                                    hint_text: "Arguments Call File #1"
+                                                    hint_text: "Arguments To Call"
                                                     required: True
                                                     helper_text: "Not required, read openpyxl's load_workbook"
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
                                                     #on_release: app.() # Add the checker for this file before applying.... Use Data Bind from Text Field
-                                                #In future versions, add arguments as possible, also add extension checker
-                                                MDFlatButton:
-                                                    theme_text_color: 'Custom'
-                                                    text: "Bind Data"
-                                                    size_hint: None, None
-                                                    size: 3 * dp(48), dp(48)
-                                                    #on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
-                                                    #on_release: app.ExcelLoadInit_Prototype()
-                                                MDFlatButton:
-                                                    theme_text_color: 'Custom'
-                                                    text: "File Manager"
-                                                    size_hint: None, None
-                                                    size: 3 * dp(48), dp(48)
-                                                MDFlatButton:
-                                                    theme_text_color: 'Custom'
-                                                    text: "Clear Path"
-                                                    size_hint: None, None
-                                                    size: 3 * dp(48), dp(48)
-                                                    #on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
-                                                    #on_release: app.ExcelLoadInit_Prototype()
-                                            BoxLayout:
-                                                orientation: 'horizontal'
-                                                spacing: dp(10)
-                                                padding: 0
-                                                MDTextField:
-                                                    id: DataBind_FilePath
-                                                    hint_text: "Database File | Data Path"
-                                                    required: True
-                                                    helper_text: "Not required, but if you already exported one and want to use it, then import it!"
-                                                    helper_text_mode: "on_focus"
-                                                    write_tab: False
-                                                    #on_release: app.() # Add the checker for this file before applying.... Use Data Bind from Texgt Field
                                                 #In future versions, add arguments as possible, also add extension checker
                                                 MDFlatButton:
                                                     theme_text_color: 'Custom'
@@ -755,6 +732,61 @@ NavigationLayout:
                                                     text: "Clear Value"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
+                                MDCard:
+                                # I just realized that removing size_hint will make the card resizable
+                                    size: dp(320), dp(165)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    elevation: 1
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        BoxLayout:
+                                            orientation:'vertical'
+                                            AnchorLayout:
+                                                anchor_x:'left'
+                                                anchor_y:'top'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "Data Pull Out / Data Export"
+                                                    text_size: self.size
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                MDLabel:
+                                                    text: 'This is the part that produces results! Please set up and fill those infos that is required in process pull-outs!'
+                                                    theme_text_color: 'Secondary'
+                                                    font_style: "Body1"
+                                                    text_size: self.size
+                                            BoxLayout:
+                                                orientation: 'horizontal'
+                                                spacing: dp(10)
+                                                padding: 0
+                                                MDTextField:
+                                                    id: DataBind_FilePath
+                                                    hint_text: "Excel File | Data Path"
+                                                    required: True
+                                                    helper_text: "Required, if you want to export an Excel File!"
+                                                    helper_text_mode: "on_focus"
+                                                    write_tab: False
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Process Export"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                    #on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
+                                                    #on_release: app.ExcelLoadInit_Prototype()
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "File Manager"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Clear Path"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                    #on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
+                                                    #on_release: app.ExcelLoadInit_Prototype()
             Screen:
                 name: 'MainWindow_AccountUserSelection'
                 AnchorLayout:

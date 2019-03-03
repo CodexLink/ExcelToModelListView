@@ -203,6 +203,7 @@ class MD_InventoryEXI_SMV_GUI(App):
         ExcelID_MDTabbedPanel = 0
         ExcelFile = openpyxl.load_workbook('E:\A Development That No One Knows\Github\InventoryEditor-Data_List_Simplier_AEMB\TrialError_ExperimentalPrototype\sample.xlsx')
         ExcelWorksheet = ExcelFile.worksheets[0]
+        self.MDUserNotif_SnackbarHandler('Excel Data has been reloaded from the editor!') 
         #Load per Column each with SheetNames on MDTabbedPanel - Seperatable or not or remove based on file
         for SheetData in ExcelFile.sheetnames:
             ExcelID_MDTabbedPanel += 1
