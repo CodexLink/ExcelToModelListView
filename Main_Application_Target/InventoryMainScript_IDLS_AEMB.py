@@ -13,8 +13,11 @@ Date Initialization: 02/21/2019
 from kivy.app import App
 from kivy.lang import Builder
 from kivy.metrics import dp
+from kivy.core.window import Window
 from kivy.properties import ObjectProperty
 from kivy.uix.image import Image
+from kivy.uix.widget import Widget
+from kivy.properties import ObjectProperty, NumericProperty, StringProperty
 from kivy.uix.screenmanager import ScreenManager, Screen, FadeTransition
 from kivy.config import Config
 from kivy.logger import Logger as LoggerDebug
@@ -32,6 +35,7 @@ from kivymd.theming import ThemeManager
 from kivymd.time_picker import MDTimePicker
 from kivymd.toolbar import Toolbar
 from kivymd.tabs import MDTab
+from kivymd.textfields import MDTextField
 from kivy.utils import get_color_from_hex
 from kivymd.color_definitions import colors
 from kivy.clock import Clock
@@ -58,8 +62,10 @@ import sqlite3
 class MD_InventoryEXI_SMV_GUI(App):
     theme_cls = ThemeManager()
     previous_date = ObjectProperty()
-    title = "Welcome to Excel Inventory To Simplified Model View | EXI_SMV" #Excel to Simplified Model VIew in GUI
+    #title = "Welcome to Excel Inventory To Simplified Model View | EXI_SMV" #Excel to Simplified Model VIew in GUI
+    title = "Excel Inventory To Simplified Model View | EXI_SMV - Individual Use" #Excel to Simplified Model VIew in GUI
     Icon_Status = 'brightness-1'
+
     def KivyConfig_Init(self): # Get Values from DB and Change App Behavior Accordingly
         pass
 
@@ -107,8 +113,13 @@ class MD_InventoryEXI_SMV_GUI(App):
         self.theme_cls.primary_palette = 'DeepOrange'
         self.theme_cls.primary_hue = '400'
         self.theme_cls.theme_style = 'Light'
+        on_dropfile=self._on_file_drop
         return self.MainClassBuildFile
         
+    def _on_file_drop(self, window, file_path):
+        print(file_path)
+        return
+    
     def MD_DataManage_ShowCellToList(self):
         pass
 
@@ -183,91 +194,108 @@ class MD_InventoryEXI_SMV_GUI(App):
             LoggerDebug.error('MDButton_DarkMode received invalid parameters, reset SQL Database or modify the property of App_ReadibilityMode to Light or Dark in String Form')
             raise ValueError('MDButton_DarkMode received invalid parameters, reset SQL Database or modify the property of App_ReadibilityMode to Light or Dark in String Form')
     
-    def MDButton_Trigger_GoBack(self, param_ScreenFrame_LastKW): #Last Known Window
-        pass
-
-    def MDButton_Trigger_ExitConfirm(self):
-         BooleanPrompt = MDDialog(title='Exit Confirmation', text='Are you sure you want to quit the application?', text_button_ok='Yes', text_button_cancel='No').open() 
-    
     def MDUserNotif_SnackbarHandler(self, params_message):
         Snackbar(text=params_message).show()
-    # Unsure Method Call
-    def MDSnackbar_CallbackHandler(self):
-        pass
 
     def ExcelLoadInit_Prototype(self):
         #Should be selectable
         CounterList = 0
-        IDTabs_Accessible = ['MD_WorkSheet_One','MD_WorkSheet_Two','MD_WorkSheet_Three','MD_WorkSheet_Four','MD_WorkSheet_Five']
         ExcelID_UniqueListIndex = 0
         ExcelID_MDTabbedPanel = 0
-        ExcelFile = openpyxl.load_workbook('E:\A Development That No One Knows\Github\InventoryEditor-Data_List_Simplier_AEMB\TrialError_ExperimentalPrototype\sample.xlsx')
-        ExcelWorksheet = ExcelFile.worksheets[0]
-        self.MDUserNotif_SnackbarHandler('Excel Data has been reloaded from the editor!') 
-        #Load per Column each with SheetNames on MDTabbedPanel - Seperatable or not or remove based on file
-        for SheetData in ExcelFile.sheetnames:
-            ExcelID_MDTabbedPanel += 1
-            #self.root.ids.FirstTimer_DataFirstName.text = SheetData
-            pass
-        for row in ExcelWorksheet['B6:P25']:#.format(ExcelWorksheet.min_row,ExcelWorksheet.max_row)]:
-            CounterCheck = 1
-            # This could be changed, or prolly make the set of ids into list, not dictionary
-            for cell in row:
-                if CounterCheck == 1 and CounterCheck <= 11:
-                    self.root.ids.Resource_ItemNumVal.text = str(cell.value)
-                    CounterCheck += 1
-                    CounterList += 1
-                elif CounterCheck == 2 and CounterCheck <= 11:
-                    self.root.ids.Resource_ParticularProperty.text = str(cell.value)
-                    CounterCheck += 1
-                    CounterList += 1
-                elif CounterCheck == 3 and CounterCheck <= 11:
-                    self.root.ids.Resource_OnHandVal.text = str(cell.value)
-                    CounterCheck += 1
-                    CounterList += 1
-                elif CounterCheck == 4 and CounterCheck <= 11:
-                    self.root.ids.Resource_ProposedVal.text = str(cell.value)
-                    CounterCheck += 1
-                    CounterList += 1
-                elif CounterCheck == 5 and CounterCheck <= 11:
-                    self.root.ids.Resource_UnitTypeProperty.text = str(cell.value)
-                    CounterCheck += 1
-                    CounterList += 1
-                elif CounterCheck == 6 and CounterCheck <= 11:
-                    self.root.ids.Resource_UnitVal.text = str(cell.value)
-                    CounterCheck += 1
-                    CounterList += 1
-                elif CounterCheck == 7 and CounterCheck <= 11:
-                    self.root.ids.Quartile_TextFieldVal_One.text = str(cell.value)
-                    CounterCheck += 1
-                    CounterList += 1
-                elif CounterCheck == 8 and CounterCheck <= 11:
-                    self.root.ids.Quartile_TextFieldVal_Two.text = str(cell.value)
-                    CounterCheck += 1
-                    CounterList += 1
-                elif CounterCheck == 9 and CounterCheck <= 11:
-                    self.root.ids.Quartile_TextFieldVal_Three.text = str(cell.value)
-                    CounterCheck += 1
-                    CounterList += 1
-                elif CounterCheck == 10 and CounterCheck <= 11:
-                    self.root.ids.Quartile_TextFieldVal_Four.text = str(cell.value)
-                    CounterCheck += 1
-                    CounterList += 1
-                elif CounterCheck == 11 and CounterCheck <= 11:
+        try:
+            ExcelFile = openpyxl.load_workbook(self.root.ids.DataBind_FilePath.text, data_only = True)
+            ExcelWorksheet = ExcelFile.worksheets[0]
+            #Load per Column each with SheetNames on MDTabbedPanel - Seperatable or not or remove based on file
+            for SheetData in ExcelFile.sheetnames:
+                ExcelID_MDTabbedPanel += 1
+                #self.root.ids.FirstTimer_DataFirstName.text = SheetData
+                pass
+            for row in ExcelWorksheet['B6:P25']:#.format(ExcelWorksheet.min_row,ExcelWorksheet.max_row)]:
+                CounterCheck = 1
+                # This could be changed, or prolly make the set of ids into list, not dictionary
+                for cell in row:
+                    if CounterCheck == 1 and CounterCheck <= 11:
+                        self.root.ids.Resource_ItemNumVal.text = str(cell.value)
+                        CounterCheck += 1
+                        CounterList += 1
+                    elif CounterCheck == 2 and CounterCheck <= 11:
+                        self.root.ids.Resource_ParticularProperty.text = str(cell.value)
+                        CounterCheck += 1
+                        CounterList += 1
+                    elif CounterCheck == 3 and CounterCheck <= 11:
+                        self.root.ids.Resource_OnHandVal.text = str(cell.value)
+                        CounterCheck += 1
+                        CounterList += 1
+                    elif CounterCheck == 4 and CounterCheck <= 11:
+                        self.root.ids.Resource_ProposedVal.text = str(cell.value)
+                        CounterCheck += 1
+                        CounterList += 1
+                    elif CounterCheck == 5 and CounterCheck <= 11:
+                        self.root.ids.Resource_UnitTypeProperty.text = str(cell.value)
+                        CounterCheck += 1
+                        CounterList += 1
+                    elif CounterCheck == 6 and CounterCheck <= 11:
+                        self.root.ids.Resource_UnitVal.text = str(cell.value)
+                        CounterCheck += 1
+                        CounterList += 1
+                    elif CounterCheck == 7 and CounterCheck <= 11:
+                        self.root.ids.Quartile_TextFieldVal_One.text = str(cell.value)
+                        CounterCheck += 1
+                        CounterList += 1
+                    elif CounterCheck == 8 and CounterCheck <= 11:
+                        self.root.ids.Quartile_TextFieldVal_Two.text = str(cell.value)
+                        CounterCheck += 1
+                        CounterList += 1
+                    elif CounterCheck == 9 and CounterCheck <= 11:
+                        self.root.ids.Quartile_TextFieldVal_Three.text = str(cell.value)
+                        CounterCheck += 1
+                        CounterList += 1
+                    elif CounterCheck == 10 and CounterCheck <= 11:
+                        self.root.ids.Quartile_TextFieldVal_Four.text = str(cell.value)
+                        CounterCheck += 1
+                        CounterList += 1
+                    elif CounterCheck == 11 and CounterCheck <= 11:
+                        self.root.ids.Total_ComputedVal.text = str(cell.value)
+                        CounterCheck += 1
+                        CounterList += 1
+                    else:
+                        break;
+                print(cell, cell.value, CounterCheck)
+            print(ExcelWorksheet.min_row)
+            print(ExcelWorksheet.max_row)
+            print(ExcelWorksheet.min_column)
+            print(ExcelWorksheet.max_column)
+        except:
+            self.MDUserNotif_SnackbarHandler("File Loading Failed Succesfully! Retry again.")
+            self.MDUserNotif_SnackbarHandler('File Path -> ' + self.root.ids.DataBind_FilePath.text + 'File Does Not Exist')
                     # This value which instantly changed when its applied or when editing is done... (I guess)
                     # The value of this show not be saved in the way it is modified here. Get the formmula by getting the function reference from undo function
                     # Create a function to dice the formula and compute it with possible iterations from any n number
-                    self.root.ids.Total_ComputedVal.text = str(cell.value)
-                    CounterCheck += 1
-                    CounterList += 1
-                else:
-                    break;
-                print (cell, cell.value, CounterCheck)
-        print(ExcelWorksheet.min_row)
-        print(ExcelWorksheet.max_row)
-        print(ExcelWorksheet.min_column)
-        print(ExcelWorksheet.max_column)
         #self.root.ids.MDList_UserInsertion_Selection.add_widget(TwoLineListItem(id=('IterationItem_%d' % CounterList), name=cell.value))
+
+    def ExcelFile_SaveOnCurrentPath(self):
+        ExcelFile = openpyxl.load_workbook(self.root.ids.DataBind_FilePath.text, data_only = True)
+        ws = ExcelFile.active
+        ws['A2'] = 'Tom'
+        ws['B2'] = 30
+        ws['B6'] = 30123
+
+        ws['A3'] = 'Marry'
+        ws['B3'] = 29
+        # Save the file
+        ExcelFile.save("sample.xlsx")
+            #try:
+        #    ExcelFile_Init = Workbook()
+        #    
+        #    ExcelFile_Init.save(self.root.ids.DataBind_FilePath.text)
+        #except:
+        #    self.MDUserNotif_SnackbarHandler('')
+    def ExcelFile_SaveOnExportPath(self):
+        try:
+            ExcelFile_Init = Workbook()
+            ExcelFile_Init.save(self.root.ids.DataBind_FileExportPath.text)
+        except:
+            self.MDUserNotif_SnackbarHandler('')
 
     def MDWorksheetWorker_DataEditor_Apply(self):
         # Create an Undo Method here?
@@ -285,34 +313,44 @@ class MD_InventoryEXI_SMV_GUI(App):
         self.root.ids.Quartile_TextFieldVal_Two.text = ''
         self.root.ids.Quartile_TextFieldVal_Three.text = ''
         self.root.ids.Quartile_TextFieldVal_Four.text = ''
-        self.MDUserNotif_SnackbarHandler('Selected Data Edit has been cleared!')
-
+        self.MDUserNotif_SnackbarHandler('Text Field Data has been cleared!')
+    
     #Reference this function on the funciton who handles when selected this one it should show up on the data editor
     def MDWorksheetWorker_DataEditor_Undo_DataHandler(self):
         pass
 
     def MDWorksheetWorker_DataEditor_Undo(self):
         self.MDUserNotif_SnackbarHandler('Selected Data has been reverted back to last save state!')
-
-    def MDWorksheet_QuickActions(self, params_actionPerformed):
-        #Get Active ID of Selected Data and transfer something or Notif this shit...
-        if params_actionPerformed == 'IncVOnHandal':
+    
+    def IMD_EXPO_ButtonCallBackManager(self, params_WidgetID):
+        if params_WidgetID == 'ClearInput_Path':
+            self.root.ids.DataBind_FilePath.text = ''
+            self.root.ids.DataBind_FileArguments.text = ''
+            self.MDUserNotif_SnackbarHandler('Excel File Path and Arguments Input has been cleared!')
+        elif params_WidgetID == 'CallFunc_ClearStartPoint':
+            self.root.ids.DataBind_CellStartPoint.text = ''
+            self.MDUserNotif_SnackbarHandler('Cell Starting Point Input has been cleared!')
+        elif params_WidgetID == 'CallFunc_ClearEndPoint':
+            self.root.ids.DataBind_CellEndPoint.text = ''
+            self.MDUserNotif_SnackbarHandler('Cell Starting Point Input has been cleared!')
+        elif params_WidgetID == 'CallFunc_ExportProcess':
             pass
-        elif params_actionPerformed == 'DecOnHandVal':
-            pass
-        elif params_actionPerformed == 'IncProposedVal':
-            pass
-        elif params_actionPerformed == 'DecProposedVal':
-            pass
-        elif params_actionPerformed == 'IncPerUnitVal':
-            pass
-        elif params_actionPerformed == 'DecPerUnitVal':
-            pass
+        elif params_WidgetID == 'CallFunc_ExportPathClear':
+            self.root.ids.DataBind_FileExportPath.text = ''
+            self.MDUserNotif_SnackbarHandler('Export Path Input has been cleared!')
         else:
-            raise ValueError('Parameter Variable -> params_actionPerformed: Received an invalid string from function caller!')
-            LoggerDebug.error('Parameter Variable -> params_actionPerformed: Received an invalid string from function caller!')
+            raise ValueError('Parameter Variable -> params_TextFieldID: Received a string that is validated with no conditions met.')
+            LoggerDebug.error('Parameter Variable -> params_TextFieldID: Received a string that is validated with no conditions met.')
             app.stop()
-        self.MDUserNotif_SnackbarHandler('Selected Data has been reverted back to last save state!')
+
+    def handledrops(self, *args):
+        # this will execute each function from list with arguments from
+        # Window.on_dropfile
+        #
+        # make sure `Window.on_dropfile` works on your system first,
+        # otherwise the example won't work at all
+        for func in self.drops:
+            func(*args)
 
 class AvatarSampleWidget(ILeftBody, Image):
     pass

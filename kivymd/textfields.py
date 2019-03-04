@@ -135,7 +135,7 @@ from kivy.properties import NumericProperty, StringProperty, BooleanProperty, \
     OptionProperty, ListProperty
 from kivy.metrics import dp
 from kivy.metrics import sp
-
+from kivy.core.window import Window
 from kivymd.label import MDLabel
 from kivymd.theming import ThemableBehavior
 
@@ -633,3 +633,10 @@ class MDTextField(ThemableBehavior, FixedHintTextInput):
     def on_line_color_focus(self, *args):
         if self.color_mode == "custom":
             self._update_colors(self.line_color_focus)
+
+#    def on_dropfile(self, widget, filename):
+#        # a function catching a dropped file
+#        # if it's dropped in the widget's area
+#        if self.collide_point(*Window.mouse_pos):
+#            # on_dropfile's filename is bytes (py3)
+#            self.text = filename.decode('utf-8')

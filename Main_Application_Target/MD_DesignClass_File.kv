@@ -41,15 +41,11 @@ NavigationLayout:
     id: nav_layout
     MDNavigationDrawer_HeaderStringOnly:
         id: nav_drawer
-        header_name: 'Authors Name'
-        subheader_name: 'Authors Job Position'
+        header_name: 'Hello, Authors Name!'
+        subheader_name: 'Position: {Anything...}'
         NavigationDrawerDivider:
         NavigationDrawerSubheader:
             text: "Authors Menu"
-        NavigationDrawerIconButton:
-            icon: 'view-dashboard'
-            text: "Dashboard"
-            on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_Dashboard'
         NavigationDrawerIconButton:
             icon: 'view-list'
             text: "Data Management"
@@ -60,11 +56,13 @@ NavigationLayout:
         NavigationDrawerIconButton:
             icon: 'face'
             text: "Add Author"
-            on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_AccountAddInfo'
+            #on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindo6w_AccountAddInfo'
+            disabled: True
         NavigationDrawerIconButton:
             icon: 'delete-sweep'
             text: "Remove Author"
-            on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_AccountDeleteInfo'
+            #on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_AccountDeleteInfo'
+            disabled: True
         NavigationDrawerIconButton:
             icon: 'key-change'
             text: "Edit Author Info"
@@ -72,7 +70,8 @@ NavigationLayout:
         NavigationDrawerIconButton:
             icon: 'nature-people'
             text: "Change Author"
-            on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_AccountUserSelection'
+            #on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_AccountUserSelection'
+            disabled: True
         NavigationDrawerIconButton:
             id: ToolMenu_6
             icon: 'exit-to-app'
@@ -88,7 +87,7 @@ NavigationLayout:
             background_hue: app.theme_cls.primary_hue
             left_action_items: [['menu', lambda x: app.root.toggle_nav_drawer()]]
             #Add an If and else on this icon
-            right_action_items: [['brightness-1', lambda x: app.MDButton_DarkMode()]]
+            right_action_items: [['brightness-2', lambda x: app.MDButton_DarkMode()]]
             darkBooleanParameter: False
         ScreenManager:
             id: ScreenFrame_MainWindow
@@ -170,82 +169,13 @@ NavigationLayout:
                                     theme_text_color: 'Custom'
                                     size: 3 * dp(48), dp(48)
                                     #on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
-                                    on_release: app.ExcelLoadInit_Prototype()
+                                    #on_release: #app.ExcelLoadInit_Prototype()
+                                    on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'        
                                 MDRaisedButton:
                                     text: "Submit Data"
                                     size_hint: None, None
                                     size: 3 * dp(48), dp(48)
                                     on_release: app.MDToolbar_DynamicContent_Change('ThisIsATest', 'Red', '' ,'')
-            Screen:
-                name: 'MainWindow_Dashboard'
-                AnchorLayout:
-                    anchor_x: 'center'
-                    anchor_y: 'center'
-                    Image:
-                        source: 'assets/LayerTriangleVector3.jpg'
-                        size_hint: None, None
-                        size: 1920, 1080
-                    ScrollView:
-                        do_scroll_x: False                            
-                        GridLayout:
-                            cols:2 if Window.width < 1200 else 2
-                            size_hint_y: None
-                            spacing: dp(10)
-                            padding: dp(10)
-                            height: self.minimum_height
-                            MDCard:
-                            # I just realized that removing size_hint will make the card resizable
-                                size: dp(320), dp(180)
-                                size_hint_y: None
-                                padding: dp(15)
-                                StackLayout:
-                                    spacing: dp(10)
-                                    BoxLayout:
-                                        orientation: 'horizontal'
-                                        padding: dp(10)
-                                        spacing: dp(10)
-                                        MDLabel:
-                                            font_style: 'Title'
-                                            theme_text_color: 'Primary'
-                                            halign: 'left'
-                                            text: "Quick Actions"
-                                            width: dp(10)
-                                        MDRaisedButton:
-                                            text: "Increment"
-                                            size_hint_y: None
-                                            size: 3 * dp(48), dp(48)
-                                        MDRaisedButton:
-                                            text: "Decrement"
-                                            size_hint_y: None
-                                            size: 3 * dp(48), dp(48)
-                                        MDRaisedButton:
-                                            text: "Remove Data"
-                                            size_hint_y: None
-                                            size: 3 * dp(48), dp(48)
-                            MDCard:
-                                size_hint: None, None
-                                size: dp(320), dp(200)
-                                BoxLayout:
-                                    orientation:'vertical'
-                                    padding: dp(10)
-                                    MDLabel:
-                                        text: 'Title'
-                                        theme_text_color: 'Secondary'
-                                        font_style: "Title"
-                                        size_hint_y: None
-                                    MDTextField:
-                                        hint_text: "No helper text"
-                                        write_tab: False
-                                    MDTextField:
-                                        hint_text: "Helper text on focus"
-                                        helper_text: "This will disappear when you click off"
-                                        helper_text_mode: "on_focus"
-                                        write_tab: False
-                                    MDTextField:
-                                        hint_text: "Persistent helper text"
-                                        helper_text: "Text is always here"
-                                        helper_text_mode: "persistent"
-                                        write_tab: False
             Screen:
                 name: 'MainWindow_SimplifiedView'
                 MDBottomNavigation:
@@ -531,11 +461,11 @@ NavigationLayout:
                                                             size: 3 * dp(48), dp(48)
                                                             on_release: app.MDWorksheetWorker_DataEditor_Undo()
                                             MDCard:
-                                            # I just realized that removing size_hint will make the card resizable
+        
                                                 size: dp(320), dp(190)
                                                 size_hint_y: None
                                                 padding: dp(15)
-                                                elevation: 1
+                                                
                                                 AnchorLayout:
                                                     anchor_x: 'left'
                                                     anchor_y: 'top'
@@ -557,25 +487,19 @@ NavigationLayout:
                                                                 text: "Save on Import Path"
                                                                 size_hint: None, None
                                                                 size: 3 * dp(48), dp(48)
-                                                                #on_release: app.ExcelLoadInit_Prototype()
+                                                                on_release: app.ExcelFile_SaveOnCurrentPath()
                                                             MDRaisedButton:
                                                                 id: FileOpt_Save
                                                                 text: "Save on Export Path"
                                                                 size_hint: None, None
                                                                 size: 3 * dp(48), dp(48)
-                                                                #on_release: app.ExcelLoadInit_Prototype()
+                                                                on_release: app.ExcelFile_SaveOnExportPath()
                                                             MDRaisedButton:
                                                                 id: FileOpt_ReloadDataFile
                                                                 text: "Reload Data"
                                                                 size_hint: None, None
                                                                 size: 3 * dp(48), dp(48)
                                                                 on_release: app.ExcelLoadInit_Prototype()
-                                                            MDRaisedButton:
-                                                                id: FileOpt_
-                                                                text: "Show Formula"
-                                                                size_hint: None, None
-                                                                size: 3 * dp(48), dp(48)
-                                                                #on_release: app.ExcelLoadInit_Prototype()
                             MDTab:
                                 name: 'Tab_IterateWorkheet#2'
                                 text: 'Tab_IterateWorkheet#2'
@@ -597,37 +521,203 @@ NavigationLayout:
                             #2 Most Used Item Recorded
                             #3 Due Dates
                             #4 Recently Added 
+                        ScrollView:
+                            do_scroll_x: False                              
                             GridLayout:
-                                cols: 2
-                                rows: 3
+                                cols:2
                                 size_hint_y: None
-                                height: self.minimum_height
                                 spacing: dp(10)
-                                size_hint_y: None
+                                padding: dp(20)
+                                height: self.minimum_height
                                 MDCard:
-                                    size_hint: None, None
-                                    size: dp(320), dp(200)
+                                    size: dp(320), dp(215)
+                                    size_hint_y: None
+                                    padding: dp(15)
                                     BoxLayout:
                                         orientation:'vertical'
-                                        padding: dp(10)
+                                        spacing: dp(2)
                                         MDLabel:
-                                            text: 'Title'
-                                            theme_text_color: 'Secondary'
-                                            font_style: "Title"
-                                            size_hint_y: None
-                                        MDTextField:
-                                            hint_text: "No helper text"
-                                            write_tab: False
-                                        MDTextField:
-                                            hint_text: "Helper text on focus"
-                                            helper_text: "This will disappear when you click off"
-                                            helper_text_mode: "on_focus"
-                                            write_tab: False
-                                        MDTextField:
-                                            hint_text: "Persistent helper text"
-                                            helper_text: "Text is always here"
-                                            helper_text_mode: "persistent"
-                                            write_tab: False
+                                            font_style: 'Headline'
+                                            theme_text_color: 'Primary'
+                                            text: "Total Units"
+                                            text_size: self.size
+                                            halign: 'left'
+                                            valign: 'top'
+                                        MDLabel:
+                                            theme_text_color: 'Primary'
+                                            font_style: "Display3"
+                                            text_size: self.size
+                                            text: '123901'
+                                            halign: 'center'
+                                            valign: 'center'
+
+                                MDCard:
+                                    size: dp(320), dp(215)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        BoxLayout:
+                                            orientation:'vertical'
+                                            AnchorLayout:
+                                                anchor_x:'left'
+                                                anchor_y:'top'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "Total Proposed"
+                                                    text_size: self.size
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                MDLabel:
+                                                    text: 'Overall'
+                                                    theme_text_color: 'Secondary'
+                                                    font_style: "Body1"
+                                                    text_size: self.size
+                                MDCard:
+                                    size: dp(320), dp(215)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        BoxLayout:
+                                            orientation:'vertical'
+                                            AnchorLayout:
+                                                anchor_x:'left'
+                                                anchor_y:'top'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "Total OnHand Value"
+                                                    text_size: self.size
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                MDLabel:
+                                                    text: 'Overall'
+                                                    theme_text_color: 'Secondary'
+                                                    font_style: "Body1"
+                                                    text_size: self.size
+                                MDCard:
+                                    size: dp(320), dp(215)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        BoxLayout:
+                                            orientation:'vertical'
+                                            AnchorLayout:
+                                                anchor_x:'left'
+                                                anchor_y:'top'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "On Storage Val"
+                                                    text_size: self.size
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                MDLabel:
+                                                    text: 'Overall'
+                                                    theme_text_color: 'Secondary'
+                                                    font_style: "Body1"
+                                                    text_size: self.size
+                                MDCard:
+                                    size: dp(320), dp(215)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        BoxLayout:
+                                            orientation:'vertical'
+                                            AnchorLayout:
+                                                anchor_x:'left'
+                                                anchor_y:'top'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "Most Used Item Recorded"
+                                                    text_size: self.size
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                MDLabel:
+                                                    text: 'Overall'
+                                                    theme_text_color: 'Secondary'
+                                                    font_style: "Body1"
+                                                    text_size: self.size
+                                MDCard:
+                                    size: dp(320), dp(215)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        BoxLayout:
+                                            orientation:'vertical'
+                                            AnchorLayout:
+                                                anchor_x:'left'
+                                                anchor_y:'top'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "Due Note Dates Added"
+                                                    text_size: self.size
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                MDLabel:
+                                                    text: 'Not sure about this one...'
+                                                    theme_text_color: 'Secondary'
+                                                    font_style: "Body1"
+                                                    text_size: self.size
+                                MDCard:
+                                    size: dp(320), dp(215)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        BoxLayout:
+                                            orientation:'vertical'
+                                            AnchorLayout:
+                                                anchor_x:'left'
+                                                anchor_y:'top'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "Recently Added Particular"
+                                                    text_size: self.size
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                MDLabel:
+                                                    text: 'Not sure about this one...'
+                                                    theme_text_color: 'Secondary'
+                                                    font_style: "Body1"
+                                                    text_size: self.size
+                                MDCard:
+                                    size: dp(320), dp(215)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        BoxLayout:
+                                            orientation:'vertical'
+                                            AnchorLayout:
+                                                anchor_x:'left'
+                                                anchor_y:'top'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "Last Data Edited"
+                                                    text_size: self.size
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                MDLabel:
+                                                    text: 'Shows what data ppoint has been edited...'
+                                                    theme_text_color: 'Secondary'
+                                                    font_style: "Body1"
+                                                    text_size: self.size
+
                     MDBottomNavigationItem:
                         name: 'MainFrameWindow_3'
                         text: "Import Data / Export Pull Out"
@@ -641,11 +731,11 @@ NavigationLayout:
                                 padding: dp(20)
                                 height: self.minimum_height
                                 MDCard:
-                                # I just realized that removing size_hint will make the card resizable
+
                                     size: dp(320), dp(215)
                                     size_hint_y: None
                                     padding: dp(15)
-                                    elevation: 1
+                                    
                                     StackLayout:
                                         spacing: dp(4)
                                         BoxLayout:
@@ -676,40 +766,26 @@ NavigationLayout:
                                                     helper_text: "Required, if you want to use this application!"
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
+                                                    text: 'C:\\Users\\janja\\Desktop\\sam.xlsx'
                                                 MDTextField:
                                                     id: DataBind_FileArguments
-                                                    hint_text: "Arguments To Call"
+                                                    hint_text: "Show Data Instead of Formulae"
                                                     required: True
-                                                    helper_text: "Not required, read openpyxl's load_workbook"
+                                                    helper_text: "Not required, Leave it 'True' or Blank."
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
-                                                    #on_release: app.() # Add the checker for this file before applying.... Use Data Bind from Text Field
-                                                #In future versions, add arguments as possible, also add extension checker
-                                                MDFlatButton:
-                                                    theme_text_color: 'Custom'
-                                                    text: "Bind Data"
-                                                    size_hint: None, None
-                                                    size: 3 * dp(48), dp(48)
-                                                    #on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
-                                                    #on_release: app.ExcelLoadInit_Prototype()
-                                                MDFlatButton:
-                                                    theme_text_color: 'Custom'
-                                                    text: "File Manager"
-                                                    size_hint: None, None
-                                                    size: 3 * dp(48), dp(48)
                                                 MDFlatButton:
                                                     theme_text_color: 'Custom'
                                                     text: "Clear Path"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
-                                                    #on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
-                                                    #on_release: app.ExcelLoadInit_Prototype()
+                                                    on_release: app.IMD_EXPO_ButtonCallBackManager('ClearInput_Path')
                                             BoxLayout:
                                                 orientation: 'horizontal'
                                                 spacing: dp(10)
                                                 padding: 0
                                                 MDTextField:
-                                                    id: DataBind_FilePath
+                                                    id: DataBind_CellStartPoint
                                                     hint_text: "Cell Starting Point"
                                                     required: True
                                                     helper_text: "What cell do you want to get started reading?"
@@ -720,8 +796,9 @@ NavigationLayout:
                                                     text: "Clear Value"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
+                                                    on_release: app.IMD_EXPO_ButtonCallBackManager('CallFunc_ClearStartPoint')
                                                 MDTextField:
-                                                    id: DataBind_FilePath
+                                                    id: DataBind_CellEndPoint
                                                     hint_text: "Cell End Part Point"
                                                     required: True
                                                     helper_text: "What cell do you wish to stop at reading?"
@@ -732,12 +809,11 @@ NavigationLayout:
                                                     text: "Clear Value"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
+                                                    on_release: app.IMD_EXPO_ButtonCallBackManager('CallFunc_ClearEndPoint')
                                 MDCard:
-                                # I just realized that removing size_hint will make the card resizable
                                     size: dp(320), dp(165)
                                     size_hint_y: None
                                     padding: dp(15)
-                                    elevation: 1
                                     StackLayout:
                                         spacing: dp(4)
                                         BoxLayout:
@@ -753,7 +829,7 @@ NavigationLayout:
                                                     halign: 'left'
                                                     valign: 'top'
                                                 MDLabel:
-                                                    text: 'This is the part that produces results! Please set up and fill those infos that is required in process pull-outs!'
+                                                    text: 'This is the part that produces results! Please input the directory where you want to save.'
                                                     theme_text_color: 'Secondary'
                                                     font_style: "Body1"
                                                     text_size: self.size
@@ -762,31 +838,19 @@ NavigationLayout:
                                                 spacing: dp(10)
                                                 padding: 0
                                                 MDTextField:
-                                                    id: DataBind_FilePath
+                                                    id: DataBind_FileExportPath
                                                     hint_text: "Excel File | Data Path"
                                                     required: True
                                                     helper_text: "Required, if you want to export an Excel File!"
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
-                                                MDFlatButton:
-                                                    theme_text_color: 'Custom'
-                                                    text: "Process Export"
-                                                    size_hint: None, None
-                                                    size: 3 * dp(48), dp(48)
-                                                    #on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
-                                                    #on_release: app.ExcelLoadInit_Prototype()
-                                                MDFlatButton:
-                                                    theme_text_color: 'Custom'
-                                                    text: "File Manager"
-                                                    size_hint: None, None
-                                                    size: 3 * dp(48), dp(48)
+                                                    #on_dropfile: app._on_file_drop
                                                 MDFlatButton:
                                                     theme_text_color: 'Custom'
                                                     text: "Clear Path"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
-                                                    #on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
-                                                    #on_release: app.ExcelLoadInit_Prototype()
+                                                    on_release: app.IMD_EXPO_ButtonCallBackManager('CallFunc_ExportPathClear')
             Screen:
                 name: 'MainWindow_AccountUserSelection'
                 AnchorLayout:
