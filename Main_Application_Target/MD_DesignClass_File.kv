@@ -184,330 +184,875 @@ NavigationLayout:
                         name: 'MainFrameWindow_1'
                         text: "Data Management"
                         icon: "view-list"
-                        #on_release: app.ExcelLoadInit_Prototype() 
-                        MDLabel:
-                            font_style: 'Body1'
-                            theme_text_color: 'Primary'
-                            text: "Data List"
-                            halign: 'center'
-                        MDTabbedPanel:
-                            id: MD_MainWorkSheet_TabPanel
-                            tab_display_mode:'text'
-                            tab_width_mode:'stacked'
-                            MDTab:
-                                id: MD_WorkSheet_One
-                                name: 'Tab_IterateWorkheet#1'
-                                text: "Tab_IterateWorkheet#1"
-                                content_disabled: False
+                        GridLayout:
+                            cols:2
+                            BoxLayout:
+                                orientation: 'vertical'
+                                ScrollView:
+                                    foon_reedo_scroll_x: False
+                                    MDList:
+                                        id: MDList_UserData_Insertion
+                                        #Statically Add 100 List Item due to Issues. Please refer to ExcelLoadInit_Prototype() Funciton for more info. 
+                                        TwoLineListItem:
+                                            id: ListElement_1
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_2
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_3
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_4
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_5
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_6
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_7
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_8
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_9
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_10
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_11
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_12
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_13
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_14
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_15
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_16
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_17
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_18
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_19
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_20
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_21
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_22
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_23
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_24
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_25
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_26
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_27
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_28
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_29
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_30
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_31
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_32
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_33
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_34
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_35
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_36
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_37
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_38
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_39
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_40
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_41
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_42
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_43
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_44
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_45
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_46
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_47
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_48
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_49
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_50
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_51
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_52
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_53
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_54
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_55
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_56
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_57
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_58
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_59
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_60
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_61
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_62
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_63
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_64
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_65
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_66
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_67
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_68
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_69
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_70
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_71
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_72
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_73
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_74
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_75
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_76
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_77
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_78
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_79
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_80
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_81
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_82
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_83
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_84
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_85
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_86
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_87
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_88
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_89
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_90
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_91
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_92
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_93
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_94
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_95
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_96
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_97
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_98
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_99
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                                        TwoLineListItem:
+                                            id: ListElement_100
+                                            type: "two-line"
+                                            text: "< No Particular / Description >"
+                                            secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
+                                            disabled: True
+                            ScrollView:
+                                do_scroll_x: False                            
                                 GridLayout:
-                                    cols:2
-                                    BoxLayout:
-                                        orientation: 'vertical'
-                                        ScrollView:
-                                            foon_reedo_scroll_x: False
-                                            MDList:
-                                                id: MDList_UserInsertion_Selection
-                                                TwoLineListItem:
-                                                    id: ListElement_Placeholder
-                                                    type: "two-line"
-                                                    text: "{Main Particular Name}"
-                                                    secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
-                                                    active: True
-                                                TwoLineListItem:
-                                                    id: ListElement_Placeholder
-                                                    type: "two-line"
-                                                    text: "{Main Particular Name}"
-                                                    secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
-                                                TwoLineListItem:
-                                                    id: ListElement_Placeholder
-                                                    type: "two-line"
-                                                    text: "{Main Particular Name}"
-                                                    secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
-                                                TwoLineListItem:
-                                                    id: ListElement_Placeholder
-                                                    type: "two-line"
-                                                    text: "{Main Particular Name}"
-                                                    secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
-                                                TwoLineListItem:
-                                                    id: ListElement_Placeholder
-                                                    type: "two-line"
-                                                    text: "{Main Particular Name}"
-                                                    secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
-                                                TwoLineListItem:
-                                                    id: ListElement_Placeholder
-                                                    type: "two-line"
-                                                    text: "{Main Particular Name}"
-                                                    secondary_text: "{On Hand Val: Proposed Val: Unit Type: PerUnit Val, Q#1: Q#2: Q#3: Q#4:}"
-                                    ScrollView:
-                                        do_scroll_x: False                            
-                                        GridLayout:
-                                            cols:1
-                                            size_hint_y: None
+                                    cols:1
+                                    size_hint_y: None
+                                    spacing: dp(10)
+                                    padding: dp(10)
+                                    height: self.minimum_height
+                                    MDCard:
+                                        size_hint_y: None
+                                        size: dp(320), dp(880)
+                                        padding: dp(15)
+                                        BoxLayout:
+                                            orientation:'vertical'
                                             spacing: dp(10)
-                                            padding: dp(10)
-                                            height: self.minimum_height
-                                            MDCard:
+                                            MDLabel:
+                                                font_style: 'Headline'
+                                                theme_text_color: 'Primary'
+                                                text: "Data Editor"
+                                                width: dp(20)
+                                                text_size: self.size
+                                                halign: 'left'
+                                                valign: 'top'
+                                            BoxLayout:
+                                                orientation: 'horizontal'
+                                                spacing: dp(10)
+                                                padding: 0
+                                                MDTextField:
+                                                    id: Resource_ItemNumVal
+                                                    hint_text: "Item Number Input"
+                                                    helper_mode: 'on_focus'
+                                                    helper_text: 'Item Number of the Particular. Required...'
+                                                    write_tab: False
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Increment"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Decrement"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                            MDTextField:
+                                                id: Resource_ParticularProperty
+                                                hint_text: "Particulars Input"
+                                                helper_text: 'Particular Name. Required...'
+                                                helper_mode: 'on_focus'
+                                                write_tab: False
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Admin Previledge"
+                                                    size_hint: None, None
+                                            BoxLayout:
+                                                orientation: 'horizontal'
+                                                spacing: dp(10)
+                                                padding: 0
+                                                MDTextField:
+                                                    id: Resource_OnHandVal
+                                                    hint_text: "On Hand Value Input"
+                                                    write_tab: False
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Increment"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Decrement"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                            BoxLayout:
+                                                orientation: 'horizontal'
+                                                spacing: dp(10)
+                                                padding: 0
+                                                MDTextField:
+                                                    id: Resource_ProposedVal
+                                                    hint_text: "Proposed Value Input"
+                                                    helper_text: "Text is always here"
+                                                    helper_text_mode: 'on_focus'
+                                                    write_tab: False
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Increment"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Decrement"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                            MDTextField:
+                                                id: Resource_UnitTypeProperty
+                                                hint_text: "Unit Type Input"
+                                                helper_text: "Type of the Unit of the Particular"
+                                                helper_text_mode: 'on_focus'
+                                                write_tab: False
+                                            BoxLayout:
+                                                orientation: 'horizontal'
+                                                spacing: dp(10)
+                                                padding: 0
+                                                MDTextField:
+                                                    id: Resource_UnitVal
+                                                    hint_text: "Unit Value Input"
+                                                    helper_text: "Text is always here"
+                                                    helper_text_mode: "persistent"
+                                                    write_tab: False
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Increment"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Decrement"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                            BoxLayout:
+                                                orientation: 'horizontal'
+                                                spacing: dp(10)
+                                                padding: 0
+                                                MDTextField:
+                                                    id: Quartile_TextFieldVal_One
+                                                    hint_text: "Quarter #1 Value"
+                                                    helper_text: "Quarter What Usage????????"
+                                                    helper_text_mode: 'on_focus'
+                                                    write_tab: False
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Increment"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Decrement"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                            BoxLayout:
+                                                orientation: 'horizontal'
+                                                spacing: dp(10)
+                                                padding: 0
+                                                MDTextField:
+                                                    id: Quartile_TextFieldVal_Two
+                                                    hint_text: "Quarter #2 Value"
+                                                    helper_text: "Quarter What Usage????????"
+                                                    helper_text_mode: 'on_focus'
+                                                    write_tab: False
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Increment"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Decrement"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                            BoxLayout:
+                                                orientation: 'horizontal'
+                                                spacing: dp(10)
+                                                padding: 0
+                                                MDTextField:
+                                                    id: Quartile_TextFieldVal_Three
+                                                    hint_text: "Quarter #3 Value"
+                                                    helper_text: "Quarter What Usage????????"
+                                                    helper_text_mode: 'on_focus'
+                                                    write_tab: False
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Increment"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Decrement"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                            BoxLayout:
+                                                orientation: 'horizontal'
+                                                spacing: dp(10)
+                                                padding: 0
+                                                MDTextField:
+                                                    id: Quartile_TextFieldVal_Four
+                                                    hint_text: "Quarter #4 Value"
+                                                    helper_text: "Quarter What Usage????????"
+                                                    helper_text_mode: 'on_focus'
+                                                    write_tab: False
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Increment"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Decrement"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                            MDTextField:
+                                                id: Total_ComputedVal
+                                                hint_text: "Total Value"
+                                                helper_text: "This value is automatically computed based from data..."
+                                                helper_text_mode: "persistent"
+                                                write_tab: False
+                                                disabled: True
+                                            BoxLayout:
+                                                orientation: 'horizontal'
+                                                spacing: dp(10)
+                                                MDRaisedButton:
+                                                    text: "Apply Changes"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                    on_release: app.MDWorksheetWorker_DataEditor_Apply()
+                                                MDFlatButton:
+                                                    text: "Clear Input"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                    on_release: app.MDWorksheetWorker_DataEditor_CleanInput()
+                                                MDFlatButton:
+                                                    text: "Undo Changes"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                    on_release: app.MDWorksheetWorker_DataEditor_Undo()
+                                    MDCard:
+                                        size: dp(320), dp(190)
+                                        size_hint_y: None
+                                        padding: dp(15)
+                                        AnchorLayout:
+                                            anchor_x: 'left'
+                                            anchor_y: 'top'
+                                            BoxLayout:
+                                                orientation:'vertical'
                                                 size_hint_y: None
-                                                size: dp(320), dp(880)
-                                                padding: dp(15)
-                                                BoxLayout:
-                                                    orientation:'vertical'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "File Options"
+                                                    width: dp(20)
+                                                    text_size: self.size
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                StackLayout:
                                                     spacing: dp(10)
-                                                    MDLabel:
-                                                        font_style: 'Headline'
-                                                        theme_text_color: 'Primary'
-                                                        text: "Data Editor"
-                                                        width: dp(20)
-                                                        text_size: self.size
-                                                        halign: 'left'
-                                                        valign: 'top'
-                                                    BoxLayout:
-                                                        orientation: 'horizontal'
-                                                        spacing: dp(10)
-                                                        padding: 0
-                                                        MDTextField:
-                                                            id: Resource_ItemNumVal
-                                                            hint_text: "Item Number Input"
-                                                            helper_mode: 'on_focus'
-                                                            helper_text: 'Item Number of the Particular. Required...'
-                                                            write_tab: False
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Increment"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Decrement"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                    MDTextField:
-                                                        id: Resource_ParticularProperty
-                                                        hint_text: "Particulars Input"
-                                                        helper_text: 'Particular Name. Required...'
-                                                        helper_mode: 'on_focus'
-                                                        write_tab: False
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Admin Previledge"
-                                                            size_hint: None, None
-                                                    BoxLayout:
-                                                        orientation: 'horizontal'
-                                                        spacing: dp(10)
-                                                        padding: 0
-                                                        MDTextField:
-                                                            id: Resource_OnHandVal
-                                                            hint_text: "On Hand Value Input"
-                                                            write_tab: False
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Increment"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Decrement"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                    BoxLayout:
-                                                        orientation: 'horizontal'
-                                                        spacing: dp(10)
-                                                        padding: 0
-                                                        MDTextField:
-                                                            id: Resource_ProposedVal
-                                                            hint_text: "Proposed Value Input"
-                                                            helper_text: "Text is always here"
-                                                            helper_text_mode: 'on_focus'
-                                                            write_tab: False
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Increment"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Decrement"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                    MDTextField:
-                                                        id: Resource_UnitTypeProperty
-                                                        hint_text: "Unit Type Input"
-                                                        helper_text: "Type of the Unit of the Particular"
-                                                        helper_text_mode: 'on_focus'
-                                                        write_tab: False
-                                                    BoxLayout:
-                                                        orientation: 'horizontal'
-                                                        spacing: dp(10)
-                                                        padding: 0
-                                                        MDTextField:
-                                                            id: Resource_UnitVal
-                                                            hint_text: "Unit Value Input"
-                                                            helper_text: "Text is always here"
-                                                            helper_text_mode: "persistent"
-                                                            write_tab: False
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Increment"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Decrement"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                    BoxLayout:
-                                                        orientation: 'horizontal'
-                                                        spacing: dp(10)
-                                                        padding: 0
-                                                        MDTextField:
-                                                            id: Quartile_TextFieldVal_One
-                                                            hint_text: "Quarter #1 Value"
-                                                            helper_text: "Quarter What Usage????????"
-                                                            helper_text_mode: 'on_focus'
-                                                            write_tab: False
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Increment"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Decrement"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                    BoxLayout:
-                                                        orientation: 'horizontal'
-                                                        spacing: dp(10)
-                                                        padding: 0
-                                                        MDTextField:
-                                                            id: Quartile_TextFieldVal_Two
-                                                            hint_text: "Quarter #2 Value"
-                                                            helper_text: "Quarter What Usage????????"
-                                                            helper_text_mode: 'on_focus'
-                                                            write_tab: False
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Increment"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Decrement"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                    BoxLayout:
-                                                        orientation: 'horizontal'
-                                                        spacing: dp(10)
-                                                        padding: 0
-                                                        MDTextField:
-                                                            id: Quartile_TextFieldVal_Three
-                                                            hint_text: "Quarter #3 Value"
-                                                            helper_text: "Quarter What Usage????????"
-                                                            helper_text_mode: 'on_focus'
-                                                            write_tab: False
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Increment"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Decrement"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                    BoxLayout:
-                                                        orientation: 'horizontal'
-                                                        spacing: dp(10)
-                                                        padding: 0
-                                                        MDTextField:
-                                                            id: Quartile_TextFieldVal_Four
-                                                            hint_text: "Quarter #4 Value"
-                                                            helper_text: "Quarter What Usage????????"
-                                                            helper_text_mode: 'on_focus'
-                                                            write_tab: False
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Increment"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                        MDFlatButton:
-                                                            theme_text_color: 'Custom'
-                                                            text: "Decrement"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                    MDTextField:
-                                                        id: Total_ComputedVal
-                                                        hint_text: "Total Value"
-                                                        helper_text: "This value is automatically computed based from data..."
-                                                        helper_text_mode: "persistent"
-                                                        write_tab: False
-                                                        disabled: True
-                                                    BoxLayout:
-                                                        orientation: 'horizontal'
-                                                        spacing: dp(10)
-                                                        MDRaisedButton:
-                                                            text: "Apply Changes"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                            on_release: app.MDWorksheetWorker_DataEditor_Apply()
-                                                        MDFlatButton:
-                                                            text: "Clear Input"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                            on_release: app.MDWorksheetWorker_DataEditor_CleanInput()
-                                                        MDFlatButton:
-                                                            text: "Undo Changes"
-                                                            size_hint: None, None
-                                                            size: 3 * dp(48), dp(48)
-                                                            on_release: app.MDWorksheetWorker_DataEditor_Undo()
-                                            MDCard:
-        
-                                                size: dp(320), dp(190)
-                                                size_hint_y: None
-                                                padding: dp(15)
-                                                
-                                                AnchorLayout:
-                                                    anchor_x: 'left'
-                                                    anchor_y: 'top'
-                                                    BoxLayout:
-                                                        orientation:'vertical'
-                                                        size_hint_y: None
-                                                        MDLabel:
-                                                            font_style: 'Headline'
-                                                            theme_text_color: 'Primary'
-                                                            text: "File Options"
-                                                            width: dp(20)
-                                                            text_size: self.size
-                                                            halign: 'left'
-                                                            valign: 'top'
-                                                        StackLayout:
-                                                            spacing: dp(10)
-                                                            MDRaisedButton:
-                                                                id: FileOpt_Save
-                                                                text: "Save on Import Path"
-                                                                size_hint: None, None
-                                                                size: 3 * dp(48), dp(48)
-                                                                on_release: app.ExcelFile_SaveOnCurrentPath()
-                                                            MDRaisedButton:
-                                                                id: FileOpt_Save
-                                                                text: "Save on Export Path"
-                                                                size_hint: None, None
-                                                                size: 3 * dp(48), dp(48)
-                                                                on_release: app.ExcelFile_SaveOnExportPath()
-                                                            MDRaisedButton:
-                                                                id: FileOpt_ReloadDataFile
-                                                                text: "Reload Data"
-                                                                size_hint: None, None
-                                                                size: 3 * dp(48), dp(48)
-                                                                on_release: app.ExcelLoadInit_Prototype()
-                            MDTab:
-                                name: 'Tab_IterateWorkheet#2'
-                                text: 'Tab_IterateWorkheet#2'
-                                MDLabel:
-                                    font_style: 'Body1'
-                                    theme_text_color: 'Primary'
-                                    text: "Iterate Data per Worksheet! Remember!"
-                                    halign: 'center'
+                                                    MDRaisedButton:
+                                                        id: FileOpt_Save
+                                                        text: "Save on Import Path"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                        on_release: app.ExcelFile_SaveOnCurrentPath()
+                                                    MDRaisedButton:
+                                                        id: FileOpt_Save
+                                                        text: "Save on Export Path"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                        on_release: app.ExcelFile_SaveOnExportPath()
+                                                    MDRaisedButton:
+                                                        id: FileOpt_ReloadDataFile
+                                                        text: "Load or Reload Data"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                        on_release: app.ExcelLoadInit_Prototype()
                     MDBottomNavigationItem:
                         name: 'MainFrameWindow_2'
                         text: "Data Status Report"
@@ -732,7 +1277,7 @@ NavigationLayout:
                                 height: self.minimum_height
                                 MDCard:
 
-                                    size: dp(320), dp(215)
+                                    size: dp(320), dp(285)
                                     size_hint_y: None
                                     padding: dp(15)
                                     
@@ -769,9 +1314,9 @@ NavigationLayout:
                                                     text: 'C:\\Users\\janja\\Desktop\\sam.xlsx'
                                                 MDTextField:
                                                     id: DataBind_FileArguments
-                                                    hint_text: "Show Data Instead of Formulae"
+                                                    hint_text: "Show True Value Instead of Formulae"
                                                     required: True
-                                                    helper_text: "Not required, Leave it 'True' or Blank."
+                                                    helper_text: "Optional, Leave it blank to save with formulae or else write True."
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
                                                 MDFlatButton:
@@ -791,6 +1336,7 @@ NavigationLayout:
                                                     helper_text: "What cell do you want to get started reading?"
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
+                                                    text: 'B6'
                                                 MDFlatButton:
                                                     theme_text_color: 'Custom'
                                                     text: "Clear Value"
@@ -804,12 +1350,37 @@ NavigationLayout:
                                                     helper_text: "What cell do you wish to stop at reading?"
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
+                                                    text: 'P25'
                                                 MDFlatButton:
                                                     theme_text_color: 'Custom'
                                                     text: "Clear Value"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
                                                     on_release: app.IMD_EXPO_ButtonCallBackManager('CallFunc_ClearEndPoint')
+                                            BoxLayout:
+                                                orientation: 'horizontal'
+                                                spacing: dp(10)
+                                                padding: 0
+                                                MDTextField:
+                                                    id: DataBind_ExcelFileSheet
+                                                    hint_text: "Sheet Name"
+                                                    required: True
+                                                    helper_text: "Required, this was added to know what sheet to use."
+                                                    helper_text_mode: "on_focus"
+                                                    write_tab: False
+                                                    text: 'Sheet1'
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Available Sheets"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                    #on_release: app.IMD_EXPO_ButtonCallBackManager('ClearInput_ExcelFileSheet')
+                                                MDFlatButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Clear Path"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                    on_release: app.IMD_EXPO_ButtonCallBackManager('ClearInput_ExcelFileSheet')
                                 MDCard:
                                     size: dp(320), dp(165)
                                     size_hint_y: None
@@ -1143,9 +1714,10 @@ NavigationLayout:
                                 MDTextField:
                                     hint_text: "Edit Your Password"
                                     required: True
-                                    helper_text: "Password is needed to avoid changing authors without permission."
-                                    helper_text_mode: "on_focus"
+                                    helper_text: "Password is needed but it is required when the program version is not individual use."
+                                    helper_text_mode: "persistent"
                                     password: True
+                                    disabled: True
                                     write_tab: False
                                 MDLabel:
                                     text: 'Want to use the program with modifying features? Click Admin Previledge for more info.'
@@ -1158,6 +1730,7 @@ NavigationLayout:
                                     text: "Admin Previledge"
                                     size_hint: None, None
                                     size: 3 * dp(48), dp(48)
+                                    disabled: True
                                 MDRaisedButton:
                                     text: "Submit Data"
                                     size_hint: None, None

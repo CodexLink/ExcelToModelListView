@@ -38,6 +38,12 @@ from kivymd.tabs import MDTab
 from kivymd.textfields import MDTextField
 from kivy.utils import get_color_from_hex
 from kivymd.color_definitions import colors
+from kivymd.list import OneLineListItem
+from kivymd.list import TwoLineListItem
+from kivymd.list import ThreeLineListItem
+from kivymd.list import OneLineAvatarListItem
+from kivymd.list import OneLineIconListItem
+from kivymd.list import OneLineAvatarIconListItem
 from kivy.clock import Clock
 from openpyxl import load_workbook, Workbook
 import openpyxl
@@ -76,6 +82,7 @@ class MD_InventoryEXI_SMV_GUI(App):
         Config.set('graphics','show_cursor','1')
         Config.set('graphics','minimum_width','1024')
         Config.set('graphics','minimum_height','768')
+        Config.set('kivy','exit_on_escape','0')
         Config.write()
     def SQLite_Generate_FirstTime(self):
         pass
@@ -201,19 +208,31 @@ class MD_InventoryEXI_SMV_GUI(App):
         #Should be selectable
         CounterList = 0
         ExcelID_UniqueListIndex = 0
-        ExcelID_MDTabbedPanel = 0
+        ListEntry_Inf = []
+        ListCount = 0
+        #ExcelID_MDTabbedPanel = 0 This was intended to use on multi-user version along with commented function below
         try:
-            ExcelFile = openpyxl.load_workbook(self.root.ids.DataBind_FilePath.text, data_only = True)
-            ExcelWorksheet = ExcelFile.worksheets[0]
+            ExcelFile = load_workbook(self.root.ids.DataBind_FilePath.text, data_only = self.root.ids.DataBind_FileArguments.text)
+            ExcelWorksheet = ExcelFile['{0}'.format(self.root.ids.DataBind_ExcelFileSheet.text)]
             #Load per Column each with SheetNames on MDTabbedPanel - Seperatable or not or remove based on file
-            for SheetData in ExcelFile.sheetnames:
-                ExcelID_MDTabbedPanel += 1
-                #self.root.ids.FirstTimer_DataFirstName.text = SheetData
-                pass
-            for row in ExcelWorksheet['B6:P25']:#.format(ExcelWorksheet.min_row,ExcelWorksheet.max_row)]:
+            #for SheetData in ExcelFile.sheetnames:
+            #    ExcelID_MDTabbedPanel += 1
+            #    #self.root.ids.FirstTimer_DataFirstName.text = SheetData
+            #    pass
+            for row in ExcelWorksheet['{0}:{1}'.format(self.root.ids.DataBind_CellStartPoint.text, self.root.ids.DataBind_CellEndPoint.text)]:
                 CounterCheck = 1
                 # This could be changed, or prolly make the set of ids into list, not dictionary
-                for cell in row:
+                for cell in row: 
+                    CounterList += 1
+                    '''
+                    I can create those widgets dynamically but not with IDS
+                    I would rather go to Iterate Through IDS of the Statically Created ListItem Method than
+                    trying to use weakref and other such methods when in fact I will just get myself go to the next problem such as 
+                    accessing ids in runtime without updating self.ids... It is not updatable... Since kivy store those ids in self.ids without update
+                    even adding a wdiget. So since, the project deadlien is almost ahead of time. We would rather go to this static method, it's really hard to accept
+                    as a Lead Developer of this application but since time goes by, we have to implement something even though this is one of the most important component in the 
+                    entire application.
+                    '''
                     if CounterCheck == 1 and CounterCheck <= 11:
                         self.root.ids.Resource_ItemNumVal.text = str(cell.value)
                         CounterCheck += 1
@@ -259,22 +278,22 @@ class MD_InventoryEXI_SMV_GUI(App):
                         CounterCheck += 1
                         CounterList += 1
                     else:
-                        break;
+                        break
                 print(cell, cell.value, CounterCheck)
             print(ExcelWorksheet.min_row)
             print(ExcelWorksheet.max_row)
             print(ExcelWorksheet.min_column)
             print(ExcelWorksheet.max_column)
         except:
-            self.MDUserNotif_SnackbarHandler("File Loading Failed Succesfully! Retry again.")
-            self.MDUserNotif_SnackbarHandler('File Path -> ' + self.root.ids.DataBind_FilePath.text + 'File Does Not Exist')
+            self.MDUserNotif_SnackbarHandler("File Loading Failed Succesfully! Check the files or the arguments you set!")
+            self.MDUserNotif_SnackbarHandler('File Path -> ' + self.root.ids.DataBind_FilePath.text + 'File Not Exist or Wrong Arguments!')
                     # This value which instantly changed when its applied or when editing is done... (I guess)
                     # The value of this show not be saved in the way it is modified here. Get the formmula by getting the function reference from undo function
                     # Create a function to dice the formula and compute it with possible iterations from any n number
         #self.root.ids.MDList_UserInsertion_Selection.add_widget(TwoLineListItem(id=('IterationItem_%d' % CounterList), name=cell.value))
 
     def ExcelFile_SaveOnCurrentPath(self):
-        ExcelFile = openpyxl.load_workbook(self.root.ids.DataBind_FilePath.text, data_only = True)
+        ExcelFile = load_workbook(self.root.ids.DataBind_FilePath.text, data_only = self.root.ids.DataBind_FileArguments.text)
         ws = ExcelFile.active
         ws['A2'] = 'Tom'
         ws['B2'] = 30
@@ -338,10 +357,16 @@ class MD_InventoryEXI_SMV_GUI(App):
         elif params_WidgetID == 'CallFunc_ExportPathClear':
             self.root.ids.DataBind_FileExportPath.text = ''
             self.MDUserNotif_SnackbarHandler('Export Path Input has been cleared!')
+        elif params_WidgetID == 'ClearInput_ExcelFileSheet':
+            self.root.ids.DataBind_ExcelFileSheet.text = ''
+            self.MDUserNotif_SnackbarHandler('Excel Sheet Name Input has been cleared!')
         else:
             raise ValueError('Parameter Variable -> params_TextFieldID: Received a string that is validated with no conditions met.')
             LoggerDebug.error('Parameter Variable -> params_TextFieldID: Received a string that is validated with no conditions met.')
             app.stop()
+    #def MDDropdown_CheckAvailSheets(self):
+    #    ExcelFile_Lookup = load_workbook(self.root.ids.DataBind_FilePath.text)
+    #    for SheetNames in ExcelFile_Lookup.sheetnames:
 
     def handledrops(self, *args):
         # this will execute each function from list with arguments from
