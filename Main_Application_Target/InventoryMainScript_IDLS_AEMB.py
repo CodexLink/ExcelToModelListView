@@ -46,7 +46,7 @@ from kivymd.list import OneLineIconListItem
 from kivymd.list import OneLineAvatarIconListItem
 from kivy.clock import Clock
 from openpyxl import load_workbook, Workbook
-import openpyxl
+from openpyxl.utils import column_index_from_string
 import sqlite3
 #Clock.max_iteration = 20
 #class HackedDemoNavDrawer(MDNavigationDrawer):
@@ -206,10 +206,25 @@ class MD_InventoryEXI_SMV_GUI(App):
 
     def ExcelLoadInit_Prototype(self):
         #Should be selectable
-        CounterList = 0
-        ExcelID_UniqueListIndex = 0
+        #ExcelID_UniqueListIndex = 0
         ListEntry_Inf = []
         ListCount = 0
+        CounterCheck = 1
+        CounterList = 1
+        StringAppend = 0
+        Content_ListElement = 0
+        Content_CompletionList = 1
+        ExcelContainer_Val_ItemNumber = ''
+        ExcelContainer_Text_ParticularName = ''
+        ExcelContainer_Val_OnHand = ''
+        ExcelContainer_Val_Proposed = ''
+        ExcelContainer_CostUnit_Type = ''
+        ExcelContainer_CostUnit_Val = ''
+        ExcelContainer_CostUnit_Total = ''
+        ExcelContainer_Quarter_Allot_1 = ''
+        ExcelContainer_Quarter_Allot_2 = ''
+        ExcelContainer_Quarter_Allot_3 = ''
+        ExcelContainer_Quarter_Allot_4 = ''
         #ExcelID_MDTabbedPanel = 0 This was intended to use on multi-user version along with commented function below
         try:
             ExcelFile = load_workbook(self.root.ids.DataBind_FilePath.text, data_only = self.root.ids.DataBind_FileArguments.text)
@@ -219,11 +234,11 @@ class MD_InventoryEXI_SMV_GUI(App):
             #    ExcelID_MDTabbedPanel += 1
             #    #self.root.ids.FirstTimer_DataFirstName.text = SheetData
             #    pass
-            for row in ExcelWorksheet['{0}:{1}'.format(self.root.ids.DataBind_CellStartPoint.text, self.root.ids.DataBind_CellEndPoint.text)]:
-                CounterCheck = 1
+            for EachDataSheet in ExcelWorksheet.iter_rows(min_row=int(self.root.ids.DataBind_RowCellStartPoint.text), max_row=int(self.root.ids.DataBind_RowCellEndPoint.text), min_col=column_index_from_string(self.root.ids.DataBind_ColumnCellStartPoint.text), max_col=column_index_from_string(self.root.ids.DataBind_ColumnCellEndPoint.text)):
                 # This could be changed, or prolly make the set of ids into list, not dictionary
-                for cell in row: 
-                    CounterList += 1
+                # This would loop for each element...
+                for cell in EachDataSheet:
+                    #Selects a Cell
                     '''
                     I can create those widgets dynamically but not with IDS
                     I would rather go to Iterate Through IDS of the Statically Created ListItem Method than
@@ -231,67 +246,114 @@ class MD_InventoryEXI_SMV_GUI(App):
                     accessing ids in runtime without updating self.ids... It is not updatable... Since kivy store those ids in self.ids without update
                     even adding a wdiget. So since, the project deadlien is almost ahead of time. We would rather go to this static method, it's really hard to accept
                     as a Lead Developer of this application but since time goes by, we have to implement something even though this is one of the most important component in the 
-                    entire application.
+                    entire application. In the recent template, there are spcaes that needs to be avoided...
                     '''
-                    if CounterCheck == 1 and CounterCheck <= 11:
-                        self.root.ids.Resource_ItemNumVal.text = str(cell.value)
-                        CounterCheck += 1
-                        CounterList += 1
-                    elif CounterCheck == 2 and CounterCheck <= 11:
-                        self.root.ids.Resource_ParticularProperty.text = str(cell.value)
-                        CounterCheck += 1
-                        CounterList += 1
-                    elif CounterCheck == 3 and CounterCheck <= 11:
-                        self.root.ids.Resource_OnHandVal.text = str(cell.value)
-                        CounterCheck += 1
-                        CounterList += 1
-                    elif CounterCheck == 4 and CounterCheck <= 11:
-                        self.root.ids.Resource_ProposedVal.text = str(cell.value)
-                        CounterCheck += 1
-                        CounterList += 1
-                    elif CounterCheck == 5 and CounterCheck <= 11:
-                        self.root.ids.Resource_UnitTypeProperty.text = str(cell.value)
-                        CounterCheck += 1
-                        CounterList += 1
-                    elif CounterCheck == 6 and CounterCheck <= 11:
-                        self.root.ids.Resource_UnitVal.text = str(cell.value)
-                        CounterCheck += 1
-                        CounterList += 1
-                    elif CounterCheck == 7 and CounterCheck <= 11:
-                        self.root.ids.Quartile_TextFieldVal_One.text = str(cell.value)
-                        CounterCheck += 1
-                        CounterList += 1
-                    elif CounterCheck == 8 and CounterCheck <= 11:
-                        self.root.ids.Quartile_TextFieldVal_Two.text = str(cell.value)
-                        CounterCheck += 1
-                        CounterList += 1
-                    elif CounterCheck == 9 and CounterCheck <= 11:
-                        self.root.ids.Quartile_TextFieldVal_Three.text = str(cell.value)
-                        CounterCheck += 1
-                        CounterList += 1
-                    elif CounterCheck == 10 and CounterCheck <= 11:
-                        self.root.ids.Quartile_TextFieldVal_Four.text = str(cell.value)
-                        CounterCheck += 1
-                        CounterList += 1
-                    elif CounterCheck == 11 and CounterCheck <= 11:
-                        self.root.ids.Total_ComputedVal.text = str(cell.value)
-                        CounterCheck += 1
-                        CounterList += 1
-                    else:
-                        break
-                print(cell, cell.value, CounterCheck)
-            print(ExcelWorksheet.min_row)
-            print(ExcelWorksheet.max_row)
-            print(ExcelWorksheet.min_column)
-            print(ExcelWorksheet.max_column)
+                    #print(cell, str(cell.value), CounterCheck)
+                    print(cell, cell.value, Content_CompletionList)
+                    if Content_ListElement == 1 and CounterCheck <= 15:
+                        if cell.value == None:
+                            ExcelContainer_Val_ItemNumber = '0'
+                            Content_ListElement += 1
+                        else:
+                            ExcelContainer_Val_ItemNumber = str(cell.value)
+                            print('Output',ExcelContainer_Val_ItemNumber)
+                            Content_ListElement += 1
+                    elif Content_ListElement == 2 and CounterCheck <= 15:
+                            Content_ListElement += 1
+                    elif Content_ListElement == 3 and CounterCheck <= 15:
+                        if cell.value == None:
+                            ExcelContainer_Text_ParticularName = '<No Description>'
+                            Content_ListElement += 1
+                        else:
+                            ExcelContainer_Text_ParticularName = str(cell.value)
+                            print('Output',ExcelContainer_Text_ParticularName)
+                            Content_ListElement += 1
+                    elif Content_ListElement == 4 and CounterCheck <= 15:
+                            Content_ListElement += 1
+                    elif Content_ListElement == 5 and CounterCheck <= 15:
+                        if cell.value == None:
+                            ExcelContainer_Val_OnHand = 'None'
+                            Content_ListElement += 1
+                        else:
+                            ExcelContainer_Val_OnHand = str(cell.value)
+                            Content_ListElement += 1
+                    elif Content_ListElement == 6 and CounterCheck <= 15:
+                            Content_ListElement += 1
+                    elif Content_ListElement == 7 and CounterCheck <= 15:
+                        if cell.value == None:
+                            ExcelContainer_Val_Proposed = 'None'
+                            Content_ListElement += 1
+                        else:
+                            ExcelContainer_Val_Proposed = str(cell.value)
+                            Content_ListElement += 1
+                    elif Content_ListElement == 8 and CounterCheck <= 15:
+                            Content_ListElement += 1
+                    elif Content_ListElement == 9 and CounterCheck <= 15:
+                        if cell.value == None:
+                            ExcelContainer_CostUnit_Type = 'Unknown'
+                            Content_ListElement += 1
+                        else:
+                            ExcelContainer_CostUnit_Type = str(cell.value)
+                            Content_ListElement += 1
+                    elif Content_ListElement == 10 and CounterCheck <= 15:
+                        if cell.value == None:
+                            ExcelContainer_CostUnit_Val = '0.00'
+                            Content_ListElement += 1
+                        else:
+                            ExcelContainer_CostUnit_Val = str(cell.value)
+                            Content_ListElement += 1
+                    elif Content_ListElement == 11 and CounterCheck <= 15:
+                        if cell.value == None:
+                            ExcelContainer_CostUnit_Total = '0.00'
+                            Content_ListElement += 1
+                        else:
+                            ExcelContainer_CostUnit_Total = str(cell.value)
+                            Content_ListElement += 1
+                    elif Content_ListElement == 12 and CounterCheck <= 15:
+                        if cell.value == None:
+                            ExcelContainer_Quarter_Allot_1 = '-'
+                            Content_ListElement += 1
+                        else:
+                            ExcelContainer_Quarter_Allot_1 = str(cell.value)
+                            Content_ListElement += 1
+                    elif Content_ListElement == 13 and CounterCheck <= 15:
+                        if cell.value == None:
+                            ExcelContainer_Quarter_Allot_1 = '-'
+                            Content_ListElement += 1
+                        else:
+                            ExcelContainer_Quarter_Allot_2 = str(cell.value)
+                            Content_ListElement += 1
+                    elif Content_ListElement == 14 and CounterCheck <= 15:
+                        if cell.value == None:
+                            ExcelContainer_Quarter_Allot_4 = '-'
+                            Content_ListElement += 1
+                        else:
+                            ExcelContainer_Quarter_Allot_3 = str(cell.value)
+                            Content_ListElement += 1
+                    elif Content_ListElement == 15 and CounterCheck <= 15:
+                        if cell.value == None:
+                            ExcelContainer_Quarter_Allot_4 = '-'
+                            Content_ListElement += 1
+                        else:
+                            ExcelContainer_Quarter_Allot_4 = str(cell.value)
+                            Content_ListElement += 1
+                Concatenation_PrimaryText = '{0} | {1}'.format(ExcelContainer_Val_ItemNumber,ExcelContainer_Text_ParticularName)
+                print('Final Output',Concatenation_PrimaryText)
+                self.root.ids['ListElement_%d' % Content_CompletionList].text = Concatenation_PrimaryText
+                #self.root.ids['ListElement_%d' % Content_CompletionList].secodary_text = 'OnHand: {0}, Proposed:{1}, Unit Type:{2}, Unit Value:{3}, TotalVal:{4}, Q1:{6}, Q2:{7}, Q3:{8}, Q4:{9}'.format(ExcelContainer_Val_OnHand, ExcelContainer_Val_Proposed, ExcelContainer_CostUnit_Type, ExcelContainer_CostUnit_Val, ExcelContainer_CostUnit_Total, ExcelContainer_Quarter_Allot_1, ExcelContainer_Quarter_Allot_2, ExcelContainer_Quarter_Allot_3, ExcelContainer_Quarter_Allot_4)
+                self.root.ids['ListElement_%d' % Content_CompletionList].disabled = False
+                self.root.ids.ToolbarMain.title = 'Hmmmmmm'
+                Content_CompletionList +=1
+                    #else:
+                    #    break
         except:
             self.MDUserNotif_SnackbarHandler("File Loading Failed Succesfully! Check the files or the arguments you set!")
-            self.MDUserNotif_SnackbarHandler('File Path -> ' + self.root.ids.DataBind_FilePath.text + 'File Not Exist or Wrong Arguments!')
+            self.MDUserNotif_SnackbarHandler('File Path -> ' + self.root.ids.DataBind_FilePath.text + ' File Not Exist or Wrong Arguments!')
                     # This value which instantly changed when its applied or when editing is done... (I guess)
                     # The value of this show not be saved in the way it is modified here. Get the formmula by getting the function reference from undo function
                     # Create a function to dice the formula and compute it with possible iterations from any n number
-        #self.root.ids.MDList_UserInsertion_Selection.add_widget(TwoLineListItem(id=('IterationItem_%d' % CounterList), name=cell.value))
-
+        #self.root.ids.MDList_UserInsertion_Selection.add_widget(TwoLineListItem(id=('IterationItem_%d' % CounterList), name=str(cell.value)))
+            self.MDUserNotif_SnackbarHandler(str(Content_CompletionList))
     def ExcelFile_SaveOnCurrentPath(self):
         ExcelFile = load_workbook(self.root.ids.DataBind_FilePath.text, data_only = self.root.ids.DataBind_FileArguments.text)
         ws = ExcelFile.active
@@ -346,12 +408,14 @@ class MD_InventoryEXI_SMV_GUI(App):
             self.root.ids.DataBind_FilePath.text = ''
             self.root.ids.DataBind_FileArguments.text = ''
             self.MDUserNotif_SnackbarHandler('Excel File Path and Arguments Input has been cleared!')
-        elif params_WidgetID == 'CallFunc_ClearStartPoint':
-            self.root.ids.DataBind_CellStartPoint.text = ''
-            self.MDUserNotif_SnackbarHandler('Cell Starting Point Input has been cleared!')
-        elif params_WidgetID == 'CallFunc_ClearEndPoint':
-            self.root.ids.DataBind_CellEndPoint.text = ''
-            self.MDUserNotif_SnackbarHandler('Cell Starting Point Input has been cleared!')
+        elif params_WidgetID == 'CallFunc_ClearColumnStartPoint':
+            self.root.ids.DataBind_ColumnCellStartPoint.text = ''
+        elif params_WidgetID == 'CallFunc_ClearColumnEndPoint':
+            self.root.ids.DataBind_ColumnCellEndPoint.text = ''
+        elif params_WidgetID == 'CallFunc_ClearRowStartPoint':
+            self.root.ids.DataBind_RowCellStartPoint.text = ''
+        elif params_WidgetID == 'CallFunc_ClearRowEndPoint':
+            self.root.ids.DataBind_RowCellEndPoint.text = ''
         elif params_WidgetID == 'CallFunc_ExportProcess':
             pass
         elif params_WidgetID == 'CallFunc_ExportPathClear':
