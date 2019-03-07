@@ -17,4 +17,5 @@ ExcelWorksheet = ExcelFile['Sheet1']
 
 for row_cells in ExcelWorksheet.iter_cols(min_col=column_index_from_string('A'), max_col=column_index_from_string('P'), min_row=6, max_row=25):
     for cell in row_cells:
+       Test = cell.value
        print('%s: cell.value=%s' % (cell, cell.value))
