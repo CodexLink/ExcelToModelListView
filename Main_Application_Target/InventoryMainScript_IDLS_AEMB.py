@@ -73,7 +73,11 @@ class MD_InventoryEXI_SMV_GUI(App):
     title = "Excel Inventory To Simplified Model View | EXI_SMV - Individual Use" #Excel to Simplified Model VIew in GUI
     Icon_Status = 'brightness-1'
     SQLite_MainPath = 'EXI_SMV_AppData.db'
-    
+    Active_DataElement = ''
+    def on_start(self):
+        self.MDNavDrawer_UserDefinition()
+        self.MDScreenManagement_CheckVal()
+
     def KivyConfig_Setup(self): #This Config is loaded by default. It cannot be changed.
         try:
             Config.set('graphics','width','1024')
@@ -98,17 +102,15 @@ class MD_InventoryEXI_SMV_GUI(App):
 
     def CriticalComponent_Check(self):
         if self.KivyConfig_Setup() == 'Passed':
-            LoggerDebug.info('Kivy Configuration Load: Kivy Appplication Parameters has successfully passed paramters.')
+            LoggerDebug.info('Kivy Configuration Load: Kivy Appplication Parameters has successfully passed parameters.')
             if self.SQLite_Generate_FirstTime() == 'Exist':
                 LoggerDebug.info('SQLite Data Load: File Exist, Data Loaded...')
                 return 1
             else:
                 LoggerDebug.warning('SQLite Data Failed: Attempting to Create a Database under application directory...')
                 try:
-                    with sqlite3.connect('EXI_SMV_AppData.db', timeout = 1) as DataSQL_FileConnection:
-                        SQLDataPosition = DataSQL_FileConnection.cursor()
-                    SQL_Connect = sqlite3.connect('EXI_SMV_AppData.db')
-                    SQL_Connect.execute('CREATE TABLE IF NOT EXISTS user_TableDatabase(user_FirstName STRING, user_LastName STRING, user_JobCurrent STRING, user_Password STRING)')
+                    SQL_Connect = sqlite3.connect(self.SQLite_MainPath)
+                    SQL_Connect.execute('CREATE TABLE IF NOT EXISTS user_TableDatabase(user_FirstName STRING, user_LastName STRING, user_JobCurrent STRING, user_Password STRING, user_isFirstTime )')
                     SQL_Connect.execute('CREATE TABLE IF NOT EXISTS user_TableLastStringSave(string_ExcelImportPath STRING, string_ExcelExportPath STRING, string_ExcelColumnStart STRING, string_ExcelColumnEnd STRING, string_ExcelRowStart STRING, string_ExcelRowEnd STRING, string_ExcelSheetName STRING, string_ShowFormulae STRING)')
                     SQL_Connect.commit()
                     SQL_Connect.close()
@@ -125,19 +127,18 @@ class MD_InventoryEXI_SMV_GUI(App):
                 return 1
             else:
                 LoggerDebug.warning('SQLite Data Load Failed: Attempting to Create a Database under application directory...')
-                try:
-                    with sqlite3.connect('EXI_SMV_AppData.db', timeout = 1) as DataSQL_FileConnection:
-                        SQLDataPosition = DataSQL_FileConnection.cursor()
-                    SQL_Connect = sqlite3.connect('EXI_SMV_AppData.db')
-                    SQL_Connect.execute('CREATE TABLE IF NOT EXISTS user_TableDatabase(user_FirstName STRING, user_LastName STRING, user_JobCurrent STRING, user_Password STRING)')
-                    SQL_Connect.execute('CREATE TABLE IF NOT EXISTS user_TableLastStringSave(string_ExcelImportPath STRING, string_ExcelExportPath STRING, string_ExcelColumnStart STRING, string_ExcelColumnEnd STRING, string_ExcelRowStart STRING, string_ExcelRowEnd STRING, string_ExcelSheetName STRING, string_ShowFormulae STRING)')
-                    SQL_Connect.commit()
-                    SQL_Connect.close()
-                    LoggerDebug.info('SQL Data Creation: Data has been succesfully created from the database!')
-                    return 1
-                except:
-                    LoggerDebug.error('[SQL Database Write]: SQL Failed to Execute. Application will be terminated...')
-                    return 0
+                #try:
+                SQL_Connect = sqlite3.connect(self.SQLite_MainPath)
+                SQL_Connect.execute('CREATE TABLE IF NOT EXISTS user_TableDatabase(user_FirstName STRING, user_LastName STRING, user_JobCurrent STRING, user_Password STRING, user_isFirstTime INTEGER)')
+                SQL_Connect.execute('CREATE TABLE IF NOT EXISTS user_TableLastStringSave(string_ExcelImportPath STRING, string_ExcelExportPath STRING, string_ExcelColumnStart STRING, string_ExcelColumnEnd STRING, string_ExcelRowStart STRING, string_ExcelRowEnd STRING, string_ExcelSheetName STRING, string_ShowFormulae STRING)')
+                SQL_Connect.commit()
+                SQL_Connect.close()
+                LoggerDebug.info('SQL Data Creation: Data has been succesfully created from the database!')
+                return 1
+                #except:
+                #    LoggerDebug.error('[SQL Database Write]: SQL Failed to Execute. Application will be terminated...')
+                #    return 0
+
     def build(self):
         self.MainClassBuildFile = Builder.load_file("MD_DesignClass_File.kv")
         self.theme_cls.primary_palette = 'DeepOrange'
@@ -151,12 +152,41 @@ class MD_InventoryEXI_SMV_GUI(App):
         return
     #
     def MD_FirstTime_DataSubmission(self):
-        SQLData = sqlite3.connect('EXI_SMV_AppData.db')
-        SQLData.execute('INSERT INTO user_TableDatabase(user_FirstName, user_LastName, user_JobCurrent, user_Password) values (?, ?, ?, ?)', (self.root.ids.FirstTimer_DataFirstName.text, self.root.ids.FirstTimer_DataLastName.text, self.root.ids.FirstTimer_DataJobPosition.text,self.root.ids.FirstTimer_DataPassword.text))
-        SQLData.commit()
-        SQLData.close()
-        self.MDUserNotif_SnackbarHandler('Welcome, {0} {1}, | {2} |'.format(self.root.ids.FirstTimer_DataFirstName.text, self.root.ids.FirstTimer_DataLastName.text , self.root.ids.FirstTimer_DataJobPosition.text))
-        self.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
+        if len(self.root.ids.FirstTimer_DataFirstName.text) <= 1 or len(self.root.ids.FirstTimer_DataLastName.text) <= 1 or len(self.root.ids.FirstTimer_DataJobPosition.text) <= 1:
+            self.MDUserNotif_SnackbarHandler('Error, TextInputs should have inputs or characters must be 2 or more')
+        else:
+            SQLData = sqlite3.connect(self.SQLite_MainPath)
+            SQLData_Cursor = SQLData.cursor()
+            # There is database data that locks the screen to be disabled to run on startup
+            SQLData.execute('INSERT INTO user_TableDatabase(user_FirstName, user_LastName, user_JobCurrent, user_Password, user_isFirstTime) values (?, ?, ?, ?, ?)', (self.root.ids.FirstTimer_DataFirstName.text, self.root.ids.FirstTimer_DataLastName.text, self.root.ids.FirstTimer_DataJobPosition.text,self.root.ids.FirstTimer_DataPassword.text, 0))
+            SQLData.commit()
+            SQLData.close()
+            self.MDUserNotif_SnackbarHandler('Welcome, {0} {1}, | {2} |'.format(self.root.ids.FirstTimer_DataFirstName.text, self.root.ids.FirstTimer_DataLastName.text , self.root.ids.FirstTimer_DataJobPosition.text))
+            self.MDScreenManagement_CheckVal()
+            self.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
+
+    def MDScreenManagement_CheckVal(self):
+        SQLData_Check = sqlite3.connect(self.SQLite_MainPath)
+        SQLData_Cursor = SQLData_Check.cursor()
+        SQLData_Cursor.execute('SELECT user_isFirstTime FROM user_TableDatabase WHERE user_isFirstTime=1 or user_isFirstTime=0')
+        if SQLData_Cursor.fetchone():
+            self.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
+        else:
+            self.root.ids.ScreenFrame_MainWindow.current = 'Startup_FirstTime_GetInfo'
+        SQLData_Check.close()
+        
+
+    def MDNavDrawer_UserDefinition(self):
+        user_FirstName = ''
+        user_LastName = ''
+        user_JobCurrent = ''
+        SQLData_Check = sqlite3.connect(self.SQLite_MainPath)
+        SQLData_Cursor = SQLData_Check.cursor()
+        SQLData_Cursor.execute('SELECT * FROM user_TableDatabase WHERE user_FirstName=? AND user_LastName=? AND user_JobCurrent=? LIMIT 1', [(user_FirstName), (user_LastName), (user_JobCurrent)])
+        #SQLData_Query = SQLData_Cursor.fetchall()
+        [print(row) for row in SQLData_Cursor.fetchall()]
+        self.root.ids.nav_drawer.header_name = 'Hello, {0}{1}!'. format(user_FirstName, user_LastName)
+        self.root.ids.nav_drawer.subheader_name = 'Position: {0}'.format(user_JobCurrent)
     def MDCard_GenerateReport(self):
         pass
 
@@ -221,6 +251,9 @@ class MD_InventoryEXI_SMV_GUI(App):
             LoggerDebug.error('MDButton_DarkMode received invalid parameters, reset SQL Database or modify the property of App_ReadibilityMode to Light or Dark in String Form')
             raise ValueError('MDButton_DarkMode received invalid parameters, reset SQL Database or modify the property of App_ReadibilityMode to Light or Dark in String Form')
     
+    def MDButton_Exit_SaveData(self):
+        pass
+
     def MDUserNotif_SnackbarHandler(self, params_message):
         Snackbar(text=params_message).show()
 
@@ -253,7 +286,7 @@ class MD_InventoryEXI_SMV_GUI(App):
         End_CellPoint = ''
         #ExcelID_MDTabbedPanel = 0 This was intended to use on multi-user version along with commented function below
         try:
-            ExcelFile = load_workbook(self.root.ids.DataBind_FilePath.text, data_only = self.root.ids.DataBind_FileArguments.text)
+            ExcelFile = load_workbook(self.root.ids.DataBind_FilePath.text, data_only=False)
             ExcelWorksheet = ExcelFile['{0}'.format(self.root.ids.DataBind_ExcelFileSheet.text)]
             
             if ExcelLoad_Method == 'Unload' or ExcelLoad_Method == 'Reload':
@@ -291,8 +324,10 @@ class MD_InventoryEXI_SMV_GUI(App):
                 self.root.ids.FileOpt_ReInit_ReloadDataFile.disabled = True
                 self.root.ids.FileOpt_EndInst_UnloadDataFile.disabled = True
                 self.root.ids.FileOpt_FirstInst_LoadDataFile.disabled = False
+                self.root.ids.MDDataEditor_ApplyChange.disabled = False
+                self.root.ids.MDDataEditor_ApplyChange.disabled = False
+                self.root.ids.MDDataEditor_ClearInput.disabled = False
                 self.MDUserNotif_SnackbarHandler("Data is Unbinded from the Editor.")
-                print("[DATA - EXCEL, ACTION] Data is Unbinded from the Editor.")
             if ExcelLoad_Method == 'Load' or ExcelLoad_Method == 'Reload':
                 for EachDataSheet in ExcelWorksheet.iter_rows(min_row=int(self.root.ids.DataBind_RowCellStartPoint.text), max_row=int(self.root.ids.DataBind_RowCellEndPoint.text), min_col=column_index_from_string(self.root.ids.DataBind_ColumnCellStartPoint.text), max_col=column_index_from_string(self.root.ids.DataBind_ColumnCellEndPoint.text)):
                     # This could be changed, or prolly make the set of ids into list, not dictionary
@@ -312,7 +347,7 @@ class MD_InventoryEXI_SMV_GUI(App):
                         print('[Excel Data Load] Content Loop Through Inside ', Content_ListElement, 'Cell Stats', cell,'| Cell Value', cell.value)
                         if Content_ListElement == 1 and Content_ListElement <= 15:
                             if cell.value is None:
-                                ExcelContainer_Val_ItemNumber = '-'
+                                ExcelContainer_Val_ItemNumber = '0'
                                 Start_CellPoint = '{0}{1}'.format(cell.column, cell.row)
                                 self.root.ids['ListElement_%d' % Content_CompletionList].cellStart = Start_CellPoint
 
@@ -325,75 +360,56 @@ class MD_InventoryEXI_SMV_GUI(App):
                                 continue
                         elif Content_ListElement == 3 and Content_ListElement <= 15:
                             if cell.value is None:
-                                ExcelContainer_Text_ParticularName = '<No Description>'
-                                print(ExcelContainer_Text_ParticularName)
-
+                                ExcelContainer_Text_ParticularName = 'No Particular Description'
                             else:
                                 ExcelContainer_Text_ParticularName = cell.value
-                                print('Output',ExcelContainer_Text_ParticularName)
-
                         elif Content_ListElement == 4 and Content_ListElement <= 15:
                                 continue
                         elif Content_ListElement == 5 and Content_ListElement <= 15:
                             if cell.value is None:
-                                ExcelContainer_Val_OnHand = 'None'
-
+                                ExcelContainer_Val_OnHand = '0'
                             else:
                                 ExcelContainer_Val_OnHand = cell.value
-
                         elif Content_ListElement == 6 and Content_ListElement <= 15:
                                 continue
                         elif Content_ListElement == 7 and Content_ListElement <= 15:
                             if cell.value is None:
-                                ExcelContainer_Val_Proposed = 'None'
-
+                                ExcelContainer_Val_Proposed = '0'
                             else:
                                 ExcelContainer_Val_Proposed = cell.value
-
                         elif Content_ListElement == 8 and Content_ListElement <= 15:
                                 continue
                         elif Content_ListElement == 9 and Content_ListElement <= 15:
                             if cell.value is None:
                                 ExcelContainer_CostUnit_Type = 'Unknown'
-
                             else:
                                 ExcelContainer_CostUnit_Type = cell.value
 
                         elif Content_ListElement == 10 and Content_ListElement <= 15:
                             if cell.value is None:
                                 ExcelContainer_CostUnit_Val = '0.00'
-
                             else:
                                 ExcelContainer_CostUnit_Val = cell.value
-
                         elif Content_ListElement == 11 and Content_ListElement <= 15:
                             if cell.value is None:
                                 ExcelContainer_CostUnit_Total = '0.00'
-
                             else:
                                 ExcelContainer_CostUnit_Total = cell.value
-
                         elif Content_ListElement == 12 and Content_ListElement <= 15:
                             if cell.value is None:
                                 ExcelContainer_Quarter_Allot_1 = '-'
-
                             else:
                                 ExcelContainer_Quarter_Allot_1 = cell.value
-
                         elif Content_ListElement == 13 and Content_ListElement <= 15:
                             if cell.value is None:
                                 ExcelContainer_Quarter_Allot_1 = '-'
-
                             else:
                                 ExcelContainer_Quarter_Allot_2 = cell.value
-
                         elif Content_ListElement == 14 and Content_ListElement <= 15:
                             if cell.value is None:
                                 ExcelContainer_Quarter_Allot_4 = '-'
-
                             else:
                                 ExcelContainer_Quarter_Allot_3 = cell.value
-
                         elif Content_ListElement == 15 and Content_ListElement <= 15:
                             if cell.value is None:
                                 ExcelContainer_Quarter_Allot_4 = '-'
@@ -433,6 +449,8 @@ class MD_InventoryEXI_SMV_GUI(App):
                     self.root.ids.FileOpt_FirstInst_LoadDataFile.disabled = True
                     self.root.ids.FileOpt_ReInit_ReloadDataFile.disabled = False
                     self.root.ids.FileOpt_EndInst_UnloadDataFile.disabled = False
+                    self.root.ids.MDDataEditor_ApplyChange.disabled = False
+                    self.root.ids.MDDataEditor_ClearInput.disabled = False
                 #elif ExcelLoad_Method == 'Reload':
                     
         except:
@@ -453,35 +471,104 @@ class MD_InventoryEXI_SMV_GUI(App):
         self.root.ids.Quartile_TextFieldVal_Three.text = self.root.ids['%s' % ListElement_Reference].quarterThree
         self.root.ids.Quartile_TextFieldVal_Four.text = self.root.ids['%s' % ListElement_Reference].quarterFour
         self.root.ids.Total_ComputedVal.text = self.root.ids['%s' % ListElement_Reference].totalVal
+        self.Active_DataElement = ListElement_Reference
 
-    def ExcelFile_SaveOnCurrentPath(self):
-        ExcelFile = load_workbook(self.root.ids.DataBind_FilePath.text, data_only = self.root.ids.DataBind_FileArguments.text)
-        ws = ExcelFile.active
-        ws['A2'] = 'Tom'
-        ws['B2'] = 30
-        ws['B6'] = 30123
-
-        ws['A3'] = 'Marry'
-        ws['B3'] = 29
-        # Save the file
-        ExcelFile.save("sample.xlsx")
-            #try:
-        #    ExcelFile_Init = Workbook()
-        #    
-        #    ExcelFile_Init.save(self.root.ids.DataBind_FilePath.text)
-        #except:
-        #    self.MDUserNotif_SnackbarHandler('')
-    def ExcelFile_SaveOnExportPath(self):
+    def ExcelFile_SaveOnPath(self, SavePath_Type):
+        ExcelFile = load_workbook(self.root.ids.DataBind_FilePath.text, data_only=False)
+        ExcelWorksheet_Active = ExcelFile.active
+        ExcelWorksheet_Init = Workbook()
+        Content_ListElement = 0
+        Content_CompletionList = 1
         try:
-            ExcelFile_Init = Workbook()
-            ExcelFile_Init.save(self.root.ids.DataBind_FileExportPath.text)
+            for EachDataSheet in ExcelWorksheet_Active.iter_rows(min_row=int(self.root.ids.DataBind_RowCellStartPoint.text), max_row=int(self.root.ids.DataBind_RowCellEndPoint.text), min_col=column_index_from_string(self.root.ids.DataBind_ColumnCellStartPoint.text), max_col=column_index_from_string(self.root.ids.DataBind_ColumnCellEndPoint.text)):
+                for cell in EachDataSheet:
+                    Content_ListElement += 1
+                    print('[Excel Data Overwrite] Element Content', Content_ListElement, 'Cell Info', cell,'| Cell Value', cell.value)
+                    if Content_ListElement == 1 and Content_ListElement <= 15:
+                        ExcelWorksheet_Active['%s' % cell.coordinate] = int(self.root.ids['ListElement_%d' % Content_CompletionList].itemNumber)
+                    elif Content_ListElement == 2 and Content_ListElement <= 15:
+                        ExcelWorksheet_Active['%s' % cell.coordinate] = ''
+                    elif Content_ListElement == 3 and Content_ListElement <= 15:
+                        ExcelWorksheet_Active['%s' % cell.coordinate] = self.root.ids['ListElement_%d' % Content_CompletionList].particularName
+                    elif Content_ListElement == 4 and Content_ListElement <= 15:
+                        ExcelWorksheet_Active['%s' % cell.coordinate] = ''
+                    elif Content_ListElement == 5 and Content_ListElement <= 15:
+                        try:
+                            ExcelWorksheet_Active['%s' % cell.coordinate] = int(self.root.ids['ListElement_%d' % Content_CompletionList].onHandVal)
+                        except:
+                            ExcelWorksheet_Active['%s' % cell.coordinate] = str(self.root.ids['ListElement_%d' % Content_CompletionList].onHandVal)
+                    elif Content_ListElement == 6 and Content_ListElement <= 15:
+                        ExcelWorksheet_Active['%s' % cell.coordinate] = ''
+                    elif Content_ListElement == 7 and Content_ListElement <= 15:
+                        ExcelWorksheet_Active['%s' % cell.coordinate] = int(self.root.ids['ListElement_%d' % Content_CompletionList].proposedVal)
+                    elif Content_ListElement == 8 and Content_ListElement <= 15:
+                        ExcelWorksheet_Active['%s' % cell.coordinate] = ''
+                    elif Content_ListElement == 9 and Content_ListElement <= 15:
+                        ExcelWorksheet_Active['%s' % cell.coordinate] = str(self.root.ids['ListElement_%d' % Content_CompletionList].unitType)
+                    elif Content_ListElement == 10 and Content_ListElement <= 15:
+                        try:
+                            ExcelWorksheet_Active['%s' % cell.coordinate] = float(self.root.ids['ListElement_%d' % Content_CompletionList].unitVal)
+                        except:
+                            ExcelWorksheet_Active['%s' % cell.coordinate] = int(self.root.ids['ListElement_%d' % Content_CompletionList].unitVal)
+                    elif Content_ListElement == 11 and Content_ListElement <= 15:
+                        try:
+                            ExcelWorksheet_Active['%s' % cell.coordinate] = float(self.root.ids['ListElement_%d' % Content_CompletionList].totalVal)
+                        except:
+                            ExcelWorksheet_Active['%s' % cell.coordinate] = str(self.root.ids['ListElement_%d' % Content_CompletionList].totalVal)
+                    elif Content_ListElement == 12 and Content_ListElement <= 15:
+                        try:
+                            ExcelWorksheet_Active['%s' % cell.coordinate] = int(self.root.ids['ListElement_%d' % Content_CompletionList].quarterOne)
+                        except:
+                            ExcelWorksheet_Active['%s' % cell.coordinate] = str(self.root.ids['ListElement_%d' % Content_CompletionList].quarterOne)
+                    elif Content_ListElement == 13 and Content_ListElement <= 15:
+                        try:
+                            ExcelWorksheet_Active['%s' % cell.coordinate] = int(self.root.ids['ListElement_%d' % Content_CompletionList].quarterTwo)
+                        except:
+                            ExcelWorksheet_Active['%s' % cell.coordinate] = str(self.root.ids['ListElement_%d' % Content_CompletionList].quarterTwo)
+                    elif Content_ListElement == 14 and Content_ListElement <= 15:
+                        try:
+                            ExcelWorksheet_Active['%s' % cell.coordinate] = int(self.root.ids['ListElement_%d' % Content_CompletionList].quarterThree)
+                        except:
+                            ExcelWorksheet_Active['%s' % cell.coordinate] = str(self.root.ids['ListElement_%d' % Content_CompletionList].quarterThree)
+                    elif Content_ListElement == 15 and Content_ListElement <= 15:
+                        Content_ListElement = 0
+                        try:
+                            ExcelWorksheet_Active['%s' % cell.coordinate] = int(self.root.ids['ListElement_%d' % Content_CompletionList].quarterFour)
+                        except:
+                            ExcelWorksheet_Active['%s' % cell.coordinate] = str(self.root.ids['ListElement_%d' % Content_CompletionList].quarterFour)
+                Content_CompletionList += 1
+            #if SavePath_Type == 'CurrentPath':
+            ExcelFile.save(self.root.ids.DataBind_FilePath.text)
+            #    self.MDUserNotif_SnackbarHandler('Saved in Current Path! -> {0}'.format(self.root.ids.DataBind_FilePath.text))
+            #elif SavePath_Type == 'ExportPath':
+            #    try:
+            #        ExcelFile.save(self.root.ids.DataBind_FileExportPath.text)
+             #       self.MDUserNotif_SnackbarHandler('Saved in Export Path! -> {0}'.format(self.root.ids.DataBind_FilePath.text))
+            #    except:
+            #        self.MDUserNotif_SnackbarHandler('Error, Export Path given is either Permission Denied or does not exist. Please another path.')
+            #else:
+            #    raise ValueError('Argument Passed for SaveTypePath is not valid.')
         except:
-            self.MDUserNotif_SnackbarHandler('')
+            self.MDUserNotif_SnackbarHandler('Error, one of the values are not respective to float or integer based on data given! Please change those values.')
 
-    def MDWorksheetWorker_DataEditor_Apply(self):
-        # Create an Undo Method here?
-        self.MDUserNotif_SnackbarHandler('Selected Data Edit has been applied!')
-
+    def MDWorksheetWorker_DataEditor_Apply(self, ListElement_Change):
+        try:
+            self.root.ids['%s'% ListElement_Change].itemNumber = self.root.ids.Resource_ItemNumVal.text
+            self.root.ids['%s'% ListElement_Change].particularName = self.root.ids.Resource_ParticularProperty.text
+            self.root.ids['%s'% ListElement_Change].onHandVal = self.root.ids.Resource_OnHandVal.text
+            self.root.ids['%s'% ListElement_Change].proposedVal = self.root.ids.Resource_ProposedVal.text
+            self.root.ids['%s'% ListElement_Change].unitType = self.root.ids.Resource_UnitTypeProperty.text
+            self.root.ids['%s'% ListElement_Change].unitVal = self.root.ids.Resource_UnitVal.text
+            self.root.ids['%s'% ListElement_Change].quarterOne = self.root.ids.Quartile_TextFieldVal_One.text
+            self.root.ids['%s'% ListElement_Change].quarterTwo = self.root.ids.Quartile_TextFieldVal_Two.text
+            self.root.ids['%s'% ListElement_Change].quarterThree = self.root.ids.Quartile_TextFieldVal_Three.text
+            self.root.ids['%s'% ListElement_Change].quarterFour = self.root.ids.Quartile_TextFieldVal_Four.text
+            self.root.ids['%s'% ListElement_Change].totalVal = self.root.ids.Total_ComputedVal.text
+            self.root.ids['%s' % ListElement_Change].text = '{0} | {1}'.format(self.root.ids.Resource_ItemNumVal.text,self.root.ids.Resource_ParticularProperty.text)
+            self.root.ids['%s' % ListElement_Change].secondary_text = 'OnHand: {0}, Proposed:{1}, Unit Type:{2}, Unit Value:{3}, TotalVal:{4}, Q1:{5}, Q2:{6}, Q3:{7}, Q4:{8}'.format(self.root.ids.Resource_OnHandVal.text, self.root.ids.Resource_ProposedVal.text, self.root.ids.Resource_UnitTypeProperty.text, self.root.ids.Resource_UnitVal.text, self.root.ids.Total_ComputedVal.text, self.root.ids.Quartile_TextFieldVal_One.text, self.root.ids.Quartile_TextFieldVal_Two.text, self.root.ids.Quartile_TextFieldVal_Three.text, self.root.ids.Quartile_TextFieldVal_Four.text)
+            self.MDUserNotif_SnackbarHandler('Selected Data Edit has been applied!')
+        except:
+            self.MDUserNotif_SnackbarHandler('Sorry, you cannot do that!')
     def MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(self, TextField_ID, ListElement_ItemNumber, TypeAction_ValueChange):
         try:
             Placement_Val_Conversion = self.root.ids.TextField_ID.text
@@ -525,6 +612,17 @@ class MD_InventoryEXI_SMV_GUI(App):
             self.root.ids.DataBind_FilePath.text = ''
             self.root.ids.DataBind_FileArguments.text = ''
             self.MDUserNotif_SnackbarHandler('Excel File Path and Arguments Input has been cleared!')
+        elif params_WidgetID == 'CallFunc_ClearEditTextFields':
+            self.root.ids.UserEdit_FirstName.text = ''
+            self.root.ids.UserEdit_LastName.text = ''
+            self.root.ids.UserEdit_JobPosition.text = ''
+            self.root.ids.UserEdit_Password.text = ''
+        elif params_WidgetID == 'CallFunc_ClearFirstTimeTextFields':
+            self.root.ids.FirstTimer_DataFirstName.text = ''
+            self.root.ids.FirstTimer_DataLastName.text = ''
+            self.root.ids.FirstTimer_DataJobPosition.text = ''
+            self.root.ids.FirstTimer_DataPassword.text = ''
+
         elif params_WidgetID == 'CallFunc_ClearColumnStartPoint':
             self.root.ids.DataBind_ColumnCellStartPoint.text = ''
         elif params_WidgetID == 'CallFunc_ClearColumnEndPoint':
@@ -545,19 +643,7 @@ class MD_InventoryEXI_SMV_GUI(App):
             raise ValueError('Parameter Variable -> params_TextFieldID: Received a string that is validated with no conditions met.')
             LoggerDebug.error('Parameter Variable -> params_TextFieldID: Received a string that is validated with no conditions met.')
             app.stop()
-    #def MDDropdown_CheckAvailSheets(self):
-    #    ExcelFile_Lookup = load_workbook(self.root.ids.DataBind_FilePath.text)
-    #    for SheetNames in ExcelFile_Lookup.sheetnames:
-
-    def handledrops(self, *args):
-        # this will execute each function from list with arguments from
-        # Window.on_dropfile
-        #
-        # make sure `Window.on_dropfile` works on your system first,
-        # otherwise the example won't work at all
-        for func in self.drops:
-            func(*args)
-
+            
 class AvatarSampleWidget(ILeftBody, Image):
     pass
 
@@ -573,6 +659,6 @@ if __name__ == '__main__':
         MD_InventoryEXI_SMV_GUI().KivyConfig_Setup()
         MD_InventoryEXI_SMV_GUI().run()
     else:
-        LoggerDebug.error('CHECK FAILURE: Application was succesfully failed to operate @ CriticalComponent_Check Function. Program bypassed till terminated...')
-        raise Exception('CHECK FAILURE: Application was succesfully failed to operate @ CriticalComponent_Check Function. Program bypassed till terminated...')
-        self.get_running_app().stop()   
+        LoggerDebug.error('CHECK FAILURE: Application was succesfully failed to operate @ CriticalComponent_Check Function.')
+        raise Exception('CHECK FAILURE: Application was succesfully failed to operate @ CriticalComponent_Check Function.')
+        self.get_running_app().stop()

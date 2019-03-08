@@ -41,8 +41,8 @@ NavigationLayout:
     id: nav_layout
     MDNavigationDrawer_HeaderStringOnly:
         id: nav_drawer
-        header_name: 'Hello, Authors Name!'
-        subheader_name: 'Position: {Anything...}'
+        header_name: 'Welcome!'
+        subheader_name: 'Job Position: Unknown'
         NavigationDrawerDivider:
         NavigationDrawerSubheader:
             text: "Authors Menu"
@@ -76,7 +76,7 @@ NavigationLayout:
             id: ToolMenu_6
             icon: 'exit-to-app'
             text: "Exit Application"
-            #on_release: root.MDButton_Trigger_ExifadtConfirm()#app.get_running_app().stop()
+            on_release: root.MDButton_Exit_SaveData()
     BoxLayout:
         orientation: 'vertical'
         Toolbar:
@@ -108,7 +108,7 @@ NavigationLayout:
                     anchor_y: 'center'
                     MDCard:
                         size_hint: None, None
-                        size: dp(560), dp(470)
+                        size: dp(560), dp(450)
                         BoxLayout:
                             orientation: 'vertical'
                             padding: dp(20)
@@ -157,21 +157,13 @@ NavigationLayout:
                                     password: True
                                     write_tab: False
                                     disabled: True
-                                MDLabel:
-                                    text: 'Want to use the program with modifying features? Click Admin Previledge for more info.'
-                                    theme_text_color: 'Secondary'
-                                    font_style: "Caption"
-                                    size_hint_y: None
-                                    height: dp(8)
                                 MDFlatButton:
                                     theme_text_color: 'Custom'
-                                    text: "Admin Previledge"
+                                    text: "Clear Input"
                                     size_hint: None, None
                                     theme_text_color: 'Custom'
                                     size: 3 * dp(48), dp(48)
-                                    #on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
-                                    #on_release: #app.ExcelLoadInit_Prototype()
-                                    on_release: app.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'        
+                                    on_release: app.IMD_EXPO_ButtonCallBackManager('CallFunc_ClearFirstTimeTextFields')
                                 MDRaisedButton:
                                     text: "Submit Data"
                                     size_hint: None, None
@@ -2224,8 +2216,8 @@ NavigationLayout:
                                                 MDTextField:
                                                     id: Resource_ItemNumVal
                                                     hint_text: "Item Number Input"
-                                                    helper_mode: 'on_focus'
-                                                    helper_text: 'Item Number of the Particular. Required...'
+                                                    helper_text: 'Item Number of the Particular.'
+                                                    helper_text_mode: 'on_focus'
                                                     write_tab: False
                                                 MDFlatButton:
                                                     theme_text_color: 'Custom'
@@ -2240,13 +2232,9 @@ NavigationLayout:
                                             MDTextField:
                                                 id: Resource_ParticularProperty
                                                 hint_text: "Particulars Input"
-                                                helper_text: 'Particular Name. Required...'
-                                                helper_mode: 'on_focus'
+                                                helper_text: 'Name of the Unit / Product.'
+                                                helper_text_mode: 'on_focus'
                                                 write_tab: False
-                                                MDFlatButton:
-                                                    theme_text_color: 'Custom'
-                                                    text: "Admin Previledge"
-                                                    size_hint: None, None
                                             BoxLayout:
                                                 orientation: 'horizontal'
                                                 spacing: dp(10)
@@ -2254,6 +2242,8 @@ NavigationLayout:
                                                 MDTextField:
                                                     id: Resource_OnHandVal
                                                     hint_text: "On Hand Value Input"
+                                                    helper_text: "Units used by people."
+                                                    helper_text_mode: 'on_focus'
                                                     write_tab: False
                                                 MDFlatButton:
                                                     theme_text_color: 'Custom'
@@ -2272,7 +2262,7 @@ NavigationLayout:
                                                 MDTextField:
                                                     id: Resource_ProposedVal
                                                     hint_text: "Proposed Value Input"
-                                                    helper_text: "Text is always here"
+                                                    helper_text: "It is the decided value."
                                                     helper_text_mode: 'on_focus'
                                                     write_tab: False
                                                 MDFlatButton:
@@ -2288,7 +2278,7 @@ NavigationLayout:
                                             MDTextField:
                                                 id: Resource_UnitTypeProperty
                                                 hint_text: "Unit Type Input"
-                                                helper_text: "Type of the Unit of the Particular"
+                                                helper_text: "Type of the Unit"
                                                 helper_text_mode: 'on_focus'
                                                 write_tab: False
                                             BoxLayout:
@@ -2298,8 +2288,8 @@ NavigationLayout:
                                                 MDTextField:
                                                     id: Resource_UnitVal
                                                     hint_text: "Unit Value Input"
-                                                    helper_text: "Text is always here"
-                                                    helper_text_mode: "persistent"
+                                                    helper_text: "The actual cost of the unit."
+                                                    helper_text_mode: "on_focus"
                                                     write_tab: False
                                                 MDFlatButton:
                                                     theme_text_color: 'Custom'
@@ -2317,8 +2307,8 @@ NavigationLayout:
                                                 padding: 0
                                                 MDTextField:
                                                     id: Quartile_TextFieldVal_One
-                                                    hint_text: "Quarter #1 Value"
-                                                    helper_text: "Quarter What Usage????????"
+                                                    hint_text: "Allotment by Quarter #1 Value"
+                                                    helper_text: "Allotment by Quarter 1"
                                                     helper_text_mode: 'on_focus'
                                                     write_tab: False
                                                 MDFlatButton:
@@ -2337,8 +2327,8 @@ NavigationLayout:
                                                 padding: 0
                                                 MDTextField:
                                                     id: Quartile_TextFieldVal_Two
-                                                    hint_text: "Quarter #2 Value"
-                                                    helper_text: "Quarter What Usage????????"
+                                                    hint_text: "Allotment by Quarter #2 Value"
+                                                    helper_text: "Allotment by Quarter 2"
                                                     helper_text_mode: 'on_focus'
                                                     write_tab: False
                                                 MDFlatButton:
@@ -2357,8 +2347,8 @@ NavigationLayout:
                                                 padding: 0
                                                 MDTextField:
                                                     id: Quartile_TextFieldVal_Three
-                                                    hint_text: "Quarter #3 Value"
-                                                    helper_text: "Quarter What Usage????????"
+                                                    hint_text: "Allotment by Quarter #3 Value"
+                                                    helper_text: "Allotment by Quarter 3"
                                                     helper_text_mode: 'on_focus'
                                                     write_tab: False
                                                 MDFlatButton:
@@ -2377,8 +2367,8 @@ NavigationLayout:
                                                 padding: 0
                                                 MDTextField:
                                                     id: Quartile_TextFieldVal_Four
-                                                    hint_text: "Quarter #4 Value"
-                                                    helper_text: "Quarter What Usage????????"
+                                                    hint_text: "Allotment by Quarter #4 Value"
+                                                    helper_text: "Allotment by Quarter 4"
                                                     helper_text_mode: 'on_focus'
                                                     write_tab: False
                                                 MDFlatButton:
@@ -2394,22 +2384,25 @@ NavigationLayout:
                                             MDTextField:
                                                 id: Total_ComputedVal
                                                 hint_text: "Total Value"
-                                                helper_text: "This value is automatically computed based from data..."
-                                                helper_text_mode: "persistent"
+                                                helper_text: "Total of Proposed * Unit, Formulae Applicable"
+                                                helper_text_mode: "on_focus"
                                                 write_tab: False
-                                                disabled: True
                                             BoxLayout:
                                                 orientation: 'horizontal'
                                                 spacing: dp(10)
                                                 MDRaisedButton:
+                                                    id: MDDataEditor_ApplyChange
                                                     text: "Apply Changes"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
-                                                    on_release: app.MDWorksheetWorker_DataEditor_Apply()
+                                                    disabled: True
+                                                    on_release: app.MDWorksheetWorker_DataEditor_Apply(app.Active_DataElement)
                                                 MDFlatButton:
+                                                    id: MDDataEditor_ClearInput
                                                     text: "Clear Input"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
+                                                    disabled: True
                                                     on_release: app.MDWorksheetWorker_DataEditor_CleanInput()
                                     MDCard:
                                         size: dp(320), dp(240)
@@ -2436,14 +2429,14 @@ NavigationLayout:
                                                         text: "Save on Import Path"
                                                         size_hint: None, None
                                                         size: 3 * dp(48), dp(48)
-                                                        on_release: app.ExcelFile_SaveOnCurrentPath()
+                                                        on_release: app.ExcelFile_SaveOnPath('CurrentPath')
                                                         disabled: True
                                                     MDRaisedButton:
                                                         id: FileOpt_Progress_SaveExport
                                                         text: "Save on Export Path"
                                                         size_hint: None, None
                                                         size: 3 * dp(48), dp(48)
-                                                        on_release: app.ExcelFile_SaveOnExportPath()
+                                                        on_release: app.ExcelFile_SaveOnPath('ExportPath')
                                                         disabled: True
                                                     MDRaisedButton:
                                                         id: FileOpt_FirstInst_LoadDataFile
@@ -2457,7 +2450,7 @@ NavigationLayout:
                                                         text: "Reload Data"
                                                         size_hint: None, None
                                                         size: 3 * dp(48), dp(48)
-                                                        on_release: app.ExcelLoadInit_Data_Editor('Load')
+                                                        on_release: app.ExcelLoadInit_Data_Editor('Reload')
                                                         disabled: True
                                                     MDRaisedButton:
                                                         id: FileOpt_EndInst_UnloadDataFile
@@ -2724,14 +2717,7 @@ NavigationLayout:
                                                     helper_text: "Required, if you want to use this application!"
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
-                                                    text: 'C:\\Users\\janja\\Desktop\\sam.xlsx'
-                                                MDTextField:
-                                                    id: DataBind_FileArguments
-                                                    hint_text: "Show True Value Instead of Formulae"
-                                                    required: True
-                                                    helper_text: "Optional, Leave it blank to save with formulae or else write True."
-                                                    helper_text_mode: "on_focus"
-                                                    write_tab: False
+                                                    text: 'E:\\A Development That No One Knows\\Github\\InventoryEditor-Data_List_Simplier_AEMB\\sam.xlsx'
                                                 MDFlatButton:
                                                     theme_text_color: 'Custom'
                                                     text: "Clear Path"
@@ -3120,7 +3106,7 @@ NavigationLayout:
                     anchor_y: 'center'
                     MDCard:
                         size_hint: None, None
-                        size: dp(560), dp(470)
+                        size: dp(560), dp(450)
                         BoxLayout:
                             orientation: 'vertical'
                             padding: dp(20)
@@ -3139,24 +3125,28 @@ NavigationLayout:
                                     size_hint_y: None
                                     height: dp(3)
                                 MDTextField:
+                                    id: UserEdit_FirstName
                                     hint_text: "Edit Your First Name"
                                     required: True
                                     helper_text: "First Name Needed for Author Assignment"
                                     helper_text_mode: "on_focus"
                                     write_tab: False
                                 MDTextField:
+                                    id: UserEdit_LastName
                                     hint_text: "Edit Your Last Name"
                                     required: True
                                     helper_text: "Last Name Needed for Author Assignment"
                                     helper_text_mode: "on_focus"
                                     write_tab: False
                                 MDTextField:
+                                    id: UserEdit_JobPosition
                                     hint_text: "Edit Your Job Position"
                                     required: True
                                     helper_text: "Job Position Needed for Author Assignment"
                                     helper_text_mode: "on_focus"
                                     write_tab: False
                                 MDTextField:
+                                    id: UserEdit_Password
                                     hint_text: "Edit Your Password"
                                     required: True
                                     helper_text: "Password is needed but it is required when the program version is not individual use."
@@ -3164,19 +3154,14 @@ NavigationLayout:
                                     password: True
                                     disabled: True
                                     write_tab: False
-                                MDLabel:
-                                    text: 'Want to use the program with modifying features? Click Admin Previledge for more info.'
-                                    theme_text_color: 'Secondary'
-                                    font_style: "Caption"
-                                    size_hint_y: None
-                                    height: dp(8)
                                 MDFlatButton:
                                     theme_text_color: 'Custom'
-                                    text: "Admin Previledge"
+                                    text: "Clear Input"
                                     size_hint: None, None
                                     size: 3 * dp(48), dp(48)
-                                    disabled: True
+                                    on_release:app.IMD_EXPO_ButtonCallBackManager('CallFunc_ClearEditTextFields')
                                 MDRaisedButton:
                                     text: "Submit Data"
                                     size_hint: None, None
                                     size: 3 * dp(48), dp(48)
+                                    #on_release:app.()
