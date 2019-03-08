@@ -48,6 +48,7 @@ from kivy.clock import Clock
 from openpyxl import load_workbook, Workbook
 from openpyxl.utils import column_index_from_string
 import sqlite3
+from os.path import isfile as FileExist
 #Clock.max_iteration = 20
 #class HackedDemoNavDrawer(MDNavigationDrawer):
 #    # DO NOT USE
@@ -71,97 +72,117 @@ class MD_InventoryEXI_SMV_GUI(App):
     #title = "Welcome to Excel Inventory To Simplified Model View | EXI_SMV" #Excel to Simplified Model VIew in GUI
     title = "Excel Inventory To Simplified Model View | EXI_SMV - Individual Use" #Excel to Simplified Model VIew in GUI
     Icon_Status = 'brightness-1'
-    def KivyConfig_Init(self): # Get Values from DB and Change App Behavior Accordingly
-        pass
-
-    def KivyConfig_Setup_FirstTime(self): #This Config can be changed from DB
-        #Config.set('graphics', 'fullscreen', 'fake')
-        Config.set('graphics','width','1024')
-        Config.set('graphics','height','768')
-        Config.set('graphics','show_cursor','1')
-        Config.set('graphics','minimum_width','1024')
-        Config.set('graphics','minimum_height','768')
-        Config.set('kivy','exit_on_escape','0')
-        Config.write()
+    SQLite_MainPath = 'EXI_SMV_AppData.db'
+    
+    def KivyConfig_Setup(self): #This Config is loaded by default. It cannot be changed.
+        try:
+            Config.set('graphics','width','1024')
+            Config.set('graphics','height','768')
+            Config.set('graphics','show_cursor','1')
+            Config.set('graphics','minimum_width','1024')
+            Config.set('graphics','minimum_height','768')
+            Config.set('kivy','exit_on_escape','0')
+            Config.write()
+            return 'Passed'
+        except:
+            return 'Failed'
     def SQLite_Generate_FirstTime(self):
-        pass
-
-    def SQLite_Init(self): #Init Files and Creates when it doesnt exist but show snackbar that is doesnt exist
+        if FileExist(self.SQLite_MainPath):
+            return 'Exist'
+        else:
+            return 'DoesNotExist'
         pass
 
     def SQLite_ChangeModify(self): # Not Sure
         pass
 
     def CriticalComponent_Check(self):
-        return 1
-        if self.KivyConfig_Init() == 'Passed':
-            LoggerDebug.info()
-        elif self.KivyConfig_Init() == 'FileDoesNotExist': #Not Consistent, Maybe Clarify this one soon
-            LoggerDebug.info('FILE EXISTENT: App knows this is not the first. File does not exist. Relocate the application...') # Add save file
-            raise Exception('FILE EXISTENT: App knows this is not the first. File does not exist. Relocate the application...')
-            self.get_running_app().stop() 
-        else: #Add Path does not exist
-            if self.KivyConfig_Setup_FirstTime() == 'Passed':
-                LoggerDebug.info('Kivy Config: First Time Settings is loaded and saved.') # Add save file
-                if self.SQLite_Init() == 'Passed':
-                    LoggerDebug.info('Kivy Config: First Time Settings is loaded and saved.') # Add save file
-                else:
-                    if self.SQLite_Generate_FirstTime() == 'Passed':
-                        LoggerDebug.info('Kivy Config: First Time Files is Initialized and Ready To Go!') # Add save file
-                        return 1
-                    else:
-                        return 0
+        if self.KivyConfig_Setup() == 'Passed':
+            LoggerDebug.info('Kivy Configuration Load: Kivy Appplication Parameters has successfully passed paramters.')
+            if self.SQLite_Generate_FirstTime() == 'Exist':
+                LoggerDebug.info('SQLite Data Load: File Exist, Data Loaded...')
+                return 1
             else:
-                return 0
-
+                LoggerDebug.warning('SQLite Data Failed: Attempting to Create a Database under application directory...')
+                try:
+                    with sqlite3.connect('EXI_SMV_AppData.db', timeout = 1) as DataSQL_FileConnection:
+                        SQLDataPosition = DataSQL_FileConnection.cursor()
+                    SQL_Connect = sqlite3.connect('EXI_SMV_AppData.db')
+                    SQL_Connect.execute('CREATE TABLE IF NOT EXISTS user_TableDatabase(user_FirstName STRING, user_LastName STRING, user_JobCurrent STRING, user_Password STRING)')
+                    SQL_Connect.execute('CREATE TABLE IF NOT EXISTS user_TableLastStringSave(string_ExcelImportPath STRING, string_ExcelExportPath STRING, string_ExcelColumnStart STRING, string_ExcelColumnEnd STRING, string_ExcelRowStart STRING, string_ExcelRowEnd STRING, string_ExcelSheetName STRING, string_ShowFormulae STRING)')
+                    SQL_Connect.commit()
+                    SQL_Connect.close()
+                    LoggerDebug.info('SQL Data Creation: Data has been succesfully created from the database!')
+                    return 1
+                except:
+                    LoggerDebug.error('SQL Database Write: SQL Failed to Execute. Application will be terminated...') 
+                    return 0
+                    
+        else:
+            LoggerDebug.warning('Kivy Configuration Load: Kivy Appplication Parameters has failed to comply its execution. Continuing....')
+            if self.SQLite_Generate_FirstTime() == 'Exist':
+                LoggerDebug.info('SQLite Data Load: File Exist, Data Loaded...')
+                return 1
+            else:
+                LoggerDebug.warning('SQLite Data Load Failed: Attempting to Create a Database under application directory...')
+                try:
+                    with sqlite3.connect('EXI_SMV_AppData.db', timeout = 1) as DataSQL_FileConnection:
+                        SQLDataPosition = DataSQL_FileConnection.cursor()
+                    SQL_Connect = sqlite3.connect('EXI_SMV_AppData.db')
+                    SQL_Connect.execute('CREATE TABLE IF NOT EXISTS user_TableDatabase(user_FirstName STRING, user_LastName STRING, user_JobCurrent STRING, user_Password STRING)')
+                    SQL_Connect.execute('CREATE TABLE IF NOT EXISTS user_TableLastStringSave(string_ExcelImportPath STRING, string_ExcelExportPath STRING, string_ExcelColumnStart STRING, string_ExcelColumnEnd STRING, string_ExcelRowStart STRING, string_ExcelRowEnd STRING, string_ExcelSheetName STRING, string_ShowFormulae STRING)')
+                    SQL_Connect.commit()
+                    SQL_Connect.close()
+                    LoggerDebug.info('SQL Data Creation: Data has been succesfully created from the database!')
+                    return 1
+                except:
+                    LoggerDebug.error('[SQL Database Write]: SQL Failed to Execute. Application will be terminated...')
+                    return 0
     def build(self):
         self.MainClassBuildFile = Builder.load_file("MD_DesignClass_File.kv")
         self.theme_cls.primary_palette = 'DeepOrange'
         self.theme_cls.primary_hue = '400'
         self.theme_cls.theme_style = 'Light'
-        on_dropfile=self._on_file_drop
+        #on_dropfile=self._on_file_drop
         return self.MainClassBuildFile
         
     def _on_file_drop(self, window, file_path):
         print(file_path)
         return
-    
-    def MD_DataManage_ShowCellToList(self):
-        pass
-
-    def MD_DataManage_Modify(self):
-        pass
-
+    #
     def MD_FirstTime_DataSubmission(self):
-        pass
-
+        SQLData = sqlite3.connect('EXI_SMV_AppData.db')
+        SQLData.execute('INSERT INTO user_TableDatabase(user_FirstName, user_LastName, user_JobCurrent, user_Password) values (?, ?, ?, ?)', (self.root.ids.FirstTimer_DataFirstName.text, self.root.ids.FirstTimer_DataLastName.text, self.root.ids.FirstTimer_DataJobPosition.text,self.root.ids.FirstTimer_DataPassword.text))
+        SQLData.commit()
+        SQLData.close()
+        self.MDUserNotif_SnackbarHandler('Welcome, {0} {1}, | {2} |'.format(self.root.ids.FirstTimer_DataFirstName.text, self.root.ids.FirstTimer_DataLastName.text , self.root.ids.FirstTimer_DataJobPosition.text))
+        self.root.ids.ScreenFrame_MainWindow.current = 'MainWindow_SimplifiedView'
     def MDCard_GenerateReport(self):
         pass
 
     #For Add and Delete
-    def MDAuthor_DeleteData(self):
-        pass
-
-    def MDAuthor_AddData(self):
-        pass
-
-    def MDAuthor_EditData(self):
-        pass
-
-    def MDStartup_FirstTime_AdminAccess(self, BooleanPrompt):
-        pass
+    #def MDAuthor_DeleteData(self):
+    #    pass
+    #
+    #def MDAuthor_AddData(self):
+    #    pass
+    #
+    #def MDAuthor_EditData(self):
+    #    pass
+    #
+    #def MDStartup_FirstTime_AdminAccess(self, BooleanPrompt):
+    #    pass
     
-    #For Checking Previledge on Accessing Admin Features
-    def MDAuthor_CheckAdminPrev_OnAction(self):
-        pass
-
-    # For Logon Screen
-    def MDAuthor_DialogBooleanPrompt(self):
-        pass
-
-    #For Logon and Admin for Modifying User and Assign
-    def MDAuthor_PasswordAccessPrompt(self):
-        pass
+    #def MDAuthor_CheckAdminPrev_OnAction(self):
+    #    pass
+    #
+    ## For Logon Screen
+    #def MDAuthor_DialogBooleanPrompt(self):
+    #    pass
+    #
+    ##For Logon and Admin for Modifying User and Assign
+    #def MDAuthor_PasswordAccessPrompt(self):
+    #    pass
         
     def MDToolbar_DynamicContent_Change(self, params_title, params_pallete, params_left_action_items, params_right_action_items):
         self.root.ids.ToolbarMain.title = params_title
@@ -549,9 +570,9 @@ class IconRightSampleWidget(IRightBodyTouch, MDCheckbox):
 if __name__ == '__main__':
     if MD_InventoryEXI_SMV_GUI().CriticalComponent_Check():
         LoggerDebug.info('Resource: File Checks Completed... ')
-        MD_InventoryEXI_SMV_GUI().KivyConfig_Setup_FirstTime()
+        MD_InventoryEXI_SMV_GUI().KivyConfig_Setup()
         MD_InventoryEXI_SMV_GUI().run()
     else:
-        LoggerDebug.error('CHECK FAILURE: Application was succesfully failed to comply on one of the files to create or check those files. Set the application run with admin previledges...')
-        raise Exception('CHECK FAILURE: Application was succesfully failed to comply on one of the files to create or check those files. Set the application run with admin previledges...')
-        get_running_app().stop()
+        LoggerDebug.error('CHECK FAILURE: Application was succesfully failed to operate @ CriticalComponent_Check Function. Program bypassed till terminated...')
+        raise Exception('CHECK FAILURE: Application was succesfully failed to operate @ CriticalComponent_Check Function. Program bypassed till terminated...')
+        self.get_running_app().stop()   

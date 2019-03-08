@@ -152,10 +152,11 @@ NavigationLayout:
                                     id: FirstTimer_DataPassword
                                     hint_text: "Input Your Password"
                                     required: True
-                                    helper_text: "Password is needed to avoid changing authors without permission."
-                                    helper_text_mode: "on_focus"
+                                    helper_text: "Password is needed but it is required when the program version is not individual use."
+                                    helper_text_mode: "persistent"
                                     password: True
                                     write_tab: False
+                                    disabled: True
                                 MDLabel:
                                     text: 'Want to use the program with modifying features? Click Admin Previledge for more info.'
                                     theme_text_color: 'Secondary'
@@ -175,7 +176,7 @@ NavigationLayout:
                                     text: "Submit Data"
                                     size_hint: None, None
                                     size: 3 * dp(48), dp(48)
-                                    on_release: app.MDToolbar_DynamicContent_Change('ThisIsATest', 'Red', '' ,'')
+                                    on_release: app.MD_FirstTime_DataSubmission() 
             Screen:
                 name: 'MainWindow_SimplifiedView'
                 MDBottomNavigation:
@@ -3132,7 +3133,7 @@ NavigationLayout:
                                     size_hint_y: None
                                     height: dp(15)
                                 MDLabel:
-                                    text: 'Type Mistake? Wrong Info? Correct That One Here!'
+                                    text: 'Type Mistaken? Wrong Info? Correct That It Here!'
                                     theme_text_color: 'Secondary'
                                     font_style: "Body1"
                                     size_hint_y: None
