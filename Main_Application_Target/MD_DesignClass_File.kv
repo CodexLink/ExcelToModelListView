@@ -2219,16 +2219,20 @@ NavigationLayout:
                                                     helper_text: 'Item Number of the Particular.'
                                                     helper_text_mode: 'on_focus'
                                                     write_tab: False
-                                                MDFlatButton:
+                                                MDRaisedButton:
+                                                    id: QuickAction_Increment_1
                                                     theme_text_color: 'Custom'
                                                     text: "Increment"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
-                                                MDFlatButton:
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(1,'Increment')
+                                                MDRaisedButton:
+                                                    id: QuickAction_Decrement_1
                                                     theme_text_color: 'Custom'
                                                     text: "Decrement"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(1,'Decrement')
                                             MDTextField:
                                                 id: Resource_ParticularProperty
                                                 hint_text: "Particulars Input"
@@ -2245,16 +2249,20 @@ NavigationLayout:
                                                     helper_text: "Units used by people."
                                                     helper_text_mode: 'on_focus'
                                                     write_tab: False
-                                                MDFlatButton:
+                                                MDRaisedButton:
+                                                    id: QuickAction_Increment_2
                                                     theme_text_color: 'Custom'
                                                     text: "Increment"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
-                                                MDFlatButton:
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(2,'Increment')
+                                                MDRaisedButton:
+                                                    id: QuickAction_Decrement_2
                                                     theme_text_color: 'Custom'
                                                     text: "Decrement"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(2,'Decrement')
                                             BoxLayout:
                                                 orientation: 'horizontal'
                                                 spacing: dp(10)
@@ -2265,16 +2273,20 @@ NavigationLayout:
                                                     helper_text: "It is the decided value."
                                                     helper_text_mode: 'on_focus'
                                                     write_tab: False
-                                                MDFlatButton:
+                                                MDRaisedButton:
+                                                    id: QuickAction_Increment_3
                                                     theme_text_color: 'Custom'
                                                     text: "Increment"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
-                                                MDFlatButton:
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(3,'Increment')
+                                                MDRaisedButton:
+                                                    id: QuickAction_Increment_3
                                                     theme_text_color: 'Custom'
                                                     text: "Decrement"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(3,'Decrement')
                                             MDTextField:
                                                 id: Resource_UnitTypeProperty
                                                 hint_text: "Unit Type Input"
@@ -2291,16 +2303,20 @@ NavigationLayout:
                                                     helper_text: "The actual cost of the unit."
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
-                                                MDFlatButton:
+                                                MDRaisedButton:
+                                                    id: QuickAction_Increment_4
                                                     theme_text_color: 'Custom'
                                                     text: "Increment"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
-                                                MDFlatButton:
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(4,'Increment')
+                                                MDRaisedButton:
+                                                    id: QuickAction_Decrement_4
                                                     theme_text_color: 'Custom'
                                                     text: "Decrement"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(4,'Decrement')
                                             BoxLayout:
                                                 orientation: 'horizontal'
                                                 spacing: dp(10)
@@ -2311,16 +2327,20 @@ NavigationLayout:
                                                     helper_text: "Allotment by Quarter 1"
                                                     helper_text_mode: 'on_focus'
                                                     write_tab: False
-                                                MDFlatButton:
+                                                MDRaisedButton:
+                                                    id: QuickAction_Increment_5
                                                     theme_text_color: 'Custom'
                                                     text: "Increment"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
-                                                MDFlatButton:
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(5,'Increment')
+                                                MDRaisedButton:
+                                                    id: QuickAction_Decrement_5
                                                     theme_text_color: 'Custom'
                                                     text: "Decrement"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(5,'Decrement')
                                             BoxLayout:
                                                 orientation: 'horizontal'
                                                 spacing: dp(10)
@@ -2331,16 +2351,20 @@ NavigationLayout:
                                                     helper_text: "Allotment by Quarter 2"
                                                     helper_text_mode: 'on_focus'
                                                     write_tab: False
-                                                MDFlatButton:
+                                                MDRaisedButton:
+                                                    id: QuickAction_Increment_6
                                                     theme_text_color: 'Custom'
                                                     text: "Increment"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
-                                                MDFlatButton:
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(6,'Increment')
+                                                MDRaisedButton:
+                                                    id: QuickAction_Decrement_6
                                                     theme_text_color: 'Custom'
                                                     text: "Decrement"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(6,'Decrement')
                                             BoxLayout:
                                                 orientation: 'horizontal'
                                                 spacing: dp(10)
@@ -2351,16 +2375,20 @@ NavigationLayout:
                                                     helper_text: "Allotment by Quarter 3"
                                                     helper_text_mode: 'on_focus'
                                                     write_tab: False
-                                                MDFlatButton:
+                                                MDRaisedButton:
+                                                    id: QuickAction_Increment_7
                                                     theme_text_color: 'Custom'
                                                     text: "Increment"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
-                                                MDFlatButton:
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(7,'Increment')
+                                                MDRaisedButton:
+                                                    id: QuickAction_Decrement_7
                                                     theme_text_color: 'Custom'
                                                     text: "Decrement"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(7,'Decrement')
                                             BoxLayout:
                                                 orientation: 'horizontal'
                                                 spacing: dp(10)
@@ -2371,16 +2399,20 @@ NavigationLayout:
                                                     helper_text: "Allotment by Quarter 4"
                                                     helper_text_mode: 'on_focus'
                                                     write_tab: False
-                                                MDFlatButton:
+                                                MDRaisedButton:
+                                                    id: QuickAction_Increment_8
                                                     theme_text_color: 'Custom'
                                                     text: "Increment"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
-                                                MDFlatButton:
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(8,'Increment')
+                                                MDRaisedButton:
+                                                    id: QuickAction_Decrement_8
                                                     theme_text_color: 'Custom'
                                                     text: "Decrement"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
+                                                    on_release: app.MDWorksheetWorker_DataEditor_ValueRaiseLowCaller(8,'Decrement')
                                             MDTextField:
                                                 id: Total_ComputedVal
                                                 hint_text: "Total Value"
@@ -2397,13 +2429,13 @@ NavigationLayout:
                                                     size: 3 * dp(48), dp(48)
                                                     disabled: True
                                                     on_release: app.MDWorksheetWorker_DataEditor_Apply(app.Active_DataElement)
-                                                MDFlatButton:
+                                                MDRaisedButton:
                                                     id: MDDataEditor_ClearInput
                                                     text: "Clear Input"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
                                                     disabled: True
-                                                    on_release: app.MDWorksheetWorker_DataEditor_CleanInput()
+                                                    on_release: app.IMD_EXPO_ButtonCallBackManager('CallFuncFromDataEditor_ClearInputs')
                                     MDCard:
                                         size: dp(320), dp(240)
                                         size_hint_y: None
@@ -2459,6 +2491,13 @@ NavigationLayout:
                                                         size: 3 * dp(48), dp(48)
                                                         on_release: app.ExcelLoadInit_Data_Editor('Unload')
                                                         disabled: True
+                                                    MDRaisedButton:
+                                                        id: FileOpt_General_GenerateReport
+                                                        text: "Generate Data Report"
+                                                        size_hint: None, None
+                                                        size: 3 * dp(48), dp(48)
+                                                        on_release: app.MDCard_Generate_DataStatusReport()
+                                                        disabled: True
                     MDBottomNavigationItem:
                         name: 'MainFrameWindow_2'
                         text: "Data Status Report"
@@ -2484,23 +2523,27 @@ NavigationLayout:
                                     size: dp(320), dp(215)
                                     size_hint_y: None
                                     padding: dp(15)
-                                    BoxLayout:
-                                        orientation:'vertical'
-                                        spacing: dp(2)
-                                        MDLabel:
-                                            font_style: 'Headline'
-                                            theme_text_color: 'Primary'
-                                            text: "Total Units"
-                                            text_size: self.size
-                                            halign: 'left'
-                                            valign: 'top'
-                                        MDLabel:
-                                            theme_text_color: 'Primary'
-                                            font_style: "Display3"
-                                            text_size: self.size
-                                            text: '123901'
-                                            halign: 'center'
-                                            valign: 'center'
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        AnchorLayout:
+                                            anchor_x:'left'
+                                            anchor_y:'top'
+                                            MDLabel:
+                                                font_style: 'Headline'
+                                                theme_text_color: 'Primary'
+                                                text: "Total Units"
+                                                text_size: self.size
+                                                halign: 'left'
+                                                valign: 'top'
+                                                height: dp(0)
+                                            MDLabel:
+                                                id: DataReport_TotalUnits
+                                                theme_text_color: 'Primary'
+                                                font_style: "Display3"
+                                                text_size: self.size
+                                                text: '0'
+                                                halign: 'center'
+                                                valign: 'center'
 
                                 MDCard:
                                     size: dp(320), dp(215)
@@ -2516,159 +2559,175 @@ NavigationLayout:
                                                 MDLabel:
                                                     font_style: 'Headline'
                                                     theme_text_color: 'Primary'
-                                                    text: "Total Proposed"
+                                                    text: "Average Proposed Quantity"
                                                     text_size: self.size
                                                     halign: 'left'
                                                     valign: 'top'
                                                 MDLabel:
-                                                    text: 'Overall'
-                                                    theme_text_color: 'Secondary'
-                                                    font_style: "Body1"
-                                                    text_size: self.size
-                                MDCard:
-                                    size: dp(320), dp(215)
-                                    size_hint_y: None
-                                    padding: dp(15)
-                                    
-                                    StackLayout:
-                                        spacing: dp(4)
-                                        BoxLayout:
-                                            orientation:'vertical'
-                                            AnchorLayout:
-                                                anchor_x:'left'
-                                                anchor_y:'top'
-                                                MDLabel:
-                                                    font_style: 'Headline'
+                                                    id: DataReport_TotalProposed
                                                     theme_text_color: 'Primary'
-                                                    text: "Total OnHand Value"
+                                                    font_style: "Display3"
                                                     text_size: self.size
-                                                    halign: 'left'
-                                                    valign: 'top'
-                                                MDLabel:
-                                                    text: 'Overall'
-                                                    theme_text_color: 'Secondary'
-                                                    font_style: "Body1"
-                                                    text_size: self.size
-                                MDCard:
-                                    size: dp(320), dp(215)
-                                    size_hint_y: None
-                                    padding: dp(15)
-                                    StackLayout:
-                                        spacing: dp(4)
-                                        BoxLayout:
-                                            orientation:'vertical'
-                                            AnchorLayout:
-                                                anchor_x:'left'
-                                                anchor_y:'top'
-                                                MDLabel:
-                                                    font_style: 'Headline'
-                                                    theme_text_color: 'Primary'
-                                                    text: "On Storage Val"
-                                                    text_size: self.size
-                                                    halign: 'left'
-                                                    valign: 'top'
-                                                MDLabel:
-                                                    text: 'Overall'
-                                                    theme_text_color: 'Secondary'
-                                                    font_style: "Body1"
-                                                    text_size: self.size
-                                MDCard:
-                                    size: dp(320), dp(215)
-                                    size_hint_y: None
-                                    padding: dp(15)
-                                    
-                                    StackLayout:
-                                        spacing: dp(4)
-                                        BoxLayout:
-                                            orientation:'vertical'
-                                            AnchorLayout:
-                                                anchor_x:'left'
-                                                anchor_y:'top'
-                                                MDLabel:
-                                                    font_style: 'Headline'
-                                                    theme_text_color: 'Primary'
-                                                    text: "Most Used Item Recorded"
-                                                    text_size: self.size
-                                                    halign: 'left'
-                                                    valign: 'top'
-                                                MDLabel:
-                                                    text: 'Overall'
-                                                    theme_text_color: 'Secondary'
-                                                    font_style: "Body1"
-                                                    text_size: self.size
-                                MDCard:
-                                    size: dp(320), dp(215)
-                                    size_hint_y: None
-                                    padding: dp(15)
-                                    
-                                    StackLayout:
-                                        spacing: dp(4)
-                                        BoxLayout:
-                                            orientation:'vertical'
-                                            AnchorLayout:
-                                                anchor_x:'left'
-                                                anchor_y:'top'
-                                                MDLabel:
-                                                    font_style: 'Headline'
-                                                    theme_text_color: 'Primary'
-                                                    text: "Due Note Dates Added"
-                                                    text_size: self.size
-                                                    halign: 'left'
-                                                    valign: 'top'
-                                                MDLabel:
-                                                    text: 'Not sure about this one...'
-                                                    theme_text_color: 'Secondary'
-                                                    font_style: "Body1"
-                                                    text_size: self.size
-                                MDCard:
-                                    size: dp(320), dp(215)
-                                    size_hint_y: None
-                                    padding: dp(15)
-                                    
-                                    StackLayout:
-                                        spacing: dp(4)
-                                        BoxLayout:
-                                            orientation:'vertical'
-                                            AnchorLayout:
-                                                anchor_x:'left'
-                                                anchor_y:'top'
-                                                MDLabel:
-                                                    font_style: 'Headline'
-                                                    theme_text_color: 'Primary'
-                                                    text: "Recently Added Particular"
-                                                    text_size: self.size
-                                                    halign: 'left'
-                                                    valign: 'top'
-                                                MDLabel:
-                                                    text: 'Not sure about this one...'
-                                                    theme_text_color: 'Secondary'
-                                                    font_style: "Body1"
-                                                    text_size: self.size
-                                MDCard:
-                                    size: dp(320), dp(215)
-                                    size_hint_y: None
-                                    padding: dp(15)
-                                    
-                                    StackLayout:
-                                        spacing: dp(4)
-                                        BoxLayout:
-                                            orientation:'vertical'
-                                            AnchorLayout:
-                                                anchor_x:'left'
-                                                anchor_y:'top'
-                                                MDLabel:
-                                                    font_style: 'Headline'
-                                                    theme_text_color: 'Primary'
-                                                    text: "Last Data Edited"
-                                                    text_size: self.size
-                                                    halign: 'left'
-                                                    valign: 'top'
-                                                MDLabel:
-                                                    text: 'Shows what data ppoint has been edited...'
-                                                    theme_text_color: 'Secondary'
-                                                    font_style: "Body1"
-                                                    text_size: self.size
+                                                    text: '0'
+                                                    halign: 'center'
+                                                    valign: 'center'
 
+                                MDCard:
+                                    size: dp(320), dp(215)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        BoxLayout:
+                                            orientation:'vertical'
+                                            AnchorLayout:
+                                                anchor_x:'left'
+                                                anchor_y:'top'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "Active OnHands"
+                                                    text_size: self.size
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                MDLabel:
+                                                    id: DataReport_TotalOnHand
+                                                    theme_text_color: 'Primary'
+                                                    font_style: "Display3"
+                                                    text_size: self.size
+                                                    text: '0'
+                                                    valign: 'center'
+                                                    halign: 'center'
+                                MDCard:
+                                    size: dp(320), dp(215)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        BoxLayout:
+                                            orientation:'vertical'
+                                            AnchorLayout:
+                                                anchor_x:'left'
+                                                anchor_y:'top'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "Average OnHand Quantity"
+                                                    text_size: self.size
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                MDLabel:
+                                                    id: DataReport_CalculatedOnHand
+                                                    theme_text_color: 'Primary'
+                                                    font_style: "Display3"
+                                                    text_size: self.size
+                                                    text: '0'
+                                                    halign: 'center'
+                                                    valign: 'center'
+                                MDCard:
+                                    size: dp(320), dp(215)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        BoxLayout:
+                                            orientation:'vertical'
+                                            AnchorLayout:
+                                                anchor_x:'left'
+                                                anchor_y:'top'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "Recent Item Updated / Modified"
+                                                    text_size: self.size
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                MDLabel:
+                                                    id: DataReport_ResourceLastModified
+                                                    text: 'Unknown'
+                                                    theme_text_color: 'Primary'
+                                                    font_style: "Title"
+                                                    text_size: self.size
+                                                    halign: 'center'
+                                                    valign: 'center'
+                                MDCard:
+                                    size: dp(320), dp(215)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        BoxLayout:
+                                            orientation:'vertical'
+                                            AnchorLayout:
+                                                anchor_x:'left'
+                                                anchor_y:'top'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "Average Quarter Allotment (1 to 4)"
+                                                    text_size: self.size
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                MDLabel:
+                                                    id: DataReport_QuarterAllotment
+                                                    text: 'Unknown Calculation'
+                                                    theme_text_color: 'Primary'
+                                                    font_style: "Display2"
+                                                    text_size: self.size
+                                                    halign: 'center'
+                                                    valign: 'center'
+                                MDCard:
+                                    size: dp(320), dp(215)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        BoxLayout:
+                                            orientation:'vertical'
+                                            AnchorLayout:
+                                                anchor_x:'left'
+                                                anchor_y:'top'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "Calculated Total Cost (Of The Current Sheet)"
+                                                    text_size: self.size    
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                MDLabel:
+                                                    id: DataReport_TotalCost
+                                                    text: '#!Unknown'
+                                                    theme_text_color: 'Primary'
+                                                    font_style: "Display1"
+                                                    text_size: self.size
+                                                    halign: 'center'
+                                                    valign: 'center'
+                                MDCard:
+                                    size: dp(320), dp(215)
+                                    size_hint_y: None
+                                    padding: dp(15)
+                                    StackLayout:
+                                        spacing: dp(4)
+                                        BoxLayout:
+                                            orientation:'vertical'
+                                            AnchorLayout:
+                                                anchor_x:'left'
+                                                anchor_y:'top'
+                                                MDLabel:
+                                                    font_style: 'Headline'
+                                                    theme_text_color: 'Primary'
+                                                    text: "Calculated Unit Cost (Of The Current Sheet)"
+                                                    text_size: self.size    
+                                                    halign: 'left'
+                                                    valign: 'top'
+                                                MDLabel:
+                                                    id: DataReport_UnitCost
+                                                    text: 'Unknown'
+                                                    theme_text_color: 'Primary'
+                                                    font_style: "Display1"
+                                                    text_size: self.size
+                                                    halign: 'center'
+                                                    valign: 'center'
                     MDBottomNavigationItem:
                         name: 'MainFrameWindow_3'
                         text: "Import Data / Export Pull Out"
@@ -2682,11 +2741,9 @@ NavigationLayout:
                                 padding: dp(20)
                                 height: self.minimum_height
                                 MDCard:
-
                                     size: dp(320), dp(345)
                                     size_hint_y: None
                                     padding: dp(15)
-                                    
                                     StackLayout:
                                         spacing: dp(4)
                                         BoxLayout:
@@ -2718,12 +2775,30 @@ NavigationLayout:
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
                                                     text: 'E:\\A Development That No One Knows\\Github\\InventoryEditor-Data_List_Simplier_AEMB\\sam.xlsx'
-                                                MDFlatButton:
+                                                MDRaisedButton:
                                                     theme_text_color: 'Custom'
                                                     text: "Clear Path"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
                                                     on_release: app.IMD_EXPO_ButtonCallBackManager('ClearInput_Path')
+                                            BoxLayout:
+                                                orientation: 'horizontal'
+                                                spacing: dp(10)
+                                                padding: 0
+                                                MDTextField:
+                                                    id: DataBind_ExcelFileSheet
+                                                    hint_text: "Sheet Name"
+                                                    required: True
+                                                    helper_text: "Required, this was added to know what sheet to use."
+                                                    helper_text_mode: "on_focus"
+                                                    write_tab: False
+                                                    text: 'Sheet1'
+                                                MDRaisedButton:
+                                                    theme_text_color: 'Custom'
+                                                    text: "Clear Path"
+                                                    size_hint: None, None
+                                                    size: 3 * dp(48), dp(48)
+                                                    on_release: app.IMD_EXPO_ButtonCallBackManager('ClearInput_ExcelFileSheet')
                                             BoxLayout:
                                                 orientation: 'horizontal'
                                                 spacing: dp(10)
@@ -2736,21 +2811,21 @@ NavigationLayout:
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
                                                     text: 'B'
-                                                MDFlatButton:
+                                                MDRaisedButton:
                                                     theme_text_color: 'Custom'
                                                     text: "Clear Value"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
                                                     on_release: app.IMD_EXPO_ButtonCallBackManager('CallFunc_ClearColumnStartPoint')
                                                 MDTextField:
-                                                    id: DataBind_ColumnCellEndPoint
-                                                    hint_text: "Cell Column Ending Point (Letter Only)"
+                                                    id: DataBind_RowCellStartPoint
+                                                    hint_text: "Row Cell Starting Point (Number Only)"
                                                     required: True
-                                                    helper_text: "Letter will define what column the program will stop at reading."
+                                                    helper_text: "Number defines what row # will start the program reading."
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
-                                                    text: 'P'
-                                                MDFlatButton:
+                                                    text: '6'
+                                                MDRaisedButton:
                                                     theme_text_color: 'Custom'
                                                     text: "Clear Value"
                                                     size_hint: None, None
@@ -2761,14 +2836,14 @@ NavigationLayout:
                                                 spacing: dp(10)
                                                 padding: 0
                                                 MDTextField:
-                                                    id: DataBind_RowCellStartPoint
-                                                    hint_text: "Row Cell Starting Point (Number Only)"
+                                                    id: DataBind_ColumnCellEndPoint
+                                                    hint_text: "Cell Column Ending Point (Letter Only)"
                                                     required: True
-                                                    helper_text: "Number defines what row # will start the program reading."
+                                                    helper_text: "Letter will define what column the program will stop at reading."
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
-                                                    text: '6'
-                                                MDFlatButton:
+                                                    text: 'P'
+                                                MDRaisedButton:
                                                     theme_text_color: 'Custom'
                                                     text: "Clear Value"
                                                     size_hint: None, None
@@ -2782,36 +2857,12 @@ NavigationLayout:
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
                                                     text: '25'
-                                                MDFlatButton:
+                                                MDRaisedButton:
                                                     theme_text_color: 'Custom'
                                                     text: "Clear Value"
                                                     size_hint: None, None
                                                     size: 3 * dp(48), dp(48)
                                                     on_release: app.IMD_EXPO_ButtonCallBackManager('CallFunc_ClearRowEndPoint')
-                                            BoxLayout:
-                                                orientation: 'horizontal'
-                                                spacing: dp(10)
-                                                padding: 0
-                                                MDTextField:
-                                                    id: DataBind_ExcelFileSheet
-                                                    hint_text: "Sheet Name"
-                                                    required: True
-                                                    helper_text: "Required, this was added to know what sheet to use."
-                                                    helper_text_mode: "on_focus"
-                                                    write_tab: False
-                                                    text: 'Sheet1'
-                                                MDFlatButton:
-                                                    theme_text_color: 'Custom'
-                                                    text: "Available Sheets"
-                                                    size_hint: None, None
-                                                    size: 3 * dp(48), dp(48)
-                                                    #on_release: app.IMD_EXPO_ButtonCallBackManager('ClearInput_ExcelFileSheet')
-                                                MDFlatButton:
-                                                    theme_text_color: 'Custom'
-                                                    text: "Clear Path"
-                                                    size_hint: None, None
-                                                    size: 3 * dp(48), dp(48)
-                                                    on_release: app.IMD_EXPO_ButtonCallBackManager('ClearInput_ExcelFileSheet')
                                 MDCard:
                                     size: dp(320), dp(165)
                                     size_hint_y: None
@@ -2847,7 +2898,7 @@ NavigationLayout:
                                                     helper_text_mode: "on_focus"
                                                     write_tab: False
                                                     #on_dropfile: app._on_file_drop
-                                                MDFlatButton:
+                                                MDRaisedButton:
                                                     theme_text_color: 'Custom'
                                                     text: "Clear Path"
                                                     size_hint: None, None
