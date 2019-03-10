@@ -4,3 +4,5 @@ Python_KivyExamples_OnInterest/openpyxl_iteratethroughrows.py
 *.xlsx
 *.xlsx
 *.db
+*.xlsx
+*.xlsx
